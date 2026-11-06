@@ -1,0 +1,614 @@
+{
+ "http://37.27.135.206": [
+  3,
+  3,
+  3,
+  "tiered sprint board: idea for a packet dashboard"
+ ],
+ "https://github.com/mas-bandwidth/nova-sprint": [
+  3,
+  2,
+  3,
+  "tier escalation code"
+ ],
+ "https://graphs.univerlab.org/patterns": [
+  3,
+  5,
+  4,
+  "pattern catalogue to read"
+ ],
+ "https://github.com/gregwebs/skills-sdlc": [
+  4,
+  4,
+  4,
+  "SDLC skills to adapt into packets"
+ ],
+ "https://photostructure.com/coding/claude-code-tpp/": [
+  4,
+  4,
+  5,
+  "same idea as HANDOFF.md"
+ ],
+ "https://virpo.io/levels": [
+  1,
+  5,
+  3,
+  ""
+ ],
+ "https://dcferreira.com/post/2026-10-how-i-use-agents/": [
+  2,
+  5,
+  3,
+  ""
+ ],
+ "https://stack.yiin.lt": [
+  2,
+  5,
+  3,
+  ""
+ ],
+ "https://epiq.sh/blog/repo-native-tooling-for-sandboxes": [
+  2,
+  4,
+  3,
+  ""
+ ],
+ "https://github.com/andrei-dubovik/jail": [
+  2,
+  3,
+  2,
+  "cloud sandbox already covers it"
+ ],
+ "https://github.com/kstenerud/yoloai": [
+  3,
+  3,
+  2,
+  "cloud proxy already injects keys"
+ ],
+ "https://www.docker.com/products/docker-sandboxes/": [
+  1,
+  3,
+  2,
+  ""
+ ],
+ "https://github.com/amterp/kan": [
+  3,
+  4,
+  2,
+  "GitHub issues already do this"
+ ],
+ "https://github.com/kuba97531/jiraude": [
+  2,
+  3,
+  2,
+  ""
+ ],
+ "https://github.com/common-pattern/claudeflow": [
+  4,
+  3,
+  4,
+  "issue labels drive the agent: close to your packets"
+ ],
+ "https://github.com/navels/neal": [
+  3,
+  3,
+  3,
+  "planner / executor / reviewer split"
+ ],
+ "https://github.com/jonwiggins/optio": [
+  2,
+  2,
+  2,
+  ""
+ ],
+ "https://github.com/ferrislucas/Circus-Chief": [
+  3,
+  2,
+  3,
+  "multi-provider meta-harness"
+ ],
+ "https://github.com/ASIXicle/Coterie": [
+  2,
+  2,
+  2,
+  ""
+ ],
+ "https://github.com/enes-alatas/spool": [
+  2,
+  2,
+  2,
+  ""
+ ],
+ "https://openspec.dev": [
+  3,
+  4,
+  4,
+  "spec before build, like a packet"
+ ],
+ "https://helyn.com/follow-the-money": [
+  3,
+  4,
+  4,
+  "reproducible process spec for content work"
+ ],
+ "https://herdr.dev": [
+  2,
+  4,
+  2,
+  "terminal app; you work from a phone"
+ ],
+ "https://t3.codes": [
+  2,
+  3,
+  2,
+  ""
+ ],
+ "https://onorca.dev": [
+  2,
+  3,
+  2,
+  ""
+ ],
+ "https://paseo.sh": [
+  2,
+  3,
+  2,
+  ""
+ ],
+ "https://github.com/jeffer1312/hangar": [
+  2,
+  3,
+  2,
+  ""
+ ],
+ "https://github.com/amterp/muster": [
+  1,
+  3,
+  1,
+  "macOS only"
+ ],
+ "https://github.com/sadilek/obeya": [
+  2,
+  3,
+  2,
+  ""
+ ],
+ "https://github.com/juggler-ai/juggler": [
+  2,
+  3,
+  2,
+  ""
+ ],
+ "https://github.com/m6r-ai/humbug": [
+  1,
+  2,
+  2,
+  ""
+ ],
+ "https://pi.dev": [
+  3,
+  3,
+  2,
+  "harness swap is a policy change"
+ ],
+ "https://maki.sh": [
+  3,
+  3,
+  2,
+  "harness swap is a policy change"
+ ],
+ "https://github.com/yendo-eng/remuda": [
+  2,
+  3,
+  2,
+  ""
+ ],
+ "https://github.com/mattpocock/skills": [
+  3,
+  5,
+  4,
+  "skill examples to copy"
+ ],
+ "https://a.l3x.in/usage": [
+  4,
+  4,
+  4,
+  "one page of balances: the cost board"
+ ],
+ "https://handy.computer": [
+  3,
+  5,
+  3,
+  "phone dictation already covers most of it"
+ ],
+ "https://github.com/oscscull/quarterdeck": [
+  1,
+  5,
+  2,
+  ""
+ ],
+ "https://stonks.jettdigital.app": [
+  1,
+  5,
+  2,
+  ""
+ ],
+ "https://wooten-labs.com": [
+  1,
+  5,
+  2,
+  ""
+ ],
+ "https://www.droneship.run": [
+  2,
+  3,
+  2
+ ],
+ "https://www.ctlflow.com": [
+  2,
+  3,
+  2
+ ],
+ "https://www.warp.dev/": [
+  2,
+  4,
+  2
+ ],
+ "https://www.openhands.dev/": [
+  2,
+  2,
+  2
+ ],
+ "https://www.filestash.app/agents/": [
+  2,
+  3,
+  2
+ ],
+ "https://www.conductor.build/": [
+  2,
+  4,
+  2,
+  "macOS app"
+ ],
+ "https://wooten-labs.com/coolwalk": [
+  1,
+  5,
+  1
+ ],
+ "https://vectorstep.io": [
+  2,
+  3,
+  2
+ ],
+ "https://usehax.dev/": [
+  2,
+  3,
+  2
+ ],
+ "https://tix.im/": [
+  1,
+  3,
+  1
+ ],
+ "https://techaddo.com/posts/ai-agentic-setups": [
+  3,
+  5,
+  4,
+  "running digest of this thread"
+ ],
+ "https://svall.dev/": [
+  1,
+  3,
+  1
+ ],
+ "https://sleeperservice.io/": [
+  2,
+  2,
+  2
+ ],
+ "https://rolloutrhino.com/": [
+  1,
+  3,
+  1
+ ],
+ "https://opencode.ai/console/go": [
+  3,
+  4,
+  2,
+  "cheap model plan: 4th provider, John decides"
+ ],
+ "https://nodecode.ai/": [
+  2,
+  3,
+  2
+ ],
+ "https://muster.town/": [
+  1,
+  3,
+  1
+ ],
+ "https://melious.ai": [
+  3,
+  4,
+  2,
+  "phillc73 provider: 4th provider, John decides"
+ ],
+ "https://magenta.cryptograss.live/": [
+  1,
+  4,
+  1
+ ],
+ "https://kiro.dev/docs/specs/": [
+  3,
+  4,
+  3,
+  "spec-driven docs"
+ ],
+ "https://kilo.ai": [
+  2,
+  3,
+  2
+ ],
+ "https://herdr.dev/tui/": [
+  2,
+  4,
+  2
+ ],
+ "https://goose-docs.ai": [
+  2,
+  3,
+  2
+ ],
+ "https://github.com/tensorninja/ninfer-4090": [
+  1,
+  1,
+  1,
+  "needs a local 4090"
+ ],
+ "https://github.com/tashfeenahmed/freellmapi": [
+  2,
+  4,
+  1,
+  "pools free APIs: terms risk"
+ ],
+ "https://github.com/sharkjets/iceghost": [
+  2,
+  3,
+  2
+ ],
+ "https://github.com/shaftoe/awesome-pi-coding-agent/": [
+  2,
+  5,
+  2
+ ],
+ "https://github.com/seanturner026/f": [
+  1,
+  3,
+  1
+ ],
+ "https://github.com/resolveworks/key": [
+  2,
+  3,
+  2
+ ],
+ "https://github.com/regnull/openbot": [
+  1,
+  3,
+  1
+ ],
+ "https://github.com/morluto/rea": [
+  1,
+  3,
+  1
+ ],
+ "https://github.com/mkornreich/llm-desktop-electron": [
+  1,
+  3,
+  1
+ ],
+ "https://github.com/mitchellgordon95/miniclaw": [
+  2,
+  3,
+  2
+ ],
+ "https://github.com/mickael-kerjean/filestash": [
+  1,
+  3,
+  1
+ ],
+ "https://github.com/mickael-kerjean/fdrive": [
+  1,
+  3,
+  1
+ ],
+ "https://github.com/mhalstrom/maximizepm": [
+  2,
+  3,
+  2
+ ],
+ "https://github.com/mas-bandwidth/schema": [
+  1,
+  3,
+  1
+ ],
+ "https://github.com/mas-bandwidth/nova-tools": [
+  3,
+  3,
+  3,
+  "simple message bus: compare with the PR 13 inbox"
+ ],
+ "https://github.com/mas-bandwidth/fixed3d": [
+  1,
+  4,
+  1
+ ],
+ "https://github.com/mas-bandwidth/fixed": [
+  1,
+  4,
+  1
+ ],
+ "https://github.com/laughingmandev/loa": [
+  2,
+  3,
+  2
+ ],
+ "https://github.com/kuyawa/jobs-lang": [
+  1,
+  3,
+  1
+ ],
+ "https://github.com/gszr/lunar": [
+  3,
+  3,
+  3,
+  "switch subscriptions mid-session"
+ ],
+ "https://github.com/gregwebs/pi-quota-dispatcher": [
+  3,
+  3,
+  3,
+  "switch provider when quota runs low"
+ ],
+ "https://github.com/gi-dellav/zerostack": [
+  2,
+  3,
+  2
+ ],
+ "https://github.com/getspur/SpurCode": [
+  1,
+  3,
+  1
+ ],
+ "https://github.com/fluxmoot/fluximp": [
+  1,
+  3,
+  1
+ ],
+ "https://github.com/containers/bubblewrap": [
+  1,
+  3,
+  1,
+  "cloud sandbox already covers it"
+ ],
+ "https://github.com/codealong/codealong": [
+  2,
+  3,
+  2
+ ],
+ "https://github.com/caudra/caudra": [
+  2,
+  2,
+  2
+ ],
+ "https://caudra.ai/features/decisions/": [
+  3,
+  4,
+  4,
+  "decision log: same idea as DECISIONS.md"
+ ],
+ "https://github.com/capocasa/3code": [
+  1,
+  3,
+  1
+ ],
+ "https://github.com/bsklaroff/yaac": [
+  2,
+  3,
+  2
+ ],
+ "https://github.com/agenta-ai/agenta": [
+  2,
+  2,
+  2
+ ],
+ "https://github.com/PAndreew/pi_group": [
+  2,
+  3,
+  2
+ ],
+ "https://github.com/GulDmitry/jagt": [
+  2,
+  3,
+  2
+ ],
+ "https://github.com/8lamaster8/GIN": [
+  1,
+  3,
+  1
+ ],
+ "https://gist.github.com/vkalintiris/3ad526e71a75bcba013aaadc9d9d0837": [
+  2,
+  5,
+  3,
+  "full agent trace to learn from"
+ ],
+ "https://gist.github.com/ontouchstart/b6a08b068cf863f0523bbd8880c88cf4": [
+  2,
+  5,
+  3,
+  "session log to learn from"
+ ],
+ "https://getspur.dev/spurlab": [
+  1,
+  3,
+  1
+ ],
+ "https://epiq.sh": [
+  2,
+  3,
+  2
+ ],
+ "https://entrim.ai": [
+  3,
+  4,
+  2,
+  "phillc73 provider: 4th provider, John decides"
+ ],
+ "https://eca.dev/": [
+  2,
+  3,
+  2
+ ],
+ "https://eamonnsullivan.co.uk/posts/2026-10-20-retirement/": [
+  3,
+  5,
+  4,
+  "clear write-up of a cheap multi-model setup"
+ ],
+ "https://devarch.ai/": [
+  2,
+  3,
+  2
+ ],
+ "https://deepinfra.com/": [
+  3,
+  4,
+  2,
+  "provider: 4th provider, John decides"
+ ],
+ "https://codeberg.org/dannyfritz/dotfiles/src/commit/f5d082d285ff40f35b4d140816f48e637f3c95ad/bin/pise": [
+  2,
+  4,
+  2
+ ],
+ "https://belfry.robgough.net": [
+  2,
+  3,
+  2
+ ],
+ "https://app.toolscaled.com/docs/agents/how-agents-work/": [
+  2,
+  4,
+  3
+ ],
+ "https://ampcode.com/": [
+  2,
+  3,
+  2
+ ],
+ "https://a.l3x.in/ai": [
+  2,
+  5,
+  3
+ ]
+}

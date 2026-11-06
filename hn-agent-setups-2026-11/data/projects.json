@@ -1,0 +1,1001 @@
+[
+ {
+  "key": "novalive",
+  "name": "nova-sprint live board",
+  "url": "http://37.27.135.206",
+  "category": "Orchestrators",
+  "stars": 5,
+  "what": "Live dashboard of a tiered agent sprint: cards landed, in flight, cost per card, spend by heavy/pro/flash tier. The single best picture of tiered routing in practice.",
+  "curated": true
+ },
+ {
+  "key": "novasprint",
+  "name": "nova-sprint repo",
+  "url": "https://github.com/mas-bandwidth/nova-sprint",
+  "category": "Orchestrators",
+  "stars": 4,
+  "what": "The code behind the board: task queue, tier escalation and verification gates.",
+  "curated": true
+ },
+ {
+  "key": "patterns",
+  "name": "Agent patterns graphs",
+  "url": "https://graphs.univerlab.org/patterns",
+  "category": "Pipelines",
+  "stars": 5,
+  "what": "Visual catalogue of agent patterns: adversarial review, deterministic gates, cross-platform checks, deterministic commit. Useful for naming the stages of your own pipeline.",
+  "curated": true
+ },
+ {
+  "key": "skillssdlc",
+  "name": "skills-sdlc",
+  "url": "https://github.com/gregwebs/skills-sdlc",
+  "category": "Pipelines",
+  "stars": 5,
+  "what": "gregwebs' skills for a full SDLC: plan, review, rigorous validation. The closest match to your Claude-plans, Codex-reviews setup.",
+  "curated": true
+ },
+ {
+  "key": "tpp",
+  "name": "Claude Code TPP",
+  "url": "https://photostructure.com/coding/claude-code-tpp/",
+  "category": "Context",
+  "stars": 5,
+  "what": "\"Claude Code has amnesia. So do PRs.\" A technical project plan file the agent keeps current. A clear write-up of the handover-file approach.",
+  "curated": true
+ },
+ {
+  "key": "levels",
+  "name": "Levels of agent use",
+  "url": "https://virpo.io/levels",
+  "category": "Context",
+  "stars": 3,
+  "what": "A playful self-assessment of how far along you are with agents. Good for calibrating where extra process stops paying off.",
+  "curated": true
+ },
+ {
+  "key": "dcferreira",
+  "name": "How I use agents for work",
+  "url": "https://dcferreira.com/post/2026-10-how-i-use-agents/",
+  "category": "Context",
+  "stars": 4,
+  "what": "A grounded, minimalist write-up: a few parallel tasks, plain tools, careful review.",
+  "curated": true
+ },
+ {
+  "key": "yiin",
+  "name": "Agent Kitchen",
+  "url": "https://stack.yiin.lt",
+  "category": "Context",
+  "stars": 4,
+  "what": "\"Ideas, not a recipe.\" A menu of setup ingredients you pick from, rather than a framework.",
+  "curated": true
+ },
+ {
+  "key": "epiq",
+  "name": "Sandboxes favor repo-native tooling",
+  "url": "https://epiq.sh/blog/repo-native-tooling-for-sandboxes",
+  "category": "Sandboxing",
+  "stars": 4,
+  "what": "Argues for keeping tooling inside the repo so sandboxed agents need no host setup. Relevant to cloud sessions.",
+  "curated": true
+ },
+ {
+  "key": "jail",
+  "name": "jail",
+  "url": "https://github.com/andrei-dubovik/jail",
+  "category": "Sandboxing",
+  "stars": 4,
+  "what": "A small wrapper around bwrap and pasta for per-project Claude sandboxes. Minimal and easy to read.",
+  "curated": true
+ },
+ {
+  "key": "yoloai",
+  "name": "yoloai",
+  "url": "https://github.com/kstenerud/yoloai",
+  "category": "Sandboxing",
+  "stars": 5,
+  "what": "\"Your agent is a security risk.\" A sandbox plus key-injecting proxy, so the agent never sees your API keys.",
+  "curated": true
+ },
+ {
+  "key": "dockersbx",
+  "name": "Docker Sandboxes",
+  "url": "https://www.docker.com/products/docker-sandboxes/",
+  "category": "Sandboxing",
+  "stars": 3,
+  "what": "MicroVM sandboxes for Claude Code, Codex and others, from local to cloud.",
+  "curated": true
+ },
+ {
+  "key": "kan",
+  "name": "Kan",
+  "url": "https://github.com/amterp/kan",
+  "category": "Tickets",
+  "stars": 4,
+  "what": "Kanban boards stored as files in your repo. Agents and humans share one board with no external service.",
+  "curated": true
+ },
+ {
+  "key": "jiraude",
+  "name": "jiraude",
+  "url": "https://github.com/kuba97531/jiraude",
+  "category": "Tickets",
+  "stars": 3,
+  "what": "A ticketing system built for Claude Code sessions.",
+  "curated": true
+ },
+ {
+  "key": "claudeflow",
+  "name": "claudeflow",
+  "url": "https://github.com/common-pattern/claudeflow",
+  "category": "Tickets",
+  "stars": 5,
+  "what": "Drives a coding agent from GitHub issue labels: claim, plan, implement, verify, ship. Very close to your packet-on-issue model.",
+  "curated": true
+ },
+ {
+  "key": "neal",
+  "name": "neal",
+  "url": "https://github.com/navels/neal",
+  "category": "Orchestrators",
+  "stars": 4,
+  "what": "A plan-driven multi-agent loop with a separate planner, coder and reviewer.",
+  "curated": true
+ },
+ {
+  "key": "optio",
+  "name": "optio",
+  "url": "https://github.com/jonwiggins/optio",
+  "category": "Orchestrators",
+  "stars": 3,
+  "what": "Workflow orchestration for AI agents, with issue-to-PR pipelines.",
+  "curated": true
+ },
+ {
+  "key": "circus",
+  "name": "Circus-Chief",
+  "url": "https://github.com/ferrislucas/Circus-Chief",
+  "category": "Orchestrators",
+  "stars": 3,
+  "what": "An open-source meta-harness that runs Claude Code, Codex and Kiro side by side.",
+  "curated": true
+ },
+ {
+  "key": "coterie",
+  "name": "Coterie",
+  "url": "https://github.com/ASIXicle/Coterie",
+  "category": "Orchestrators",
+  "stars": 3,
+  "what": "Self-hosted team of persistent Claude Code agents, each with its own role.",
+  "curated": true
+ },
+ {
+  "key": "spool",
+  "name": "spool",
+  "url": "https://github.com/enes-alatas/spool",
+  "category": "Orchestrators",
+  "stars": 3,
+  "what": "A fleet of persistent Claude Code coworkers you talk to in Telegram and Slack.",
+  "curated": true
+ },
+ {
+  "key": "openspec",
+  "name": "OpenSpec",
+  "url": "https://openspec.dev",
+  "category": "Pipelines",
+  "stars": 4,
+  "what": "A lightweight spec framework: agree what to build before the agent builds it.",
+  "curated": true
+ },
+ {
+  "key": "helyn",
+  "name": "Follow the Money",
+  "url": "https://helyn.com/follow-the-money",
+  "category": "Pipelines",
+  "stars": 4,
+  "what": "A worked example of a reproducible process spec that turns public campaign-finance data into a report. Inspiration for your content pipeline.",
+  "curated": true
+ },
+ {
+  "key": "herdr",
+  "name": "Herdr",
+  "url": "https://herdr.dev",
+  "category": "Sessions",
+  "stars": 4,
+  "what": "A configurable terminal app for running many coding agents at once. The best-looking session manager in the thread.",
+  "curated": true
+ },
+ {
+  "key": "t3code",
+  "name": "T3 Code",
+  "url": "https://t3.codes",
+  "category": "Sessions",
+  "stars": 4,
+  "what": "An open-source control plane for Claude Code, Codex, OpenCode and others.",
+  "curated": true
+ },
+ {
+  "key": "orca",
+  "name": "Orca",
+  "url": "https://onorca.dev",
+  "category": "Sessions",
+  "stars": 3,
+  "what": "An agent IDE: parallel Claude Code and Codex sessions with worktrees and review panes.",
+  "curated": true
+ },
+ {
+  "key": "paseo",
+  "name": "Paseo",
+  "url": "https://paseo.sh",
+  "category": "Sessions",
+  "stars": 3,
+  "what": "An agentic development environment: many agents, one machine, phone access.",
+  "curated": true
+ },
+ {
+  "key": "hangar",
+  "name": "hangar",
+  "url": "https://github.com/jeffer1312/hangar",
+  "category": "Sessions",
+  "stars": 3,
+  "what": "All your coding agents in one place, across Claude Code, Codex and Cursor.",
+  "curated": true
+ },
+ {
+  "key": "muster",
+  "name": "muster",
+  "url": "https://github.com/amterp/muster",
+  "category": "Sessions",
+  "stars": 2,
+  "what": "A native macOS workspace for agents with tab splits and agent states. Mac only.",
+  "curated": true
+ },
+ {
+  "key": "obeya",
+  "name": "obeya",
+  "url": "https://github.com/sadilek/obeya",
+  "category": "Sessions",
+  "stars": 3,
+  "what": "A spatial workspace for directing coding agents as you would an engineering team.",
+  "curated": true
+ },
+ {
+  "key": "juggler",
+  "name": "juggler",
+  "url": "https://github.com/juggler-ai/juggler",
+  "category": "Sessions",
+  "stars": 2,
+  "what": "A coding-agent app for juggling many parallel tasks.",
+  "curated": true
+ },
+ {
+  "key": "humbug",
+  "name": "humbug",
+  "url": "https://github.com/m6r-ai/humbug",
+  "category": "Sessions",
+  "stars": 2,
+  "what": "An \"operating system for human-AI collaboration\" with its own editor and shell.",
+  "curated": true
+ },
+ {
+  "key": "pi",
+  "name": "Pi",
+  "url": "https://pi.dev",
+  "category": "Harnesses",
+  "stars": 4,
+  "what": "\"There are many agent harnesses but this one is yours.\" A minimal, hackable harness, popular with the minimalist camp.",
+  "curated": true
+ },
+ {
+  "key": "maki",
+  "name": "maki",
+  "url": "https://maki.sh",
+  "category": "Harnesses",
+  "stars": 3,
+  "what": "A lean coding agent that claims 2\u20133\u00d7 lower token use than mainstream harnesses.",
+  "curated": true
+ },
+ {
+  "key": "remuda",
+  "name": "remuda",
+  "url": "https://github.com/yendo-eng/remuda",
+  "category": "Harnesses",
+  "stars": 3,
+  "what": "A CLI to make AI-assisted development low friction.",
+  "curated": true
+ },
+ {
+  "key": "pocock",
+  "name": "mattpocock/skills",
+  "url": "https://github.com/mattpocock/skills",
+  "category": "Harnesses",
+  "stars": 4,
+  "what": "Matt Pocock's skills for real engineers. A good reference for small, sharp skills rather than giant prompts.",
+  "curated": true
+ },
+ {
+  "key": "l3xusage",
+  "name": "LLM usage page",
+  "url": "https://a.l3x.in/usage",
+  "category": "Ops",
+  "stars": 4,
+  "what": "One page showing the remaining balance across every LLM account. Simple, and worth copying for your caps.",
+  "curated": true
+ },
+ {
+  "key": "handy",
+  "name": "Handy",
+  "url": "https://handy.computer",
+  "category": "Ops",
+  "stars": 3,
+  "what": "Free, open-source speech-to-text into any field, using Parakeet locally.",
+  "curated": true
+ },
+ {
+  "key": "quarterdeck",
+  "name": "quarterdeck",
+  "url": "https://github.com/oscscull/quarterdeck",
+  "category": "Built with agents",
+  "stars": 2,
+  "what": "A Tauri + Rust day scheduler built with agents.",
+  "curated": true
+ },
+ {
+  "key": "stonks",
+  "name": "stonks",
+  "url": "https://stonks.jettdigital.app",
+  "category": "Built with agents",
+  "stars": 2,
+  "what": "A portfolio leaderboard app built with agents, to show what one person can now ship.",
+  "curated": true
+ },
+ {
+  "key": "wooten",
+  "name": "Wooten Labs",
+  "url": "https://wooten-labs.com",
+  "category": "Built with agents",
+  "stars": 2,
+  "what": "A collection of small apps built with agents. Charming pixel-art landing page.",
+  "curated": true
+ },
+ {
+  "key": "droneship",
+  "name": "droneship",
+  "url": "https://www.droneship.run",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "ctlflow",
+  "name": "ctlflow",
+  "url": "https://www.ctlflow.com",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "warp",
+  "name": "warp",
+  "url": "https://www.warp.dev/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "openhands",
+  "name": "openhands",
+  "url": "https://www.openhands.dev/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "filestashagents",
+  "name": "filestashagents",
+  "url": "https://www.filestash.app/agents/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "conductor",
+  "name": "conductor",
+  "url": "https://www.conductor.build/",
+  "category": "",
+  "stars": null,
+  "what": "macOS app",
+  "curated": false
+ },
+ {
+  "key": "coolwalk",
+  "name": "coolwalk",
+  "url": "https://wooten-labs.com/coolwalk",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "vectorstep",
+  "name": "vectorstep",
+  "url": "https://vectorstep.io",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "usehax",
+  "name": "usehax",
+  "url": "https://usehax.dev/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "tix",
+  "name": "tix",
+  "url": "https://tix.im/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "techaddo",
+  "name": "techaddo",
+  "url": "https://techaddo.com/posts/ai-agentic-setups",
+  "category": "",
+  "stars": null,
+  "what": "running digest of this thread",
+  "curated": false
+ },
+ {
+  "key": "svall",
+  "name": "svall",
+  "url": "https://svall.dev/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "sleeperservice",
+  "name": "sleeperservice",
+  "url": "https://sleeperservice.io/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "rolloutrhino",
+  "name": "rolloutrhino",
+  "url": "https://rolloutrhino.com/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "opencodego",
+  "name": "opencodego",
+  "url": "https://opencode.ai/console/go",
+  "category": "",
+  "stars": null,
+  "what": "cheap model plan: 4th provider, John decides",
+  "curated": false
+ },
+ {
+  "key": "nodecode",
+  "name": "nodecode",
+  "url": "https://nodecode.ai/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "musterweb",
+  "name": "musterweb",
+  "url": "https://muster.town/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "melious",
+  "name": "melious",
+  "url": "https://melious.ai",
+  "category": "",
+  "stars": null,
+  "what": "phillc73 provider: 4th provider, John decides",
+  "curated": false
+ },
+ {
+  "key": "magenta",
+  "name": "magenta",
+  "url": "https://magenta.cryptograss.live/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "kiro",
+  "name": "kiro",
+  "url": "https://kiro.dev/docs/specs/",
+  "category": "",
+  "stars": null,
+  "what": "spec-driven docs",
+  "curated": false
+ },
+ {
+  "key": "kilo",
+  "name": "kilo",
+  "url": "https://kilo.ai",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "herdrtui",
+  "name": "herdrtui",
+  "url": "https://herdr.dev/tui/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "goose",
+  "name": "goose",
+  "url": "https://goose-docs.ai",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "ninfer",
+  "name": "tensorninja/ninfer-4090",
+  "url": "https://github.com/tensorninja/ninfer-4090",
+  "category": "",
+  "stars": null,
+  "what": "needs a local 4090",
+  "curated": false
+ },
+ {
+  "key": "freellmapi",
+  "name": "tashfeenahmed/freellmapi",
+  "url": "https://github.com/tashfeenahmed/freellmapi",
+  "category": "",
+  "stars": null,
+  "what": "pools free APIs: terms risk",
+  "curated": false
+ },
+ {
+  "key": "iceghost",
+  "name": "sharkjets/iceghost",
+  "url": "https://github.com/sharkjets/iceghost",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "awesomepi",
+  "name": "shaftoe/awesome-pi-coding-agent",
+  "url": "https://github.com/shaftoe/awesome-pi-coding-agent/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "seanf",
+  "name": "seanturner026/f",
+  "url": "https://github.com/seanturner026/f",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "key",
+  "name": "resolveworks/key",
+  "url": "https://github.com/resolveworks/key",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "openbot",
+  "name": "regnull/openbot",
+  "url": "https://github.com/regnull/openbot",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "rea",
+  "name": "morluto/rea",
+  "url": "https://github.com/morluto/rea",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "llmdesktop",
+  "name": "mkornreich/llm-desktop-electron",
+  "url": "https://github.com/mkornreich/llm-desktop-electron",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "miniclaw",
+  "name": "mitchellgordon95/miniclaw",
+  "url": "https://github.com/mitchellgordon95/miniclaw",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "filestash",
+  "name": "mickael-kerjean/filestash",
+  "url": "https://github.com/mickael-kerjean/filestash",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "fdrive",
+  "name": "mickael-kerjean/fdrive",
+  "url": "https://github.com/mickael-kerjean/fdrive",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "maximizepm",
+  "name": "mhalstrom/maximizepm",
+  "url": "https://github.com/mhalstrom/maximizepm",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "schema",
+  "name": "mas-bandwidth/schema",
+  "url": "https://github.com/mas-bandwidth/schema",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "novatools",
+  "name": "mas-bandwidth/nova-tools",
+  "url": "https://github.com/mas-bandwidth/nova-tools",
+  "category": "",
+  "stars": null,
+  "what": "simple message bus: compare with the PR 13 inbox",
+  "curated": false
+ },
+ {
+  "key": "fixed3d",
+  "name": "mas-bandwidth/fixed3d",
+  "url": "https://github.com/mas-bandwidth/fixed3d",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "fixed",
+  "name": "mas-bandwidth/fixed",
+  "url": "https://github.com/mas-bandwidth/fixed",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "loa",
+  "name": "laughingmandev/loa",
+  "url": "https://github.com/laughingmandev/loa",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "jobslang",
+  "name": "kuyawa/jobs-lang",
+  "url": "https://github.com/kuyawa/jobs-lang",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "lunar",
+  "name": "gszr/lunar",
+  "url": "https://github.com/gszr/lunar",
+  "category": "",
+  "stars": null,
+  "what": "switch subscriptions mid-session",
+  "curated": false
+ },
+ {
+  "key": "piquota",
+  "name": "gregwebs/pi-quota-dispatcher",
+  "url": "https://github.com/gregwebs/pi-quota-dispatcher",
+  "category": "",
+  "stars": null,
+  "what": "switch provider when quota runs low",
+  "curated": false
+ },
+ {
+  "key": "zerostack",
+  "name": "gi-dellav/zerostack",
+  "url": "https://github.com/gi-dellav/zerostack",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "spurcode",
+  "name": "getspur/SpurCode",
+  "url": "https://github.com/getspur/SpurCode",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "fluximp",
+  "name": "fluxmoot/fluximp",
+  "url": "https://github.com/fluxmoot/fluximp",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "bubblewrap",
+  "name": "containers/bubblewrap",
+  "url": "https://github.com/containers/bubblewrap",
+  "category": "",
+  "stars": null,
+  "what": "cloud sandbox already covers it",
+  "curated": false
+ },
+ {
+  "key": "codealong",
+  "name": "codealong/codealong",
+  "url": "https://github.com/codealong/codealong",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "caudra",
+  "name": "caudra/caudra",
+  "url": "https://github.com/caudra/caudra",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "caudradecisions",
+  "name": "caudradecisions",
+  "url": "https://caudra.ai/features/decisions/",
+  "category": "",
+  "stars": null,
+  "what": "decision log: same idea as DECISIONS.md",
+  "curated": false
+ },
+ {
+  "key": "threecode",
+  "name": "capocasa/3code",
+  "url": "https://github.com/capocasa/3code",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "yaac",
+  "name": "bsklaroff/yaac",
+  "url": "https://github.com/bsklaroff/yaac",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "agenta",
+  "name": "agenta-ai/agenta",
+  "url": "https://github.com/agenta-ai/agenta",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "pigroup",
+  "name": "PAndreew/pi_group",
+  "url": "https://github.com/PAndreew/pi_group",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "jagt",
+  "name": "GulDmitry/jagt",
+  "url": "https://github.com/GulDmitry/jagt",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "gin",
+  "name": "8lamaster8/GIN",
+  "url": "https://github.com/8lamaster8/GIN",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "gistvk",
+  "name": "gistvk",
+  "url": "https://gist.github.com/vkalintiris/3ad526e71a75bcba013aaadc9d9d0837",
+  "category": "",
+  "stars": null,
+  "what": "full agent trace to learn from",
+  "curated": false
+ },
+ {
+  "key": "gistot",
+  "name": "gistot",
+  "url": "https://gist.github.com/ontouchstart/b6a08b068cf863f0523bbd8880c88cf4",
+  "category": "",
+  "stars": null,
+  "what": "session log to learn from",
+  "curated": false
+ },
+ {
+  "key": "spurlab",
+  "name": "spurlab",
+  "url": "https://getspur.dev/spurlab",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "epiqhome",
+  "name": "epiqhome",
+  "url": "https://epiq.sh",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "entrim",
+  "name": "entrim",
+  "url": "https://entrim.ai",
+  "category": "",
+  "stars": null,
+  "what": "phillc73 provider: 4th provider, John decides",
+  "curated": false
+ },
+ {
+  "key": "eca",
+  "name": "eca",
+  "url": "https://eca.dev/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "eamonn",
+  "name": "eamonn",
+  "url": "https://eamonnsullivan.co.uk/posts/2026-10-20-retirement/",
+  "category": "",
+  "stars": null,
+  "what": "clear write-up of a cheap multi-model setup",
+  "curated": false
+ },
+ {
+  "key": "devarch",
+  "name": "devarch",
+  "url": "https://devarch.ai/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "deepinfra",
+  "name": "deepinfra",
+  "url": "https://deepinfra.com/",
+  "category": "",
+  "stars": null,
+  "what": "provider: 4th provider, John decides",
+  "curated": false
+ },
+ {
+  "key": "pise",
+  "name": "pise",
+  "url": "https://codeberg.org/dannyfritz/dotfiles/src/commit/f5d082d285ff40f35b4d140816f48e637f3c95ad/bin/pise",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "belfry",
+  "name": "belfry",
+  "url": "https://belfry.robgough.net",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "toolscaled",
+  "name": "toolscaled",
+  "url": "https://app.toolscaled.com/docs/agents/how-agents-work/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "amp",
+  "name": "amp",
+  "url": "https://ampcode.com/",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ },
+ {
+  "key": "l3xai",
+  "name": "l3xai",
+  "url": "https://a.l3x.in/ai",
+  "category": "",
+  "stars": null,
+  "what": "",
+  "curated": false
+ }
+]

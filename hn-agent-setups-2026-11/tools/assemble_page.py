@@ -12,9 +12,9 @@ t0 = idx(lambda l: l.startswith('<div class="tldr"')); t1 = idx(lambda l: l.star
 e = html.escape
 L[t0:t1 + 1] = ['<div class="tldr" id="tldr"><strong>Top five changes for your harness, by v2 priority</strong><ol>'] + \
     [f'<li><b>{e(r["title"])}</b> — v2 {r["v2"]} <span class="work">{e(r["v2_working"])}</span></li>' for r in recs[:5]] + \
-    ['</ol><p style="margin:10px 0 0;font-size:14px">The thread\'s loudest message is still "less is more": nobody posted an eval showing a custom harness beats vanilla. Five more ideas need your decision; see <a href="#john">John decides</a>.</p></div>']
+    ['</ol><p style="margin:10px 0 0;font-size:14px">The thread\'s loudest message is still "less is more": nobody posted an eval showing a custom harness beats vanilla. Six more ideas need your decision; see <a href="#john">John decides</a>.</p></div>']
 i = idx(lambda l: l.startswith('<nav class="toc">'))
-L[i] = '<nav class="toc">' + ''.join(f'<a href="#{h}">{t}</a>' for h, t in [('tldr', 'TL;DR'), ('method', 'How scored'), ('do', 'What to adopt'), ('john', 'John decides'), ('camps', 'Camps'), ('insights', 'Insights'), ('disagree', 'Disagreements'), ('quotes', 'Quotes'), ('reddit', 'Reddit check'), ('routing', 'Routing table'), ('cost', 'Cost maths'), ('gallery', 'Gallery')]) + '</nav>'
+L[i] = '<nav class="toc">' + ''.join(f'<a href="#{h}">{t}</a>' for h, t in [('tldr', 'TL;DR'), ('method', 'How scored'), ('do', 'What to adopt'), ('john', 'John decides'), ('camps', 'Camps'), ('insights', 'Insights'), ('disagree', 'Disagreements'), ('quotes', 'Quotes'), ('reddit', 'Reddit check'), ('routing', 'Routing table'), ('critic', 'Critic notes'), ('cost', 'Cost maths'), ('gallery', 'Gallery')]) + '</nav>'
 i = idx(lambda l: l.startswith('<p class="lede">'))
 L[i] = f'<p class="lede">The 645-comment thread, mined by eight parallel readers, synthesised and critic-checked: {len(S["categories"])} camps, {len(S["top_insights"])} insights and {len(S["recommendations"]) + len(sys.argv[5:])} candidate changes for your three-provider harness, all scored with rubric v2. It ends with screenshots of 111 linked projects.</p>'
 i = idx(lambda l: l.startswith('<footer>'))

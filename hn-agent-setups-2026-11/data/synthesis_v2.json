@@ -1,5 +1,5 @@
 {
- "report_markdown": "# Gold mine report: 'Ask HN: What's your current AI agentic setup?'\\n\\nThread: HN item 50366117, 645 comments. Source: eight reader chunks, merged and de-duplicated here. Comment ids are cited as [#id]. Model names, prices and usage figures are as commenters reported them. None of them are verified. This synthesis step made no repository changes and no nested model calls.\\n\\n## 1. The short version\\n\\n- **Cross-vendor review is the pattern with the most support.** At least a dozen independent setups have one provider write and another review, by default [#50370886] [#50373001] [#50378365] [#50389282] [#50376463]. John's harness already works this way. Keep it and sharpen it.\\n- **'Plan strong, execute cheap' is a close second**, ideally with escalation when the cheap tier fails [#50374549] [#50378856] [#50375921]. John's three model routes already follow this pattern. The missing piece is an explicit, logged escalation step.\\n- **Memory belongs in files, not in the context window.** That means HANDOFF.md resets, ADRs, state files and close-out notes [#50375342] [#50376262] [#50377952] [#50375278].\\n- **The minimalists make a lot of noise and are often right.** Newer models need fewer guardrails [#50378434] [#50379944]. But almost nobody tests a custom setup against the vanilla harness [#50379514]. That test is John's best next experiment.\\n- **Cheap open models are now very cheap, and there is real data to show it** [#50381117] [#50375427] [#50385251]. But models still write poor prose [#50367589] [#50373357] [#50375084]. For a content harness this backs the current split: GreenPT does bounded extraction, and the strong owners do the prose and the judgement.\\n- **Wide swarms, personal 'claw' agents and local inference are mostly noise for this setup.**\\n\\n## 2. How the scores work\\n\\nEvery item gets four scores, each from 1 to 5. The total is out of 20.\\n- **Impact:** how much it would improve results.\\n- **Ease:** how cheap it is to adopt.\\n- **Evidence:** how many independent commenters back it, and how specific or data-backed they are.\\n- **Fit:** how well it suits John's harness: three providers, GitHub task packets, receipts, budget caps, review reuse, work from a phone, and content consumers (the chauffeur academy and the Sark retreat site).\\n\\n## 3. Category ranking\\n\\n| Rank | Category | Verdict | Impact+Ease+Evidence+Fit = Total |\\n|---|---|---|---|\\n| 1 | Cross-vendor and cross-model review | adopt | 5+4+5+5 = 19 |\\n| 2 | Tiered routing: plan strong, execute cheap, escalate | adopt | 5+4+5+5 = 19 |\\n| 3 | Context and memory as files | adopt | 4+5+5+5 = 19 |\\n| 4 | Minimalism and evals against vanilla | adopt | 4+5+5+4 = 18 |\\n| 5 | Issues and tickets as the agent interface | adopt | 4+4+5+5 = 18 |\\n| 6 | Deterministic-first workflows | adopt | 5+3+4+5 = 17 |\\n| 7 | Cheap open-weight workers | trial | 4+4+5+4 = 17 |\\n| 8 | Skills, prompts and prose quality | trial | 4+4+4+5 = 17 |\\n| 9 | Cost and quota telemetry | adopt | 4+3+4+5 = 16 |\\n| 10 | Verification beyond code review | trial | 4+3+4+5 = 16 |\\n| 11 | Session control: phone, remote, voice, alerts | trial | 3+4+4+5 = 16 |\\n| 12 | Coordinator-style orchestration | trial | 4+3+4+4 = 15 |\\n| 13 | Sandboxing and credential isolation | trial | 4+3+5+3 = 15 |\\n| 14 | Skeptics, attention limits and wellbeing | adopt (keep caps) | 3+4+5+3 = 15 |\\n| 15 | Personal agents and local inference | watch | 2+2+4+2 = 10 |\\n\\n## 4. Camp by camp\\n\\n### 4.1 Cross-vendor review (19)\\nThis is the most common serious pattern in the thread.\\n- **Author with one vendor, review with another.** Opus writes and Codex reviews by default, with Grok and Gemini added for critical work [#50370886]. Codex Pro works as the second-opinion reviewer [#50373001]. Opus is reviewed by GPT Sol, with both on $20 plans [#50373589]. navels built neal so that Codex reviews Claude or the other way round [#50373463].\\n- **Calling the reviewer.** Some call Codex's review function from inside the Claude CLI [#50378365]. Others run Codex as a pre-PR or post-PR hook [#50376390]. One person pays for a cheap third subscription purely for adversarial review [#50377705].\\n- **Why it works.** In glennfiedler's words, 'each model sees things the others don't' [#50375606]. Even a skeptic finds real bugs with 'now review this' [#50380787].\\n- **Sharper variants.**\\n  - A fresh session reviews with a fixed list of 16 of your own PR questions [#50378899].\\n  - Implementer and clean-context reviewer loops repeat until no serious issue remains [#50379808].\\n  - Reviews are cached and pinned to the commit hash, and an AST-diff after a rebase decides whether a review can be reused [#50378157]. This is close to John's rule 11.\\n- **The warning.** AI review almost always finds something, even straight after you fix the last round [#50374732]. You need a stop rule.\\n\\n### 4.2 Tiered routing (19)\\n- **Plan strong, execute cheap.** Opus plans and Sonnet executes [#50374549]. Claude files issues and OpenCode with DeepSeek picks them up [#50373974]. oh-my-pi's 'prewalk' pairs an Opus planner with a DeepSeek executor [#50376454]. Claude ($20) plans, Codex ($20) reviews and DeepSeek ($1-3 a day) implements, all for under $100 a month [#50378856]. Opus plans and reviews, Sonnet writes code and Haiku does the mechanical work [#50389538].\\n- **Escalation.** An Opus coordinator puts each card in a tier: flash, pro, heavy or frontier. A card that fails moves up a tier [#50375921]. Others use the top model only when stuck or on a high-value step [#50374502], or only for big-picture planning [#50381009].\\n- **Raise effort only where it pays.** Use it for architecture work, and split implementation into small pieces that need low reasoning [#50367589].\\n- **For John.** The routes exist already. Make escalation a recorded event on the receipt, triggered by a failed deterministic check, not by judgement.\\n\\n### 4.3 Context and memory as files (19)\\n- **Reset instead of compacting.** The agent writes HANDOFF.md, listing the subtasks, their status, what was learnt and what remains. Then a fresh agent starts from it [#50375342].\\n- **A memory folder in version control.** bottom999mottob keeps LOG.md, HANDOFF.md and DECISIONS.md plus a plan folder [#50375274].\\n- **ADRs written as the project goes.** stkni found they 'raised overall output quality' [#50376262] [#50376451].\\n- **A shared-memory repo with rules and state.** There is one rules file (especially what is forbidden) and one state file per repo. Each task has an Org-mode file naming its owner agent and model. Hooks keep it all current [#50377952].\\n- **A close-out routine.** At the end of a session, the agent writes hints into AGENTS.md [#50375278].\\n- **A full trace.** A 'status repo' records everything, but it eats tokens [#50375619].\\n- **Keep context small.** Keep the context window under 10% full and start fresh from markdown [#50375856].\\n- **The contrarian.** Re-explaining forces better thinking about architecture [#50376204]. The answer is to keep these files short, not to drop them.\\n\\n### 4.4 Minimalism and evals against vanilla (18)\\n- **Plain setups go a long way.** Many people run plain Claude Code or Codex and stop there [#50373208] [#50380407] [#50375079].\\n- **Complex setups age fast.** 'Almost all of the intelligence is in the model', so complex setups are obsolete within months [#50373351].\\n- **Newer models need less scaffolding.** Since the 5.5 models arrived, they 'need less skills and guardrails' [#50378434]. Organisation structures need less attention as models improve [#50379944].\\n- **Broad context hurts.** Broad skills and tool access poison the context [#50380583]. One commenter added a switch that ignores bloated repo instructions [#50375302].\\n- **The sharpest point.** 'All of these gas towns and no one running evals to compare to the vanilla harness' [#50379514].\\n- **Ways to compare.** Use a locked-down baseline harness [#50375145]. Or benchmark on your own past sessions rather than leaderboards [#50378628].\\n- **For John.** His ~19-rule CLAUDE.md is exactly what this camp would challenge. The fair answer is a bake-off, not a debate.\\n\\n### 4.5 Issues and tickets as the interface (18)\\n- **GitHub issues as the hand-off.** One person says this is 'simple and resilient enough' [#50373974]. claudeflow turns issues into Claude one-shots and handles CI and landing the PR [#50374380]. A Pi GitHub Action runs an issue-and-PR workflow [#50374094].\\n- **Tickets as the conversation.** jiraude makes tickets the whole interface. Questions come back in the ticket, and side findings become new tickets [#50376058] [#50384746].\\n- **Kanban as plain files.** Kan keeps cards as files in the repo, with dependencies and a `kan ready` query [#50374498].\\n- **For John.** He already works this way. The thread confirms it is a strong design, not over-engineering.\\n\\n### 4.6 Deterministic-first workflows (17)\\n- **Promote what works.** Start a workflow as a skill and make it deterministic once it proves useful [#50367326]. When you need throughput, automate the deterministic parts first [#50367587].\\n- **Scripts first, agents as fallback.** poelzi runs 40+ step workflows that are mostly scripts, with agents only as fallbacks. Each failure hardens the workflow, and runs can resume [#50378157].\\n- **Turn token sinks into code.** When Fordec hits his weekly limit, he studies his consumption data and turns the biggest token sinks into ordinary code [#50374764].\\n- **Mechanical gates.** One example: no remote push without approval [#50367557].\\n- **For John.** This matches his rules 4 and 17. The new idea is the regular token-sink review.\\n\\n### 4.7 Cheap open-weight workers (17)\\n- **The data.**\\n  - 1 billion tokens used 7% of a $10 plan [#50381117].\\n  - A 99% cache hit rate keeps long jobs at about $20 a week [#50375427].\\n  - 'Billions of tokens per week for maybe ~20 bucks' [#50385251].\\n  - $4.37 in 30 days [#50376778].\\n  - A long code review cost about $0.033 [#50377633].\\n- **The counterpoint.** 'In practice all of these open models are more expensive than a Claude subscription' [#50380381]. DeepSeek 4.1 Flash is still on the high side [#50384114].\\n- **For John.** GreenPT's EUR 10 cap is the cheap worker. John has already said to use it more. The thread supports pushing more bounded extraction to it.\\n\\n### 4.8 Skills, prompts and prose quality (17)\\n- **Prose is the weak spot.** All models struggle with prose such as reports and PR summaries [#50367589]. Open models are 'incredible tool callers, but their prose is insufferable' [#50373357]. Flash models give approximately-correct text, while frontier models are concise and correct [#50376087].\\n- **A hard boundary on slop.** 'I don't like making other people read AI slop, but I don't mind having AIs read it' [#50375084].\\n- **Small prompt wins.** One line, 'answer me like a Vulcan', cut verbosity [#50380005]. Turn any prompt you run often into a skill and keep refining it [#50384236].\\n- **For a content harness, this is the key finding.** Cheap models must never own final prose.\\n\\n### 4.9 Cost and quota telemetry (16)\\n- **Visible limits and spend.** People build usage-limit trackers [#50373740], public usage pages [#50374094] and per-loop cost views in a control room [#50376390]. A gateway dashboard shows real speed and cost [#50376352].\\n- **Using quota well.** A scheduler spends leftover capacity on queued improvements before the reset [#50380990]. A dispatcher switches provider when quota runs low [#50378856].\\n- **For John.** Receipts already carry running totals. A single board that reads them is cheap and useful.\\n\\n### 4.10 Verification beyond code review (16)\\n- **Persona testing.** A dogfood rig tests as user personas. Persistent 'returning users' give much better feedback than blank-slate ones [#50385555].\\n- **Browser testing.** A strong model does exploratory testing in a real browser, in a loop [#50376216].\\n- **Visual checks.** The agent builds review pages so you can check visual work [#50382792].\\n- **Binary gates.** Each gate is CLEAR or DISCREPANCY, 'never a numeric score' [#50380633].\\n- **A clean-up pass.** Plan one after high-throughput fleet work [#50375606].\\n- **A warning.** Agents drift into 'productivity porn': reports and evidence packs, but nothing shipped [#50381456].\\n- **For the academy and Sark.** Persona readers are a natural fit.\\n\\n### 4.11 Session control: phone, remote, voice and alerts (16)\\n- **From the phone.** Keep remote control running in every project so the phone apps work [#50374380] [#50377004]. Remote control can reach a real GPU from the phone [#50376177].\\n- **Alerts.** One bell for 'done' and a gong for 'needs an answer' [#50373796]. A Stream Deck shows which agent has finished [#50378479].\\n- **Voice.** Push-to-talk, with an intentional 'turn' [#50381098]. Local dictation [#50374502].\\n- **For John,** who works mostly from a phone, the useful idea is two different kinds of alert: done, and needs John.\\n\\n### 4.12 Coordinator-style orchestration (15)\\n- **A coordinator that doesn't build.** Tell the main thread not to implement anything, only coordinate [#50375347] [#50376582]. A 'chief of staff' Opus requires at least one round of agentic review before a PR reaches the human [#50375407]. A pm-intake seat checks feedback against the roadmap and batches a daily digest for bulk approve or deny [#50385555].\\n- **Against.** Wide swarms are 'a waste of token' [#50375205]. Sessions that message each other drift into chaos [#50376476].\\n- **Verdict.** A narrow coordinator yes, a swarm no.\\n\\n### 4.13 Sandboxing and credentials (15)\\n- **Keys out of reach.** A proxy injects credentials so the LLM never sees keys [#50367803] [#50379377] [#50381875]. 'NO KEYS IN THE VM' [#50387654].\\n- **Push from the host.** Agents commit inside the sandbox and the host does the pushing [#50379089] [#50379206].\\n- **Don't trust the harness's own sandbox.** Claude has been seen disabling its own [#50380164]. Agents also remember secrets they saw a week ago [#50387438].\\n- **For John.** Cloud sessions and the push hook already cover most of this, which is why fit is only 3.\\n\\n### 4.14 Skeptics, attention limits and wellbeing (15)\\n- **Attention limits.** 'I can do 5 things concurrently for about a day max' [#50373117]. ~6 CLIs was sadilek's ceiling [#50370886]. 'I can't even handle 4 parallel tasks' [#50376632].\\n- **Burnout.** Warnings in [#50373236] [#50390416].\\n- **Thread bias.** The thread over-represents power users [#50375972].\\n- **For John.** His two-worker cap is well judged.\\n\\n### 4.15 Personal agents and local inference (10)\\n- **Personal agents.** These platforms are unstable [#50373974], dwindle into digest bots [#50376601] and amount to 'just a cronjob' [#50370886].\\n- **Local models.** They need hardware, and they don't suit phone-first cloud work.\\n- **What to keep.** The privacy-routing idea: private material goes only to private models, and diffs are redacted before cloud review [#50385740] [#50377307].\\n\\n## 5. Top insights (top 30; the full list of 56 is in the structured data)\\n\\n| # | Insight | Working | Ids |\\n|---|---|---|---|\\n| 1 | One vendor authors, another reviews, by default | 5+4+5+5 = 19 | 50370886, 50373001, 50378365, 50389282 |\\n| 2 | Strong model plans, cheap model executes | 5+4+5+5 = 19 | 50374549, 50378856, 50376454, 50389538 |\\n| 3 | Reset context via HANDOFF.md rather than compaction | 5+5+4+5 = 19 | 50375342, 50378847, 50375856 |\\n| 4 | Escalate a task up tiers when it fails | 5+4+3+5 = 17 | 50375921, 50374502 |\\n| 5 | Agents write ADRs as they go | 4+5+3+5 = 17 | 50376262, 50376451 |\\n| 6 | Deterministic scripts first, agents as fallback | 5+3+4+5 = 17 | 50378157, 50367326, 50367587 |\\n| 7 | Fresh-session review driven by your own question list | 5+5+2+5 = 17 | 50378899 |\\n| 8 | Models still write poor prose; strong models or humans own it | 5+3+4+5 = 17 | 50367589, 50373357, 50375084 |\\n| 9 | Cheap open models: hard cost data | 4+4+5+4 = 17 | 50381117, 50375427, 50385251 |\\n| 10 | GitHub issues as the planner-to-worker hand-off | 4+4+4+5 = 17 | 50373974, 50374380, 50374094 |\\n| 11 | A single usage and cost board | 4+4+4+5 = 17 | 50373740, 50374094, 50376390 |\\n| 12 | Route private material only to private models; redact first | 4+4+4+5 = 17 | 50385740, 50376538, 50377307 |\\n| 13 | Eval custom setups against vanilla | 5+3+3+5 = 16 | 50379514, 50375145, 50378628 |\\n| 14 | Newer models need fewer guardrails | 4+4+4+4 = 16 | 50378434, 50379944, 50381456 |\\n| 15 | A memory folder in version control plus per-repo state file | 4+4+3+5 = 16 | 50375274, 50377952 |\\n| 16 | Close-out routine writes hints to AGENTS.md | 4+5+2+5 = 16 | 50375278 |\\n| 17 | AI review always finds something: set a stop rule | 4+5+2+5 = 16 | 50374732 |\\n| 18 | Main thread only coordinates | 4+5+3+4 = 16 | 50375347, 50376058 |\\n| 19 | Subagents burn limits fastest; use them for map-reduce only | 4+5+3+4 = 16 | 50373445, 50373364 |\\n| 20 | Human attention caps parallelism at about 3-6 | 3+5+5+3 = 16 | 50373117, 50376632 |\\n| 21 | Spec-first: Vision, then Features, then Tasks | 4+4+4+4 = 16 | 50382792, 50380633 |\\n| 22 | Agents commit; only the host pushes | 4+4+4+4 = 16 | 50379089, 50379206 |\\n| 23 | Credential-injecting proxy; no keys in the sandbox | 4+5+4+3 = 16 | 50367803, 50387654 |\\n| 24 | Binary CLEAR/DISCREPANCY gates, not scores | 4+4+2+5 = 15 | 50380633 |\\n| 25 | Implementer and clean reviewer loop | 4+4+3+4 = 15 | 50379808 |\\n| 26 | Daily digest for bulk approve or deny | 4+4+2+5 = 15 | 50385555 |\\n| 27 | Warning: 'productivity porn' with nothing shipped | 4+5+1+5 = 15 | 50381456 |\\n| 28 | Broad skills poison context | 4+4+3+4 = 15 | 50380583, 50375302 |\\n| 29 | Separate 'done' and 'needs you' alerts | 3+5+2+5 = 15 | 50373796, 50378479 |\\n| 30 | Cheap inter-agent channels: shared .md file, send-keys | 3+4+4+4 = 15 | 50373684, 50388928 |\\n\\n## 6. Recommendations for John's harness\\n\\n| # | Change | Working | John decides? |\\n|---|---|---|---|\\n| 1 | Write HANDOFF.md and DECISIONS.md at packet close | 5+5+4+5 = 19 | no |\\n| 2 | Escalation rule across model routes, logged on receipts | 5+4+4+5 = 18 | yes |\\n| 3 | Question-list reviewer with binary verdicts | 5+5+3+5 = 18 | no |\\n| 4 | Review stop rule (round limit and severity threshold) | 4+5+3+5 = 17 | yes |\\n| 5 | Push more bounded extraction to GreenPT, inside the cap | 4+4+4+5 = 17 | no |\\n| 6 | One cost and quota board read from receipts | 4+4+4+5 = 17 | no |\\n| 7 | Deterministic guard for private paths before GreenPT | 4+4+4+5 = 17 | no |\\n| 8 | Keep width at two workers; no swarm tooling | 3+5+5+4 = 17 | no |\\n| 9 | Bake-off: vanilla against the full harness, then prune | 5+3+3+5 = 16 | yes |\\n| 10 | Phone digest: one queue of 'needs John' items | 4+4+3+5 = 16 | no |\\n| 11 | Spec-first content packets that must ship an artefact | 4+4+3+5 = 16 | no |\\n| 12 | Prune CLAUDE.md; move rules into hooks | 4+4+4+4 = 16 | yes |\\n| 13 | Monthly turn-sink review, scripting the top sink | 4+3+3+5 = 15 | no |\\n| 14 | Persona readers for academy and Sark content | 4+3+2+5 = 14 | yes |\\n| 15 | AST/content-diff check to decide review reuse | 4+3+1+5 = 13 | no |\\n\\nThe structured recommendations explain how each one works inside the harness. The best first step is to trial items 1, 3 and 9 in Experimentation Station before touching any consumer.\\n\\n## 7. Projects worth opening (inspiration 4-5)\\n\\n- **tix.im** [#50378157]: Nix workflows that are mostly deterministic, plus a commit-pinned review cache. This is the project closest in spirit to John's harness.\\n- **skills-sdlc** [#50378856]: an /implement skill where Claude plans, Codex reviews and DeepSeek implements.\\n- **neal** [#50373463]: cross-provider review loop.\\n- **jiraude** [#50384746] and **claudeflow** [#50374380]: tickets and issues as the interface.\\n- **Kan** [#50374498]: kanban as files in the repo.\\n- **status repo skill gist** [#50375619] and **Claude Code TPP write-up** [#50375879]: memory as files.\\n- **nova-bus / nova-sprint** [#50375606]: tier escalation and multi-model review at scale.\\n- **Spool** [#50376390]: mission loops, egress allowlists, per-loop cost.\\n- **alexfortin usage page** [#50374094]: a public usage board.\\n- **virpo levels** [#50378479]: 100 tips an agent can audit your setup against.\\n- **Helyn follow-the-money** [#50380633]: binary-gate protocol.\\n- **Obeya** [#50370886]: card canvas with narrated video demos.\\n- **Superintendent** [#50380990]: spends spare capacity (no URL given).\\n\\nThe structured data lists all 150+ projects, including weak ones.\\n\\n## 8. Disagreements and verdicts\\n\\n- **Swarms against a single loop.** Coordinators and fleets [#50375606] [#50373324] versus 'a single good human in the loop beats any automated orchestration tool' [#50375205]. Verdict: a narrow coordinator plus a reviewer, no swarm.\\n- **Are skills still useful?** Yes [#50384236] [#50378336]. Less so [#50367037] [#50380583]. Verdict: a few specific, refined skills; prune broad ones.\\n- **Persist context, or re-explain?** Persist [#50375342] versus re-explain [#50376204]. Verdict: persist decisions and hand-offs, and keep them short.\\n- **Are open models cheaper?** Cheaper [#50381117] versus dearer than a subscription [#50380381]. Verdict: measure. For John, GreenPT is capped anyway.\\n- **Minimal setup or heavy protocol?** [#50380407] versus [#50380633]. Verdict: heavy only where it is deterministic, and prove it against vanilla.\\n- **Cloud agent privacy.** No worse than local [#50377537] versus worse [#50377189]. Verdict: keep docs/private out of cheap providers by mechanical check.\\n- **Tell the model to use subagents, or let it decide?** [#50375851] versus [#50373767]. Verdict: let it decide, inside the budget caps.\\n- **Opus or Fable?** [#50378628] versus [#50380023]. Verdict: the main difference is price; benchmark on your own tasks.\\n- **Cheap flash correctness.** Fast output 'pretty much always correct' [#50376062] versus approximately correct [#50376087]. Verdict: fine for extraction, not for final prose.\\n- **Is lightweight isolation enough?** [#50379089] versus [#50380164]. Verdict: use an external sandbox. Cloud sessions already give one.\\n- **Is nonstop building healthy?** [#50374802] versus [#50390416]. Verdict: keep the caps.\\n- **Do model differences matter?** Parity [#50377263] versus big differences in price and prose [#50376352]. Verdict: they still matter for prose and price.\\n\\n## 9. Gold quotes\\n\\n- 'I'd say the biggest trick is just to tell it what complete looks like.' (thefourthchime) [#50367037]\\n- 'Models be dumb sometimes.' (ctolsen) [#50367326]\\n- 'All of these gas towns and no one running evals to compare to the vanilla harness.' (SOLAR_FIELDS) [#50379514]\\n- 'If a card fails at a particular tier, it's going to get escalated up tiers until it gets sorted.' (glennfiedler) [#50375921]\\n- 'Each model sees things the others don't.' (glennfiedler) [#50375606]\\n- 'the review is pinned to the commit hash.' (poelzi) [#50378157]\\n- 'Reset your context frequently instead of only relying on compaction.' (sheepscreek) [#50375342]\\n- 'it almost always inevitably finds something wrong' (smashed) [#50374732]\\n- 'a phase is either CLEAR (GREEN) or DISCREPANCY (RED) — never a numeric score' (cpobuda) [#50380633]\\n- 'I don't like making other people read AI slop, but I don't mind having AIs read it.' (martincsweiss) [#50375084]\\n- 'their prose is insufferable.' (guhcampos) [#50373357]\\n- 'defects cost time and money later.' (gregwebs) [#50378856]\\n- 'My ABSOLUTE rule is NO KEYS IN THE VM.' (allen-munsch) [#50387654]\\n- 'This thread is super biased by the power users' (ex-aws-dude) [#50375972]\\n\\nThe structured data holds the full set of 24.\\n\\n## 10. Changes from the first pass\\n\\n- **Cross-model review: 16 to 19.** It is the most independently backed pattern in the thread (12+ setups).\\n- **Tiered routing: 17 to 19.** Plan-strong, execute-cheap appears in 10+ setups. Escalate-on-failure is confirmed but rests mainly on glennfiedler and contingencies.\\n- **Context-as-files: 17 to 19,** widened to cover ADRs, state files and close-out notes.\\n- **Minimalists: kept at 18,** but reframed. Their strongest point is 'eval against vanilla'. The first pass's 'eval harness then prune' recommendation stands at 16 (evidence is thin, impact is high).\\n- **Tickets and kanban: 13 to 18.** Many independent issue-driven setups, and it is John's existing design.\\n- **Cheap open models: 14 to 17,** because of the hard cost data. It stays at trial because of the counter-evidence.\\n- **Orchestrators: 10 to 15,** as a narrow 'coordinator' pattern only. Big swarms stay weak.\\n- **Session managers: 11, folded into session control (16).** Phone-first fit raises it.\\n- **New categories:** deterministic-first (17), skills, prompts and prose (17), cost telemetry (16) and verification beyond review (16).\\n- **Daily digest: reframed.** As a personal-agent feature it is where agents 'dwindle' [#50376601]. As a bulk approve-or-deny queue [#50385555] it scores 16.\\n- **Cost board: 14 to 17.**\\n- **Sandboxing: 14 to 15.** Strong evidence, but low marginal fit for cloud sessions.\\n\\n## 11. Caveats\\n\\n- **Biased sample.** Power users are the most eager to share [#50375972].\\n- **Self-promotion.** Several projects are authors promoting their own work. droneship was posted as a reply twice.\\n- **Unverified figures.** All spend and throughput figures are self-reported.\\n- **Untrusted link.** One link is a file-host download, not a vendor site (#50375124). Don't install from it.\\n- **Telemetry.** The delegated-call count and spend for this synthesis step are not visible to this agent. Record them as unknown.\\n",
+ "report_markdown": "# Gold mine report: 'Ask HN: What's your current AI agentic setup?'\\n\\nThread: HN item 50366117, 645 comments. Source: eight reader chunks, merged and de-duplicated here. Comment ids are cited as [#id]. Model names, prices and usage figures are as commenters reported them. None of them are verified. This synthesis step made no repository changes and no nested model calls.\\n\\n## 1. The short version\\n\\n- **Cross-vendor review is the pattern with the most support.** At least a dozen independent setups have one provider write and another review, by default [#50370886] [#50373001] [#50378365] [#50389282] [#50376463]. John's harness already works this way. Keep it and sharpen it.\\n- **'Plan strong, execute cheap' is a close second**, ideally with escalation when the cheap tier fails [#50374549] [#50378856] [#50375921]. John's three model routes already follow this pattern. The missing piece is an explicit, logged escalation step.\\n- **Memory belongs in files, not in the context window.** That means HANDOFF.md resets, ADRs, state files and close-out notes [#50375342] [#50376262] [#50377952] [#50375278].\\n- **The minimalists make a lot of noise and are often right.** Newer models need fewer guardrails [#50378434] [#50379944]. But almost nobody tests a custom setup against the vanilla harness [#50379514]. That test is John's best next experiment.\\n- **Cheap open models are now very cheap, and there is real data to show it** [#50381117] [#50375427] [#50385251]. But models still write poor prose [#50367589] [#50373357] [#50375084]. For a content harness this backs the current split: GreenPT does bounded extraction, and the strong owners do the prose and the judgement.\\n- **Wide swarms, personal 'claw' agents and local inference are mostly noise for this setup.**\\n\\n## 2. How the scores work\\n\\nEvery item gets four scores, each from 1 to 5. The total is out of 20.\\n- **Impact:** how much it would improve results.\\n- **Ease:** how cheap it is to adopt.\\n- **Evidence:** how many independent commenters back it, and how specific or data-backed they are.\\n- **Fit:** how well it suits John's harness: three providers, GitHub task packets, receipts, budget caps, review reuse, work from a phone, and content consumers (the chauffeur academy and the Sark retreat site).\\n\\n## 3. Category ranking\\n\\n| Rank | Category | Verdict | Impact+Ease+Evidence+Fit = Total |\\n|---|---|---|---|\\n| 1 | Cross-vendor and cross-model review | adopt | 5+4+5+5 = 19 |\\n| 2 | Tiered routing: plan strong, execute cheap, escalate | adopt | 5+4+5+5 = 19 |\\n| 3 | Context and memory as files | adopt | 4+5+5+5 = 19 |\\n| 4 | Minimalism and evals against vanilla | adopt | 4+5+5+4 = 18 |\\n| 5 | Issues and tickets as the agent interface | adopt | 4+4+5+5 = 18 |\\n| 6 | Deterministic-first workflows | adopt | 5+3+4+5 = 17 |\\n| 7 | Cheap open-weight workers | trial | 4+4+5+4 = 17 |\\n| 8 | Skills, prompts and prose quality | trial | 4+4+4+5 = 17 |\\n| 9 | Cost and quota telemetry | adopt | 4+3+4+5 = 16 |\\n| 10 | Verification beyond code review | trial | 4+3+4+5 = 16 |\\n| 11 | Session control: phone, remote, voice, alerts | trial | 3+4+4+5 = 16 |\\n| 12 | Coordinator-style orchestration | trial | 4+3+4+4 = 15 |\\n| 13 | Sandboxing and credential isolation | trial | 4+3+5+3 = 15 |\\n| 14 | Skeptics, attention limits and wellbeing | adopt (keep caps) | 3+4+5+3 = 15 |\\n| 15 | Personal agents and local inference | watch | 2+2+4+2 = 10 |\\n\\n## 4. Camp by camp\\n\\n### 4.1 Cross-vendor review (19)\\nThis is the most common serious pattern in the thread.\\n- **Author with one vendor, review with another.** Opus writes and Codex reviews by default, with Grok and Gemini added for critical work [#50370886]. Codex Pro works as the second-opinion reviewer [#50373001]. Opus is reviewed by GPT Sol, with both on $20 plans [#50373589]. navels built neal so that Codex reviews Claude or the other way round [#50373463].\\n- **Calling the reviewer.** Some call Codex's review function from inside the Claude CLI [#50378365]. Others run Codex as a pre-PR or post-PR hook [#50376390]. One person pays for a cheap third subscription purely for adversarial review [#50377705].\\n- **Why it works.** In glennfiedler's words, 'each model sees things the others don't' [#50375606]. Even a skeptic finds real bugs with 'now review this' [#50380787].\\n- **Sharper variants.**\\n  - A fresh session reviews with a fixed list of 16 of your own PR questions [#50378899].\\n  - Implementer and clean-context reviewer loops repeat until no serious issue remains [#50379808].\\n  - Reviews are cached and pinned to the commit hash, and an AST-diff after a rebase decides whether a review can be reused [#50378157]. This is close to John's rule 11.\\n- **The warning.** AI review almost always finds something, even straight after you fix the last round [#50374732]. You need a stop rule.\\n\\n### 4.2 Tiered routing (19)\\n- **Plan strong, execute cheap.** Opus plans and Sonnet executes [#50374549]. Claude files issues and OpenCode with DeepSeek picks them up [#50373974]. oh-my-pi's 'prewalk' pairs an Opus planner with a DeepSeek executor [#50376454]. Claude ($20) plans, Codex ($20) reviews and DeepSeek ($1-3 a day) implements, all for under $100 a month [#50378856]. Opus plans and reviews, Sonnet writes code and Haiku does the mechanical work [#50389538].\\n- **Escalation.** An Opus coordinator puts each card in a tier: flash, pro, heavy or frontier. A card that fails moves up a tier [#50375921]. Others use the top model only when stuck or on a high-value step [#50374502], or only for big-picture planning [#50381009].\\n- **Raise effort only where it pays.** Use it for architecture work, and split implementation into small pieces that need low reasoning [#50367589].\\n- **For John.** The routes exist already. Make escalation a recorded event on the receipt, triggered by a failed deterministic check, not by judgement.\\n\\n### 4.3 Context and memory as files (19)\\n- **Reset instead of compacting.** The agent writes HANDOFF.md, listing the subtasks, their status, what was learnt and what remains. Then a fresh agent starts from it [#50375342].\\n- **A memory folder in version control.** bottom999mottob keeps LOG.md, HANDOFF.md and DECISIONS.md plus a plan folder [#50375274].\\n- **ADRs written as the project goes.** stkni found they 'raised overall output quality' [#50376262] [#50376451].\\n- **A shared-memory repo with rules and state.** There is one rules file (especially what is forbidden) and one state file per repo. Each task has an Org-mode file naming its owner agent and model. Hooks keep it all current [#50377952].\\n- **A close-out routine.** At the end of a session, the agent writes hints into AGENTS.md [#50375278].\\n- **A full trace.** A 'status repo' records everything, but it eats tokens [#50375619].\\n- **Keep context small.** Keep the context window under 10% full and start fresh from markdown [#50375856].\\n- **The contrarian.** Re-explaining forces better thinking about architecture [#50376204]. The answer is to keep these files short, not to drop them.\\n\\n### 4.4 Minimalism and evals against vanilla (18)\\n- **Plain setups go a long way.** Many people run plain Claude Code or Codex and stop there [#50373208] [#50380407] [#50375079].\\n- **Complex setups age fast.** 'Almost all of the intelligence is in the model', so complex setups are obsolete within months [#50373351].\\n- **Newer models need less scaffolding.** Since the 5.5 models arrived, they 'need less skills and guardrails' [#50378434]. Organisation structures need less attention as models improve [#50379944].\\n- **Broad context hurts.** Broad skills and tool access poison the context [#50380583]. One commenter added a switch that ignores bloated repo instructions [#50375302].\\n- **The sharpest point.** 'All of these gas towns and no one running evals to compare to the vanilla harness' [#50379514].\\n- **Ways to compare.** Use a locked-down baseline harness [#50375145]. Or benchmark on your own past sessions rather than leaderboards [#50378628].\\n- **For John.** His ~19-rule CLAUDE.md is exactly what this camp would challenge. The fair answer is a bake-off, not a debate.\\n\\n### 4.5 Issues and tickets as the interface (18)\\n- **GitHub issues as the hand-off.** One person says this is 'simple and resilient enough' [#50373974]. claudeflow turns issues into Claude one-shots and handles CI and landing the PR [#50374380]. A Pi GitHub Action runs an issue-and-PR workflow [#50374094].\\n- **Tickets as the conversation.** jiraude makes tickets the whole interface. Questions come back in the ticket, and side findings become new tickets [#50376058] [#50384746].\\n- **Kanban as plain files.** Kan keeps cards as files in the repo, with dependencies and a `kan ready` query [#50374498].\\n- **For John.** He already works this way. The thread confirms it is a strong design, not over-engineering.\\n\\n### 4.6 Deterministic-first workflows (17)\\n- **Promote what works.** Start a workflow as a skill and make it deterministic once it proves useful [#50367326]. When you need throughput, automate the deterministic parts first [#50367587].\\n- **Scripts first, agents as fallback.** poelzi runs 40+ step workflows that are mostly scripts, with agents only as fallbacks. Each failure hardens the workflow, and runs can resume [#50378157].\\n- **Turn token sinks into code.** When Fordec hits his weekly limit, he studies his consumption data and turns the biggest token sinks into ordinary code [#50374764].\\n- **Mechanical gates.** One example: no remote push without approval [#50367557].\\n- **For John.** This matches his rules 4 and 17. The new idea is the regular token-sink review.\\n\\n### 4.7 Cheap open-weight workers (17)\\n- **The data.**\\n  - 1 billion tokens used 7% of a $10 plan [#50381117].\\n  - A 99% cache hit rate keeps long jobs at about $20 a week [#50375427].\\n  - 'Billions of tokens per week for maybe ~20 bucks' [#50385251].\\n  - $4.37 in 30 days [#50376778].\\n  - A long code review cost about $0.033 [#50377633].\\n- **The counterpoint.** 'In practice all of these open models are more expensive than a Claude subscription' [#50380381]. DeepSeek 4.1 Flash is still on the high side [#50384114].\\n- **For John.** GreenPT's EUR 10 cap is the cheap worker. John has already said to use it more. The thread supports pushing more bounded extraction to it.\\n\\n### 4.8 Skills, prompts and prose quality (17)\\n- **Prose is the weak spot.** All models struggle with prose such as reports and PR summaries [#50367589]. Open models are 'incredible tool callers, but their prose is insufferable' [#50373357]. Flash models give approximately-correct text, while frontier models are concise and correct [#50376087].\\n- **A hard boundary on slop.** 'I don't like making other people read AI slop, but I don't mind having AIs read it' [#50375084].\\n- **Small prompt wins.** One line, 'answer me like a Vulcan', cut verbosity [#50380005]. Turn any prompt you run often into a skill and keep refining it [#50384236].\\n- **For a content harness, this is the key finding.** Cheap models must never own final prose.\\n\\n### 4.9 Cost and quota telemetry (16)\\n- **Visible limits and spend.** People build usage-limit trackers [#50373740], public usage pages [#50374094] and per-loop cost views in a control room [#50376390]. A gateway dashboard shows real speed and cost [#50376352].\\n- **Using quota well.** A scheduler spends leftover capacity on queued improvements before the reset [#50380990]. A dispatcher switches provider when quota runs low [#50378856].\\n- **For John.** Receipts already carry running totals. A single board that reads them is cheap and useful.\\n\\n### 4.10 Verification beyond code review (16)\\n- **Persona testing.** A dogfood rig tests as user personas. Persistent 'returning users' give much better feedback than blank-slate ones [#50385555].\\n- **Browser testing.** A strong model does exploratory testing in a real browser, in a loop [#50376216].\\n- **Visual checks.** The agent builds review pages so you can check visual work [#50382792].\\n- **Binary gates.** Each gate is CLEAR or DISCREPANCY, 'never a numeric score' [#50380633].\\n- **A clean-up pass.** Plan one after high-throughput fleet work [#50375606].\\n- **A warning.** Agents drift into 'productivity porn': reports and evidence packs, but nothing shipped [#50381456].\\n- **For the academy and Sark.** Persona readers are a natural fit.\\n\\n### 4.11 Session control: phone, remote, voice and alerts (16)\\n- **From the phone.** Keep remote control running in every project so the phone apps work [#50374380] [#50377004]. Remote control can reach a real GPU from the phone [#50376177].\\n- **Alerts.** One bell for 'done' and a gong for 'needs an answer' [#50373796]. A Stream Deck shows which agent has finished [#50378479].\\n- **Voice.** Push-to-talk, with an intentional 'turn' [#50381098]. Local dictation [#50374502].\\n- **For John,** who works mostly from a phone, the useful idea is two different kinds of alert: done, and needs John.\\n\\n### 4.12 Coordinator-style orchestration (15)\\n- **A coordinator that doesn't build.** Tell the main thread not to implement anything, only coordinate [#50375347] [#50376582]. A 'chief of staff' Opus requires at least one round of agentic review before a PR reaches the human [#50375407]. A pm-intake seat checks feedback against the roadmap and batches a daily digest for bulk approve or deny [#50385555].\\n- **Against.** Wide swarms are 'a waste of token' [#50375205]. Sessions that message each other drift into chaos [#50376476].\\n- **Verdict.** A narrow coordinator yes, a swarm no.\\n\\n### 4.13 Sandboxing and credentials (15)\\n- **Keys out of reach.** A proxy injects credentials so the LLM never sees keys [#50367803] [#50379377] [#50381875]. 'NO KEYS IN THE VM' [#50387654].\\n- **Push from the host.** Agents commit inside the sandbox and the host does the pushing [#50379089] [#50379206].\\n- **Don't trust the harness's own sandbox.** Claude has been seen disabling its own [#50380164]. Agents also remember secrets they saw a week ago [#50387438].\\n- **For John.** Cloud sessions and the push hook already cover most of this, which is why fit is only 3.\\n\\n### 4.14 Skeptics, attention limits and wellbeing (15)\\n- **Attention limits.** 'I can do 5 things concurrently for about a day max' [#50373117]. ~6 CLIs was sadilek's ceiling [#50370886]. 'I can't even handle 4 parallel tasks' [#50376632].\\n- **Burnout.** Warnings in [#50373236] [#50390416].\\n- **Thread bias.** The thread over-represents power users [#50375972].\\n- **For John.** His two-worker cap is well judged.\\n\\n### 4.15 Personal agents and local inference (10)\\n- **Personal agents.** These platforms are unstable [#50373974], dwindle into digest bots [#50376601] and amount to 'just a cronjob' [#50370886].\\n- **Local models.** They need hardware, and they don't suit phone-first cloud work.\\n- **What to keep.** The privacy-routing idea: private material goes only to private models, and diffs are redacted before cloud review [#50385740] [#50377307].\\n\\n## 5. Top insights (top 30; the full list of 56 is in the structured data)\\n\\n| # | Insight | Working | Ids |\\n|---|---|---|---|\\n| 1 | One vendor authors, another reviews, by default | 5+4+5+5 = 19 | 50370886, 50373001, 50378365, 50389282 |\\n| 2 | Strong model plans, cheap model executes | 5+4+5+5 = 19 | 50374549, 50378856, 50376454, 50389538 |\\n| 3 | Reset context via HANDOFF.md rather than compaction | 5+5+4+5 = 19 | 50375342, 50378847, 50375856 |\\n| 4 | Escalate a task up tiers when it fails | 5+4+3+5 = 17 | 50375921, 50374502 |\\n| 5 | Agents write ADRs as they go | 4+5+3+5 = 17 | 50376262, 50376451 |\\n| 6 | Deterministic scripts first, agents as fallback | 5+3+4+5 = 17 | 50378157, 50367326, 50367587 |\\n| 7 | Fresh-session review driven by your own question list | 5+5+2+5 = 17 | 50378899 |\\n| 8 | Models still write poor prose; strong models or humans own it | 5+3+4+5 = 17 | 50367589, 50373357, 50375084 |\\n| 9 | Cheap open models: hard cost data | 4+4+5+4 = 17 | 50381117, 50375427, 50385251 |\\n| 10 | GitHub issues as the planner-to-worker hand-off | 4+4+4+5 = 17 | 50373974, 50374380, 50374094 |\\n| 11 | A single usage and cost board | 4+4+4+5 = 17 | 50373740, 50374094, 50376390 |\\n| 12 | Route private material only to private models; redact first | 4+4+4+5 = 17 | 50385740, 50376538, 50377307 |\\n| 13 | Eval custom setups against vanilla | 5+3+3+5 = 16 | 50379514, 50375145, 50378628 |\\n| 14 | Newer models need fewer guardrails | 4+4+4+4 = 16 | 50378434, 50379944, 50381456 |\\n| 15 | A memory folder in version control plus per-repo state file | 4+4+3+5 = 16 | 50375274, 50377952 |\\n| 16 | Close-out routine writes hints to AGENTS.md | 4+5+2+5 = 16 | 50375278 |\\n| 17 | AI review always finds something: set a stop rule | 4+5+2+5 = 16 | 50374732 |\\n| 18 | Main thread only coordinates | 4+5+3+4 = 16 | 50375347, 50376058 |\\n| 19 | Subagents burn limits fastest; use them for map-reduce only | 4+5+3+4 = 16 | 50373445, 50373364 |\\n| 20 | Human attention caps parallelism at about 3-6 | 3+5+5+3 = 16 | 50373117, 50376632 |\\n| 21 | Spec-first: Vision, then Features, then Tasks | 4+4+4+4 = 16 | 50382792, 50380633 |\\n| 22 | Agents commit; only the host pushes | 4+4+4+4 = 16 | 50379089, 50379206 |\\n| 23 | Credential-injecting proxy; no keys in the sandbox | 4+5+4+3 = 16 | 50367803, 50387654 |\\n| 24 | Binary CLEAR/DISCREPANCY gates, not scores | 4+4+2+5 = 15 | 50380633 |\\n| 25 | Implementer and clean reviewer loop | 4+4+3+4 = 15 | 50379808 |\\n| 26 | Daily digest for bulk approve or deny | 4+4+2+5 = 15 | 50385555 |\\n| 27 | Warning: 'productivity porn' with nothing shipped | 4+5+1+5 = 15 | 50381456 |\\n| 28 | Broad skills poison context | 4+4+3+4 = 15 | 50380583, 50375302 |\\n| 29 | Separate 'done' and 'needs you' alerts | 3+5+2+5 = 15 | 50373796, 50378479 |\\n| 30 | Cheap inter-agent channels: shared .md file, send-keys | 3+4+4+4 = 15 | 50373684, 50388928 |\\n\\n## 6. Recommendations for John's harness\\n\\n| # | Change | Working | John decides? |\\n|---|---|---|---|\\n| 1 | Write HANDOFF.md and DECISIONS.md at packet close | 5+5+4+5 = 19 | no |\\n| 2 | Escalation rule across model routes, logged on receipts | 5+4+4+5 = 18 | yes |\\n| 3 | Question-list reviewer with binary verdicts | 5+5+3+5 = 18 | no |\\n| 4 | Review stop rule (round limit and severity threshold) | 4+5+3+5 = 17 | yes |\\n| 5 | Push more bounded extraction to GreenPT, inside the cap | 4+4+4+5 = 17 | no |\\n| 6 | One cost and quota board read from receipts | 4+4+4+5 = 17 | no |\\n| 7 | Deterministic guard for private paths before GreenPT | 4+4+4+5 = 17 | no |\\n| 8 | Keep width at two workers; no swarm tooling | 3+5+5+4 = 17 | no |\\n| 9 | Bake-off: vanilla against the full harness, then prune | 5+3+3+5 = 16 | yes |\\n| 10 | Phone digest: one queue of 'needs John' items | 4+4+3+5 = 16 | no |\\n| 11 | Spec-first content packets that must ship an artefact | 4+4+3+5 = 16 | no |\\n| 12 | Prune CLAUDE.md; move rules into hooks | 4+4+4+4 = 16 | yes |\\n| 13 | Monthly turn-sink review, scripting the top sink | 4+3+3+5 = 15 | no |\\n| 14 | Persona readers for academy and Sark content | 4+3+2+5 = 14 | yes |\\n| 15 | AST/content-diff check to decide review reuse | 4+3+1+5 = 13 | no |\\n\\nThe structured recommendations explain how each one works inside the harness. The best first step is to trial items 1, 3 and 9 in Experimentation Station before touching any consumer.\\n\\n## 7. Projects worth opening (inspiration 4-5)\\n\\n- **tix.im** [#50378157]: Nix workflows that are mostly deterministic, plus a commit-pinned review cache. This is the project closest in spirit to John's harness.\\n- **skills-sdlc** [#50378856]: an /implement skill where Claude plans, Codex reviews and DeepSeek implements.\\n- **neal** [#50373463]: cross-provider review loop.\\n- **jiraude** [#50384746] and **claudeflow** [#50374380]: tickets and issues as the interface.\\n- **Kan** [#50374498]: kanban as files in the repo.\\n- **status repo skill gist** [#50375619] and **Claude Code TPP write-up** [#50375879]: memory as files.\\n- **nova-bus / nova-sprint** [#50375606]: tier escalation and multi-model review at scale.\\n- **Spool** [#50376390]: mission loops, egress allowlists, per-loop cost.\\n- **alexfortin usage page** [#50374094]: a public usage board.\\n- **virpo levels** [#50378479]: 100 tips an agent can audit your setup against.\\n- **Helyn follow-the-money** [#50380633]: binary-gate protocol.\\n- **Obeya** [#50370886]: card canvas with narrated video demos.\\n- **Superintendent** [#50380990]: spends spare capacity (no URL given).\\n\\nThe structured data lists all 150+ projects, including weak ones.\\n\\n## 8. Disagreements and verdicts\\n\\n- **Swarms against a single loop.** Coordinators and fleets [#50375606] [#50373324] versus 'a single good human in the loop beats any automated orchestration tool' [#50375205]. Verdict: a narrow coordinator plus a reviewer, no swarm.\\n- **Are skills still useful?** Yes [#50384236] [#50378336]. Less so [#50367037] [#50380583]. Verdict: a few specific, refined skills; prune broad ones.\\n- **Persist context, or re-explain?** Persist [#50375342] versus re-explain [#50376204]. Verdict: persist decisions and hand-offs, and keep them short.\\n- **Are open models cheaper?** Cheaper [#50381117] versus dearer than a subscription [#50380381]. Verdict: measure. For John, GreenPT is capped anyway.\\n- **Minimal setup or heavy protocol?** [#50380407] versus [#50380633]. Verdict: heavy only where it is deterministic, and prove it against vanilla.\\n- **Cloud agent privacy.** No worse than local [#50377537] versus worse [#50377189]. Verdict: keep docs/private out of cheap providers by mechanical check.\\n- **Tell the model to use subagents, or let it decide?** [#50375851] versus [#50373767]. Verdict: let it decide, inside the budget caps.\\n- **Opus or Fable?** [#50378628] versus [#50380023]. Verdict: the main difference is price; benchmark on your own tasks.\\n- **Cheap flash correctness.** Fast output 'pretty much always correct' [#50376062] versus approximately correct [#50376087]. Verdict: fine for extraction, not for final prose.\\n- **Is lightweight isolation enough?** [#50379089] versus [#50380164]. Verdict: use an external sandbox. Cloud sessions already give one.\\n- **Is nonstop building healthy?** [#50374802] versus [#50390416]. Verdict: keep the caps.\\n- **Do model differences matter?** Parity [#50377263] versus big differences in price and prose [#50376352]. Verdict: they still matter for prose and price.\\n\\n## 9. Gold quotes\\n\\n- 'I'd say the biggest trick is just to tell it what complete looks like.' (thefourthchime) [#50367037]\\n- 'Models be dumb sometimes.' (ctolsen) [#50367326]\\n- 'All of these gas towns and no one running evals to compare to the vanilla harness.' (SOLAR_FIELDS) [#50379514]\\n- 'If a card fails at a particular tier, it's going to get escalated up tiers until it gets sorted.' (glennfiedler) [#50375921]\\n- 'Each model sees things the others don't.' (glennfiedler) [#50375606]\\n- 'the review is pinned to the commit hash.' (poelzi) [#50378157]\\n- 'Reset your context frequently instead of only relying on compaction.' (sheepscreek) [#50375342]\\n- 'it almost always inevitably finds something wrong' (smashed) [#50374732]\\n- 'a phase is either CLEAR (GREEN) or DISCREPANCY (RED) \u2014 never a numeric score' (cpobuda) [#50380633]\\n- 'I don't like making other people read AI slop, but I don't mind having AIs read it.' (martincsweiss) [#50375084]\\n- 'their prose is insufferable.' (guhcampos) [#50373357]\\n- 'defects cost time and money later.' (gregwebs) [#50378856]\\n- 'My ABSOLUTE rule is NO KEYS IN THE VM.' (allen-munsch) [#50387654]\\n- 'This thread is super biased by the power users' (ex-aws-dude) [#50375972]\\n\\nThe structured data holds the full set of 24.\\n\\n## 10. Changes from the first pass\\n\\n- **Cross-model review: 16 to 19.** It is the most independently backed pattern in the thread (12+ setups).\\n- **Tiered routing: 17 to 19.** Plan-strong, execute-cheap appears in 10+ setups. Escalate-on-failure is confirmed but rests mainly on glennfiedler and contingencies.\\n- **Context-as-files: 17 to 19,** widened to cover ADRs, state files and close-out notes.\\n- **Minimalists: kept at 18,** but reframed. Their strongest point is 'eval against vanilla'. The first pass's 'eval harness then prune' recommendation stands at 16 (evidence is thin, impact is high).\\n- **Tickets and kanban: 13 to 18.** Many independent issue-driven setups, and it is John's existing design.\\n- **Cheap open models: 14 to 17,** because of the hard cost data. It stays at trial because of the counter-evidence.\\n- **Orchestrators: 10 to 15,** as a narrow 'coordinator' pattern only. Big swarms stay weak.\\n- **Session managers: 11, folded into session control (16).** Phone-first fit raises it.\\n- **New categories:** deterministic-first (17), skills, prompts and prose (17), cost telemetry (16) and verification beyond review (16).\\n- **Daily digest: reframed.** As a personal-agent feature it is where agents 'dwindle' [#50376601]. As a bulk approve-or-deny queue [#50385555] it scores 16.\\n- **Cost board: 14 to 17.**\\n- **Sandboxing: 14 to 15.** Strong evidence, but low marginal fit for cloud sessions.\\n\\n## 11. Caveats\\n\\n- **Biased sample.** Power users are the most eager to share [#50375972].\\n- **Self-promotion.** Several projects are authors promoting their own work. droneship was posted as a reply twice.\\n- **Unverified figures.** All spend and throughput figures are self-reported.\\n- **Untrusted link.** One link is a file-host download, not a vendor site (#50375124). Don't install from it.\\n- **Telemetry.** The delegated-call count and spend for this synthesis step are not visible to this agent. Record them as unknown.\\n",
  "categories": [
   {
    "name": "Context and memory as files",
@@ -13,7 +13,7 @@
    "key_people": "sheepscreek, bottom999mottob, tritondev, stkni, Asmod4n, coeneedell, ehostunreach, alexfortin, kikdij, hypfer (contra)",
    "v1": "4+5+5+5 = 19",
    "v2": 20.0,
-   "v2_working": "4×5×1.0÷1 = 20.0 (conf. proxy)",
+   "v2_working": "4\u00d75\u00d71.0\u00f71 = 20.0 (conf. proxy)",
    "v2_authors": 0,
    "v2_conf_source": "proxy",
    "gated": false
@@ -30,7 +30,7 @@
    "key_people": "willio58, Aozora7, SOLAR_FIELDS, ryanthedev, dcferreira, RamblingCTO, leofree, kbbgl87, joshheitzman, nedt",
    "v1": "4+5+5+4 = 18",
    "v2": 16.0,
-   "v2_working": "4×4×1.0÷1 = 16.0 (conf. proxy)",
+   "v2_working": "4\u00d74\u00d71.0\u00f71 = 16.0 (conf. proxy)",
    "v2_authors": 0,
    "v2_conf_source": "proxy",
    "gated": false
@@ -47,7 +47,7 @@
    "key_people": "sadilek, devinegan, entrope, navels, sgarland, enesalatas, chrisvalleybay, lgunsch, KronisLV, poelzi, glennfiedler, smashed",
    "v1": "5+4+5+5 = 19",
    "v2": 12.5,
-   "v2_working": "5×5×1.0÷2 = 12.5 (conf. proxy)",
+   "v2_working": "5\u00d75\u00d71.0\u00f72 = 12.5 (conf. proxy)",
    "v2_authors": 0,
    "v2_conf_source": "proxy",
    "gated": false
@@ -64,7 +64,7 @@
    "key_people": "glennfiedler, gregwebs, smashed, browningstreet, tomasulo, contingencies, peepee1982, WhiteMart, Xonzo, ActionHank",
    "v1": "5+4+5+5 = 19",
    "v2": 12.5,
-   "v2_working": "5×5×1.0÷2 = 12.5 (conf. proxy)",
+   "v2_working": "5\u00d75\u00d71.0\u00f72 = 12.5 (conf. proxy)",
    "v2_authors": 0,
    "v2_conf_source": "proxy",
    "gated": false
@@ -81,7 +81,7 @@
    "key_people": "browningstreet, sudhirj, kuboble, amterp, pglevy, alexfortin, parkersweb, earthdeity, dgunay, rcgeorge23",
    "v1": "4+4+5+5 = 18",
    "v2": 10.0,
-   "v2_working": "4×5×1.0÷2 = 10.0 (conf. proxy)",
+   "v2_working": "4\u00d75\u00d71.0\u00f72 = 10.0 (conf. proxy)",
    "v2_authors": 0,
    "v2_conf_source": "proxy",
    "gated": false
@@ -98,7 +98,7 @@
    "key_people": "peepee1982, guhcampos, martincsweiss, haizhung, GoodFriday, jeffyaw, virpo, brabel",
    "v1": "4+4+4+5 = 17",
    "v2": 10.0,
-   "v2_working": "4×5×1.0÷2 = 10.0 (conf. proxy)",
+   "v2_working": "4\u00d75\u00d71.0\u00f72 = 10.0 (conf. proxy)",
    "v2_authors": 0,
    "v2_conf_source": "proxy",
    "gated": false
@@ -115,7 +115,7 @@
    "key_people": "poelzi, ctolsen, dgb23, Fordec, phillc73, MITSardine, biggestriverman",
    "v1": "5+3+4+5 = 17",
    "v2": 8.3,
-   "v2_working": "5×5×1.0÷3 = 8.3 (conf. proxy)",
+   "v2_working": "5\u00d75\u00d71.0\u00f73 = 8.3 (conf. proxy)",
    "v2_authors": 0,
    "v2_conf_source": "proxy",
    "gated": false
@@ -132,7 +132,7 @@
    "key_people": "ggregoire, anigbrowl, Primer81, techman001, internet_points, Footprint0521, jpardoe (contra), jeffyaw",
    "v1": "4+4+5+4 = 17",
    "v2": 8.0,
-   "v2_working": "4×4×1.0÷2 = 8.0 (conf. proxy)",
+   "v2_working": "4\u00d74\u00d71.0\u00f72 = 8.0 (conf. proxy)",
    "v2_authors": 0,
    "v2_conf_source": "proxy",
    "gated": false
@@ -149,7 +149,7 @@
    "key_people": "sudhirj, m4tthumphrey, onion2k, Kuyawa, virpo, robviren, gogoro, paustint, laxjester",
    "v1": "3+4+4+5 = 16",
    "v2": 7.5,
-   "v2_working": "3×5×1.0÷2 = 7.5 (conf. proxy)",
+   "v2_working": "3\u00d75\u00d71.0\u00f72 = 7.5 (conf. proxy)",
    "v2_authors": 0,
    "v2_conf_source": "proxy",
    "gated": false
@@ -166,7 +166,7 @@
    "key_people": "shepherdjerred, alexfortin, enesalatas, djeastm, gregwebs, netsroht, brabel, Fordec",
    "v1": "4+3+4+5 = 16",
    "v2": 6.7,
-   "v2_working": "4×5×1.0÷3 = 6.7 (conf. proxy)",
+   "v2_working": "4\u00d75\u00d71.0\u00f73 = 6.7 (conf. proxy)",
    "v2_authors": 0,
    "v2_conf_source": "proxy",
    "gated": false
@@ -183,7 +183,7 @@
    "key_people": "mschwarz, rcgeorge23, drltaidev, cpobuda, glennfiedler, siliconc0w, genxy, SftwareRenderer",
    "v1": "4+3+4+5 = 16",
    "v2": 6.7,
-   "v2_working": "4×5×1.0÷3 = 6.7 (conf. proxy)",
+   "v2_working": "4\u00d75\u00d71.0\u00f73 = 6.7 (conf. proxy)",
    "v2_authors": 0,
    "v2_conf_source": "proxy",
    "gated": false
@@ -200,7 +200,7 @@
    "key_people": "sheepscreek, kuboble, dgunay, mschwarz, l9o, jeswin, 2001zhaozhao, joegibbs (contra), YuechenLi (contra)",
    "v1": "4+3+4+4 = 15",
    "v2": 5.3,
-   "v2_working": "4×4×1.0÷3 = 5.3 (conf. proxy)",
+   "v2_working": "4\u00d74\u00d71.0\u00f73 = 5.3 (conf. proxy)",
    "v2_authors": 0,
    "v2_conf_source": "proxy",
    "gated": false
@@ -217,7 +217,7 @@
    "key_people": "fhub, sadilek, ultrasandwich, thibsrn, f3b5, LittleBox, thefourthchime, ex-aws-dude",
    "v1": "3+4+5+3 = 15",
    "v2": 4.5,
-   "v2_working": "3×3×1.0÷2 = 4.5 (conf. proxy)",
+   "v2_working": "3\u00d73\u00d71.0\u00f72 = 4.5 (conf. proxy)",
    "v2_authors": 0,
    "v2_conf_source": "proxy",
    "gated": false
@@ -234,7 +234,7 @@
    "key_people": "auslegung, allen-munsch, weightedreply, kikdij, rdg1991, kbbgl87, 0xbadcafebee, Primer81, thehours, elendee",
    "v1": "4+3+5+3 = 15",
    "v2": 4.0,
-   "v2_working": "4×3×1.0÷3 = 4.0 (conf. proxy)",
+   "v2_working": "4\u00d73\u00d71.0\u00f73 = 4.0 (conf. proxy)",
    "v2_authors": 0,
    "v2_conf_source": "proxy",
    "gated": false
@@ -251,7 +251,7 @@
    "key_people": "browningstreet, jedisct1, sadilek, vidarh, guhcampos, fidelramos, voodooEntity, benbojangles",
    "v1": "2+2+4+2 = 10",
    "v2": 1.0,
-   "v2_working": "2×2×1.0÷4 = 1.0 (conf. proxy)",
+   "v2_working": "2\u00d72\u00d71.0\u00f74 = 1.0 (conf. proxy)",
    "v2_authors": 0,
    "v2_conf_source": "proxy",
    "gated": false
@@ -281,7 +281,7 @@
    "fit": 5,
    "v1": "5+5+4+5 = 19",
    "v2": 25.0,
-   "v2_working": "5×5×1.0÷1 = 25.0",
+   "v2_working": "5\u00d75\u00d71.0\u00f71 = 25.0",
    "v2_authors": 5.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -305,7 +305,7 @@
    "fit": 4,
    "v1": "4+5+3+4 = 16",
    "v2": 16.0,
-   "v2_working": "4×4×1.0÷1 = 16.0",
+   "v2_working": "4\u00d74\u00d71.0\u00f71 = 16.0",
    "v2_authors": 3.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -329,7 +329,7 @@
    "fit": 4,
    "v1": "4+5+3+4 = 16",
    "v2": 16.0,
-   "v2_working": "4×4×1.0÷1 = 16.0",
+   "v2_working": "4\u00d74\u00d71.0\u00f71 = 16.0",
    "v2_authors": 3.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -372,7 +372,7 @@
    "detail": "Includes calling Codex review from inside the Claude CLI and running Codex as a pre/post-PR hook.",
    "v1": "5+4+5+5 = 19",
    "v2": 12.5,
-   "v2_working": "5×5×1.0÷2 = 12.5",
+   "v2_working": "5\u00d75\u00d71.0\u00f72 = 12.5",
    "v2_authors": 11.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -413,7 +413,7 @@
    "detail": "gregwebs: Claude plans, Codex reviews, DeepSeek implements, for under $100/mo, about 3x slower but low-defect.",
    "v1": "5+4+5+5 = 19",
    "v2": 12.5,
-   "v2_working": "5×5×1.0÷2 = 12.5",
+   "v2_working": "5\u00d75\u00d71.0\u00f72 = 12.5",
    "v2_authors": 10.5,
    "v2_conf_source": "counted",
    "gated": false
@@ -434,7 +434,7 @@
    "detail": "16 questions that mirror the human's own. Called a game changer for simpler, cleaner code.",
    "v1": "5+5+2+5 = 17",
    "v2": 12.5,
-   "v2_working": "5×5×0.5÷1 = 12.5",
+   "v2_working": "5\u00d75\u00d70.5\u00f71 = 12.5",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -462,7 +462,7 @@
    "fit": 3,
    "v1": "4+5+4+3 = 16",
    "v2": 12.0,
-   "v2_working": "4×3×1.0÷1 = 12.0",
+   "v2_working": "4\u00d73\u00d71.0\u00f71 = 12.0",
    "v2_authors": 4.5,
    "v2_conf_source": "counted",
    "gated": false
@@ -485,7 +485,7 @@
    "detail": "An Opus coordinator does the classifying. contingencies uses the top model only when stuck or on a high-value step.",
    "v1": "5+4+3+5 = 17",
    "v2": 10.0,
-   "v2_working": "5×5×0.8÷2 = 10.0",
+   "v2_working": "5\u00d75\u00d70.8\u00f72 = 10.0",
    "v2_authors": 2.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -508,7 +508,7 @@
    "detail": "stkni says it raised overall output quality and picked up proposed-but-unbuilt features.",
    "v1": "4+5+3+5 = 17",
    "v2": 10.0,
-   "v2_working": "4×5×0.5÷1 = 10.0",
+   "v2_working": "4\u00d75\u00d70.5\u00f71 = 10.0",
    "v2_authors": 1.5,
    "v2_conf_source": "counted",
    "gated": false
@@ -534,7 +534,7 @@
    "fit": 5,
    "v1": "4+4+4+5 = 17",
    "v2": 10.0,
-   "v2_working": "4×5×1.0÷2 = 10.0",
+   "v2_working": "4\u00d75\u00d71.0\u00f72 = 10.0",
    "v2_authors": 3.5,
    "v2_conf_source": "counted",
    "gated": false
@@ -560,7 +560,7 @@
    "fit": 5,
    "v1": "4+4+4+5 = 17",
    "v2": 10.0,
-   "v2_working": "4×5×1.0÷2 = 10.0",
+   "v2_working": "4\u00d75\u00d71.0\u00f72 = 10.0",
    "v2_authors": 3.5,
    "v2_conf_source": "counted",
    "gated": false
@@ -580,7 +580,7 @@
    "fit": 5,
    "v1": "4+5+2+5 = 16",
    "v2": 10.0,
-   "v2_working": "4×5×0.5÷1 = 10.0",
+   "v2_working": "4\u00d75\u00d70.5\u00f71 = 10.0",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -601,7 +601,7 @@
    "detail": "Findings are often debatable or describe unreachable states.",
    "v1": "4+5+2+5 = 16",
    "v2": 10.0,
-   "v2_working": "4×5×0.5÷1 = 10.0",
+   "v2_working": "4\u00d75\u00d70.5\u00f71 = 10.0",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -621,7 +621,7 @@
    "fit": 5,
    "v1": "4+5+1+5 = 15",
    "v2": 10.0,
-   "v2_working": "4×5×0.5÷1 = 10.0",
+   "v2_working": "4\u00d75\u00d70.5\u00f71 = 10.0",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -643,7 +643,7 @@
    "fit": 4,
    "v1": "3+5+2+4 = 14",
    "v2": 9.6,
-   "v2_working": "3×4×0.8÷1 = 9.6",
+   "v2_working": "3\u00d74\u00d70.8\u00f71 = 9.6",
    "v2_authors": 2.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -671,7 +671,7 @@
    "fit": 3,
    "v1": "3+5+5+3 = 16",
    "v2": 9.0,
-   "v2_working": "3×3×1.0÷1 = 9.0",
+   "v2_working": "3\u00d73\u00d71.0\u00f71 = 9.0",
    "v2_authors": 4.5,
    "v2_conf_source": "counted",
    "gated": false
@@ -695,7 +695,7 @@
    "fit": 5,
    "v1": "5+3+4+5 = 17",
    "v2": 8.3,
-   "v2_working": "5×5×1.0÷3 = 8.3",
+   "v2_working": "5\u00d75\u00d71.0\u00f73 = 8.3",
    "v2_authors": 3.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -722,7 +722,7 @@
    "detail": "Directly relevant to a content harness: GreenPT output stays a candidate and never becomes final prose.",
    "v1": "5+3+4+5 = 17",
    "v2": 8.3,
-   "v2_working": "5×5×1.0÷3 = 8.3",
+   "v2_working": "5\u00d75\u00d71.0\u00f73 = 8.3",
    "v2_authors": 4.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -750,7 +750,7 @@
    "fit": 5,
    "v1": "5+3+3+5 = 16",
    "v2": 8.3,
-   "v2_working": "5×5×1.0÷3 = 8.3",
+   "v2_working": "5\u00d75\u00d71.0\u00f73 = 8.3",
    "v2_authors": 5.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -781,7 +781,7 @@
    "detail": "1B tokens used 7% of a $10 plan; ~$20/week at a 99% cache hit rate; $4.37 in 30 days; a long review cost about $0.033.",
    "v1": "4+4+5+4 = 17",
    "v2": 8.0,
-   "v2_working": "4×4×1.0÷2 = 8.0",
+   "v2_working": "4\u00d74\u00d71.0\u00f72 = 8.0",
    "v2_authors": 6.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -805,7 +805,7 @@
    "fit": 5,
    "v1": "4+4+4+5 = 17",
    "v2": 8.0,
-   "v2_working": "4×5×0.8÷2 = 8.0",
+   "v2_working": "4\u00d75\u00d70.8\u00f72 = 8.0",
    "v2_authors": 2.5,
    "v2_conf_source": "counted",
    "gated": false
@@ -831,7 +831,7 @@
    "fit": 4,
    "v1": "4+4+4+4 = 16",
    "v2": 8.0,
-   "v2_working": "4×4×1.0÷2 = 8.0",
+   "v2_working": "4\u00d74\u00d71.0\u00f72 = 8.0",
    "v2_authors": 4.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -853,7 +853,7 @@
    "fit": 5,
    "v1": "4+4+3+5 = 16",
    "v2": 8.0,
-   "v2_working": "4×5×0.8÷2 = 8.0",
+   "v2_working": "4\u00d75\u00d70.8\u00f72 = 8.0",
    "v2_authors": 2.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -881,7 +881,7 @@
    "fit": 4,
    "v1": "4+4+4+4 = 16",
    "v2": 8.0,
-   "v2_working": "4×4×1.0÷2 = 8.0",
+   "v2_working": "4\u00d74\u00d71.0\u00f72 = 8.0",
    "v2_authors": 5.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -907,7 +907,7 @@
    "fit": 4,
    "v1": "4+4+4+4 = 16",
    "v2": 8.0,
-   "v2_working": "4×4×1.0÷2 = 8.0",
+   "v2_working": "4\u00d74\u00d71.0\u00f72 = 8.0",
    "v2_authors": 4.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -929,7 +929,7 @@
    "fit": 5,
    "v1": "3+5+2+5 = 15",
    "v2": 7.5,
-   "v2_working": "3×5×0.5÷1 = 7.5",
+   "v2_working": "3\u00d75\u00d70.5\u00f71 = 7.5",
    "v2_authors": 1.5,
    "v2_conf_source": "counted",
    "gated": false
@@ -951,7 +951,7 @@
    "fit": 4,
    "v1": "4+4+3+4 = 15",
    "v2": 6.4,
-   "v2_working": "4×4×0.8÷2 = 6.4",
+   "v2_working": "4\u00d74\u00d70.8\u00f72 = 6.4",
    "v2_authors": 2.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -977,7 +977,7 @@
    "fit": 4,
    "v1": "3+4+4+4 = 15",
    "v2": 6.0,
-   "v2_working": "3×4×1.0÷2 = 6.0",
+   "v2_working": "3\u00d74\u00d71.0\u00f72 = 6.0",
    "v2_authors": 4.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1001,7 +1001,7 @@
    "fit": 4,
    "v1": "3+4+3+4 = 14",
    "v2": 6.0,
-   "v2_working": "3×4×1.0÷2 = 6.0",
+   "v2_working": "3\u00d74\u00d71.0\u00f72 = 6.0",
    "v2_authors": 3.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1021,7 +1021,7 @@
    "fit": 4,
    "v1": "3+5+1+4 = 13",
    "v2": 6.0,
-   "v2_working": "3×4×0.5÷1 = 6.0",
+   "v2_working": "3\u00d74\u00d70.5\u00f71 = 6.0",
    "v2_authors": 0.5,
    "v2_conf_source": "counted",
    "gated": false
@@ -1041,7 +1041,7 @@
    "fit": 4,
    "v1": "3+5+1+4 = 13",
    "v2": 6.0,
-   "v2_working": "3×4×0.5÷1 = 6.0",
+   "v2_working": "3\u00d74\u00d70.5\u00f71 = 6.0",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1061,7 +1061,7 @@
    "fit": 5,
    "v1": "4+4+2+5 = 15",
    "v2": 5.0,
-   "v2_working": "4×5×0.5÷2 = 5.0",
+   "v2_working": "4\u00d75\u00d70.5\u00f72 = 5.0",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1082,7 +1082,7 @@
    "fit": 5,
    "v1": "4+4+2+5 = 15",
    "v2": 5.0,
-   "v2_working": "4×5×0.5÷2 = 5.0",
+   "v2_working": "4\u00d75\u00d70.5\u00f72 = 5.0",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1102,7 +1102,7 @@
    "fit": 5,
    "v1": "4+4+2+5 = 15",
    "v2": 5.0,
-   "v2_working": "4×5×0.5÷2 = 5.0",
+   "v2_working": "4\u00d75\u00d70.5\u00f72 = 5.0",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1122,7 +1122,7 @@
    "fit": 5,
    "v1": "4+4+1+5 = 14",
    "v2": 5.0,
-   "v2_working": "4×5×0.5÷2 = 5.0",
+   "v2_working": "4\u00d75\u00d70.5\u00f72 = 5.0",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1142,7 +1142,7 @@
    "fit": 5,
    "v1": "4+4+1+5 = 14",
    "v2": 5.0,
-   "v2_working": "4×5×0.5÷2 = 5.0",
+   "v2_working": "4\u00d75\u00d70.5\u00f72 = 5.0",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1166,7 +1166,7 @@
    "fit": 4,
    "v1": "3+4+3+4 = 14",
    "v2": 4.8,
-   "v2_working": "3×4×0.8÷2 = 4.8",
+   "v2_working": "3\u00d74\u00d70.8\u00f72 = 4.8",
    "v2_authors": 2.5,
    "v2_conf_source": "counted",
    "gated": false
@@ -1190,7 +1190,7 @@
    "fit": 4,
    "v1": "3+4+2+4 = 13",
    "v2": 4.8,
-   "v2_working": "3×4×0.8÷2 = 4.8",
+   "v2_working": "3\u00d74\u00d70.8\u00f72 = 4.8",
    "v2_authors": 2.5,
    "v2_conf_source": "counted",
    "gated": false
@@ -1213,7 +1213,7 @@
    "detail": "chasd00: a daily blog of status and decision reasons tracks an unattended agent well.",
    "v1": "3+4+2+4 = 13",
    "v2": 4.8,
-   "v2_working": "3×4×0.8÷2 = 4.8",
+   "v2_working": "3\u00d74\u00d70.8\u00f72 = 4.8",
    "v2_authors": 2.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1239,7 +1239,7 @@
    "fit": 3,
    "v1": "3+4+4+3 = 14",
    "v2": 4.5,
-   "v2_working": "3×3×1.0÷2 = 4.5",
+   "v2_working": "3\u00d73\u00d71.0\u00f72 = 4.5",
    "v2_authors": 4.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1259,7 +1259,7 @@
    "fit": 4,
    "v1": "4+4+3+4 = 15",
    "v2": 4.0,
-   "v2_working": "4×4×0.5÷2 = 4.0",
+   "v2_working": "4\u00d74\u00d70.5\u00f72 = 4.0",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1285,7 +1285,7 @@
    "fit": 3,
    "v1": "4+3+4+3 = 14",
    "v2": 4.0,
-   "v2_working": "4×3×1.0÷3 = 4.0",
+   "v2_working": "4\u00d73\u00d71.0\u00f73 = 4.0",
    "v2_authors": 4.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1305,7 +1305,7 @@
    "fit": 4,
    "v1": "4+4+1+4 = 13",
    "v2": 4.0,
-   "v2_working": "4×4×0.5÷2 = 4.0",
+   "v2_working": "4\u00d74\u00d70.5\u00f72 = 4.0",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1329,7 +1329,7 @@
    "fit": 4,
    "v1": "3+3+3+4 = 13",
    "v2": 4.0,
-   "v2_working": "3×4×1.0÷3 = 4.0",
+   "v2_working": "3\u00d74\u00d71.0\u00f73 = 4.0",
    "v2_authors": 3.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1349,7 +1349,7 @@
    "fit": 5,
    "v1": "4+3+2+5 = 14",
    "v2": 3.3,
-   "v2_working": "4×5×0.5÷3 = 3.3",
+   "v2_working": "4\u00d75\u00d70.5\u00f73 = 3.3",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1369,7 +1369,7 @@
    "fit": 5,
    "v1": "4+3+2+5 = 14",
    "v2": 3.3,
-   "v2_working": "4×5×0.5÷3 = 3.3",
+   "v2_working": "4\u00d75\u00d70.5\u00f73 = 3.3",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1389,7 +1389,7 @@
    "fit": 5,
    "v1": "4+3+1+5 = 13",
    "v2": 3.3,
-   "v2_working": "4×5×0.5÷3 = 3.3",
+   "v2_working": "4\u00d75\u00d70.5\u00f73 = 3.3",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1409,7 +1409,7 @@
    "fit": 5,
    "v1": "4+3+1+5 = 13",
    "v2": 3.3,
-   "v2_working": "4×5×0.5÷3 = 3.3",
+   "v2_working": "4\u00d75\u00d70.5\u00f73 = 3.3",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1431,7 +1431,7 @@
    "fit": 3,
    "v1": "4+3+2+3 = 12",
    "v2": 3.2,
-   "v2_working": "4×3×0.8÷3 = 3.2",
+   "v2_working": "4\u00d73\u00d70.8\u00f73 = 3.2",
    "v2_authors": 2.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1459,7 +1459,7 @@
    "fit": 2,
    "v1": "3+4+5+2 = 14",
    "v2": 3.0,
-   "v2_working": "3×2×1.0÷2 = 3.0",
+   "v2_working": "3\u00d72\u00d71.0\u00f72 = 3.0",
    "v2_authors": 5.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1485,7 +1485,7 @@
    "fit": 3,
    "v1": "3+3+4+3 = 13",
    "v2": 3.0,
-   "v2_working": "3×3×1.0÷3 = 3.0",
+   "v2_working": "3\u00d73\u00d71.0\u00f73 = 3.0",
    "v2_authors": 3.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1505,7 +1505,7 @@
    "fit": 4,
    "v1": "3+4+1+4 = 12",
    "v2": 3.0,
-   "v2_working": "3×4×0.5÷2 = 3.0",
+   "v2_working": "3\u00d74\u00d70.5\u00f72 = 3.0",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1525,7 +1525,7 @@
    "fit": 4,
    "v1": "3+4+1+4 = 12",
    "v2": 3.0,
-   "v2_working": "3×4×0.5÷2 = 3.0",
+   "v2_working": "3\u00d74\u00d70.5\u00f72 = 3.0",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1545,7 +1545,7 @@
    "fit": 4,
    "v1": "3+4+1+4 = 12",
    "v2": 3.0,
-   "v2_working": "3×4×0.5÷2 = 3.0",
+   "v2_working": "3\u00d74\u00d70.5\u00f72 = 3.0",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1565,7 +1565,7 @@
    "fit": 4,
    "v1": "4+3+2+4 = 13",
    "v2": 2.7,
-   "v2_working": "4×4×0.5÷3 = 2.7",
+   "v2_working": "4\u00d74\u00d70.5\u00f73 = 2.7",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1589,7 +1589,7 @@
    "fit": 3,
    "v1": "2+4+4+3 = 13",
    "v2": 2.4,
-   "v2_working": "2×3×0.8÷2 = 2.4",
+   "v2_working": "2\u00d73\u00d70.8\u00f72 = 2.4",
    "v2_authors": 2.5,
    "v2_conf_source": "counted",
    "gated": false
@@ -1614,7 +1614,7 @@
    ],
    "v1": "5+5+4+5 = 19",
    "v2": 25.0,
-   "v2_working": "5×5×1.0÷1 = 25.0",
+   "v2_working": "5\u00d75\u00d71.0\u00f71 = 25.0",
    "v2_authors": 4.5,
    "v2_conf_source": "counted",
    "gated": false
@@ -1635,7 +1635,7 @@
    ],
    "v1": "5+5+3+5 = 18",
    "v2": 25.0,
-   "v2_working": "5×5×1.0÷1 = 25.0",
+   "v2_working": "5\u00d75\u00d71.0\u00f71 = 25.0",
    "v2_authors": 3.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1658,7 +1658,7 @@
    ],
    "v1": "3+5+5+4 = 17",
    "v2": 12.0,
-   "v2_working": "3×4×1.0÷1 = 12.0",
+   "v2_working": "3\u00d74\u00d71.0\u00f71 = 12.0",
    "v2_authors": 5.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1681,7 +1681,7 @@
    ],
    "v1": "4+4+4+5 = 17",
    "v2": 10.0,
-   "v2_working": "4×5×1.0÷2 = 10.0",
+   "v2_working": "4\u00d75\u00d71.0\u00f72 = 10.0",
    "v2_authors": 5.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1703,7 +1703,7 @@
    ],
    "v1": "4+4+4+5 = 17",
    "v2": 10.0,
-   "v2_working": "4×5×1.0÷2 = 10.0",
+   "v2_working": "4\u00d75\u00d71.0\u00f72 = 10.0",
    "v2_authors": 3.5,
    "v2_conf_source": "counted",
    "gated": false
@@ -1725,7 +1725,7 @@
    ],
    "v1": "4+4+4+5 = 17",
    "v2": 10.0,
-   "v2_working": "4×5×1.0÷2 = 10.0",
+   "v2_working": "4\u00d75\u00d71.0\u00f72 = 10.0",
    "v2_authors": 3.5,
    "v2_conf_source": "counted",
    "gated": false
@@ -1747,7 +1747,7 @@
    ],
    "v1": "4+4+3+5 = 16",
    "v2": 10.0,
-   "v2_working": "4×5×1.0÷2 = 10.0",
+   "v2_working": "4\u00d75\u00d71.0\u00f72 = 10.0",
    "v2_authors": 4.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1769,7 +1769,7 @@
    ],
    "v1": "4+4+3+5 = 16",
    "v2": 10.0,
-   "v2_working": "4×5×1.0÷2 = 10.0",
+   "v2_working": "4\u00d75\u00d71.0\u00f72 = 10.0",
    "v2_authors": 4.0,
    "v2_conf_source": "counted",
    "gated": false
@@ -1790,29 +1790,29 @@
    ],
    "v1": "4+3+3+5 = 15",
    "v2": 6.7,
-   "v2_working": "4×5×1.0÷3 = 6.7",
+   "v2_working": "4\u00d75\u00d71.0\u00f73 = 6.7",
    "v2_authors": 3.0,
    "v2_conf_source": "counted",
    "gated": false
   },
   {
    "title": "Content-diff check for review reuse",
-   "what": "Extend review reuse (rule 11) with a mechanical check. After a rebase or other unrelated change, a normalised diff of the reviewed files decides whether the cached review still applies.",
+   "what": "Extend review reuse (rule 11) with a mechanical check. After a rebase or other unrelated change, a normalised diff of the reviewed files decides whether the cached review still applies. Critic note: this loosens rule 11, so it is John\u2019s call.",
    "how_in_harness": "A script compares the reviewed file hashes and normalised content against the recorded receipt and outputs reuse or rerun. Aggregation still reruns whenever interactions may have changed.",
    "impact": 4,
    "ease": 3,
    "evidence": 1,
    "fit": 5,
-   "needs_john_decision": false,
+   "needs_john_decision": true,
    "source_ids": [
     "50378157"
    ],
    "v1": "4+3+1+5 = 13",
-   "v2": 3.3,
-   "v2_working": "4×5×0.5÷3 = 3.3",
+   "v2": null,
+   "v2_working": "4\u00d75\u00d70.5\u00f73 = 3.3",
    "v2_authors": 1.0,
    "v2_conf_source": "counted",
-   "gated": false
+   "gated": true
   },
   {
    "title": "Explicit escalation rule across model routes",
@@ -1831,7 +1831,7 @@
    ],
    "v1": "5+4+4+5 = 18",
    "v2": null,
-   "v2_working": "5×5×1.0÷2 = 12.5",
+   "v2_working": "5\u00d75\u00d71.0\u00f72 = 12.5",
    "v2_authors": 4.0,
    "v2_conf_source": "counted",
    "gated": true
@@ -1852,7 +1852,7 @@
    ],
    "v1": "4+5+3+5 = 17",
    "v2": null,
-   "v2_working": "4×5×1.0÷1 = 20.0",
+   "v2_working": "4\u00d75\u00d71.0\u00f71 = 20.0",
    "v2_authors": 3.0,
    "v2_conf_source": "counted",
    "gated": true
@@ -1874,7 +1874,7 @@
    ],
    "v1": "5+3+3+5 = 16",
    "v2": null,
-   "v2_working": "5×5×1.0÷3 = 8.3",
+   "v2_working": "5\u00d75\u00d71.0\u00f73 = 8.3",
    "v2_authors": 4.0,
    "v2_conf_source": "counted",
    "gated": true
@@ -1897,7 +1897,7 @@
    ],
    "v1": "4+4+4+4 = 16",
    "v2": null,
-   "v2_working": "4×4×1.0÷2 = 8.0",
+   "v2_working": "4\u00d74\u00d71.0\u00f72 = 8.0",
    "v2_authors": 5.0,
    "v2_conf_source": "counted",
    "gated": true
@@ -1917,7 +1917,7 @@
    ],
    "v1": "4+3+2+5 = 14",
    "v2": null,
-   "v2_working": "4×5×0.8÷3 = 5.3",
+   "v2_working": "4\u00d75\u00d70.8\u00f73 = 5.3",
    "v2_authors": 2.0,
    "v2_conf_source": "counted",
    "gated": true
@@ -3632,7 +3632,7 @@
    "comment_id": "50378899"
   },
   {
-   "quote": "a phase is either CLEAR (GREEN) or DISCREPANCY (RED) — never a numeric score",
+   "quote": "a phase is either CLEAR (GREEN) or DISCREPANCY (RED) \u2014 never a numeric score",
    "author": "cpobuda",
    "comment_id": "50380633"
   },
@@ -3672,7 +3672,7 @@
    "comment_id": "50373117"
   },
   {
-   "quote": "Just know that there’s no quicker way to hit your limits than to use subagents.",
+   "quote": "Just know that there\u2019s no quicker way to hit your limits than to use subagents.",
    "author": "sillysaurusx",
    "comment_id": "50373445"
   },

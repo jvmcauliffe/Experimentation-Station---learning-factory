@@ -143,5 +143,12 @@ H += ['</tbody></table></div>']
 if S.get('disagreements'): H += ['<h2 id="disagree">Where the thread disagrees</h2><ul>'] + [f'<li>{md_inline(txt(d))}</li>' for d in S['disagreements']] + ['</ul>']
 if S.get('gold_quotes'): H += ['<h2 id="quotes">Gold quotes</h2>'] + [f'<blockquote>{md_inline(txt(q))}</blockquote>' for q in S['gold_quotes']]
 H += ['<section id="reddit">', md_html(reddit, 0), '</section>', '<section id="routing">', md_html(routing, 0), '</section>']
+if C.get('issues') or C.get('missing'):
+    iss = sorted(C.get('issues', []), key=lambda x: {'high': 0, 'medium': 1, 'low': 2}.get(str(x.get('severity', '')).lower(), 3) if isinstance(x, dict) else 3)
+    H += ['<section id="critic"><h2>Critic notes</h2>',
+          f'<p class="sub">An independent critic agent checked the synthesis: {len(iss)} issues and {len(C.get("missing", []))} gaps. Policy-sensitive items it flagged were moved to <a href="#john">John decides</a>.</p>',
+          '<details><summary>Issues found, most severe first</summary><ul>'] + \
+         [f'<li><b>{e(str(x.get("severity", "")).upper())}</b> {md_inline(x.get("problem", ""))} <i>Fix:</i> {md_inline(x.get("fix", ""))}</li>' if isinstance(x, dict) else f'<li>{md_inline(txt(x))}</li>' for x in iss] + \
+         ['</ul></details>', '<details><summary>What the synthesis missed</summary><ul>'] + [f'<li>{md_inline(txt(x))}</li>' for x in C.get('missing', [])] + ['</ul></details></section>']
 open(os.path.join(out, 'sections.html'), 'w').write('\n'.join(H))
 print('recs', len(ranked(recs)), 'gated', len(gated), 'cats', len(cats), 'insights', len(ins))

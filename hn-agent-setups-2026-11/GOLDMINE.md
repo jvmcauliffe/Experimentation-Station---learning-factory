@@ -20,7 +20,6 @@ Priority = Impact × Fit × Confidence ÷ Effort. Effort = 6 − Ease. Impact, E
 | 8 | Phone digest: one queue of 'needs John' items | 10.0 | 4×5×1.0÷2 = 10.0 | 4+4+3+5 = 16 | 4.0 |
 | 9 | Spec-first content packets that must ship an artefact | 10.0 | 4×5×1.0÷2 = 10.0 | 4+4+3+5 = 16 | 4.0 |
 | 10 | Monthly turn-sink review | 6.7 | 4×5×1.0÷3 = 6.7 | 4+3+3+5 = 15 | 3.0 |
-| 11 | Content-diff check for review reuse | 3.3 | 4×5×0.5÷3 = 3.3 | 4+3+1+5 = 13 | 1.0 |
 
 ### 1. Write HANDOFF.md and DECISIONS.md at packet close — v2 25.0
 
@@ -102,20 +101,13 @@ Once a month, list which packet stages consumed the most turns, retries and dele
 
 Sources: [#50374764](https://news.ycombinator.com/item?id=50374764), [#50378157](https://news.ycombinator.com/item?id=50378157), [#50367326](https://news.ycombinator.com/item?id=50367326)
 
-### 11. Content-diff check for review reuse — v2 3.3
-
-Extend review reuse (rule 11) with a mechanical check. After a rebase or other unrelated change, a normalised diff of the reviewed files decides whether the cached review still applies.
-
-**In your harness:** A script compares the reviewed file hashes and normalised content against the recorded receipt and outputs reuse or rerun. Aggregation still reruns whenever interactions may have changed.
-
-Sources: [#50378157](https://news.ycombinator.com/item?id=50378157)
-
 ## John decides (not ranked)
 
 These change policy, providers or spend, or fit poorly, so they are listed for your decision instead of ranked.
 
 | Kind | Item | Would score | Working |
 | --- | --- | --- | --- |
+| Change | Content-diff check for review reuse | 3.3 | 4×5×0.5÷3 = 3.3 |
 | Change | Explicit escalation rule across model routes | 12.5 | 5×5×1.0÷2 = 12.5 |
 | Change | Review stop rule | 20.0 | 4×5×1.0÷1 = 20.0 |
 | Change | Bake-off: vanilla against the full harness | 8.3 | 5×5×1.0÷3 = 8.3 |
@@ -519,6 +511,51 @@ All 111 are in data/projects_v2.json and on the page, with screenshots.
 - The daily digest is reframed. As a personal-agent feature it is where agents 'dwindle' (#50376601). As a bulk approve-or-deny queue for John (#50385555) it scores 16.
 - The cost board rises from 14 to 17, backed by several independent usage trackers and control rooms.
 - New recommendations not in the first pass: a question-list reviewer with binary verdicts, a review stop rule, a private-path guard before GreenPT, a monthly turn-sink review, and persona readers for consumer content.
+
+## Critic notes
+
+An independent critic agent checked the synthesis. Its points:
+
+- Recommendation 2 ('Escalation rule across model routes, logged on receipts') describes a packet that moves up model routes when it fails. That breaks CLAUDE.md rule 16 (one model route per packet; highest_reasoning only after the explicit premium command), and rule 12 says to stop on a premium-model substitution. — Reframed as 'Escalate by opening a new packet'. The failed deterministic check is recorded on the receipt and the packet closes. A follow-up packet runs on the next route. highest_reasoning needs John's explicit premium command. Any retry stays inside the packet's retry and ten-turn ceilings. Ease drops to 3 and evidence to 3, so the total is 5+3+3+5 = 16, and John decides. — high
+- Recommendation 15 (AST or content-diff check to decide review reuse) is marked 'John decides? no'. It loosens rule 11, which allows reuse only when the file hash, policy hash, reviewer evidence and verdict are unchanged. That is a silent policy change, which rule 5 forbids. — Marked 'John decides: yes'. Framed it as an Experimentation Station trial whose diff check can only flag a reuse candidate, never grant reuse, until John changes rule 11. — high
+- The report counts sgarland [#50378365] as a by-default cross-vendor reviewer and claims '12+ setups by default'. sgarland is Claude-first. He only occasionally asks ChatGPT for an adversarial review, and calls Codex review from inside Claude. — Moved sgarland to the 'occasional' group. Restated the count as 11 clearly by-default setups: sadilek, devinegan, entrope, navels, fonrex, enesalatas, Reebz, gregwebs, gabriel-uribe, virpo, petesergeant. Added YuechenLi as a split by vendor strength rather than a review. Evidence stays at 5 and the category stays at 19. — medium
+- Escalate-on-failure evidence is overstated and inconsistent: 3 in insight 4 but 4 in recommendation 2. Only glennfiedler [#50375921] automates escalation. contingencies [#50374502] switches up manually, and wombat-man [#50381009] uses Fable only for planning. The report also leaves out glennfiedler's own caveat: 'for 99% of stuff I need to do Opus 5.5 @ medium is ideal'. — Evidence set to 3 everywhere. Section 4.2 now separates automated from manual escalation and adds the 99% caveat. Section 10 overturns the first pass's escalate-on-failure score from 17 to 16 as a recommendation. — medium
+- The daily digest is scored 15 as insight 26 but 16 in section 10, with no explanation. Its only source, 50385555, is a vendor reply (mschwarz: 'this is mike from OpenRig'), which the report does not disclose. — Separated the two items. Insight 26 (bulk approve or deny, one vendor source) stays at 15. Recommendation 10 (a phone 'needs John' queue) is 16 because alerts and approval queues appear in several setups (50373796, 50378479, 50380990, 50376390, 50379944). The vendor disclosure is added to 4.10, 4.12 and the caveats. — medium
+- Insight 12 (privacy routing) cites voodooEntity [#50376538]. That is weak support. The direct evidence is a-saleh [#50376810] ('personal stuff that I don't want to send to cloud'), fidelramos [#50385740] (private hosting in Venice, Opus and GPT only for non-personal tasks) and internet_points [#50377307] (diffs redacted automatically). — Changed the ids to 50385740, 50376810 and 50377307, and updated 4.15 to match. — medium
+- Insight 19 ('Subagents burn limits fastest; use them for map-reduce only') cites mholm [#50373364], who does not support it. — Changed the ids to sillysaurusx [#50373445] (subagents for map-reduce work) and joegibbs [#50376279] ('a big gimmick', barely uses subagents, models are 'identical clones'). — medium
+- Insight 18 ('Main thread only coordinates') cites kuboble [#50376058]. In kuboble's setup Claude decides whether to do a ticket itself or delegate it, so it is not a coordinator-only main thread. — Changed the ids to sheepscreek [#50375347] ('Tell it explicitly not to implement anything') and mickeyp [#50376582] (a master chat that delegates). Kept kuboble under tickets, where it belongs. — medium
+- Section 4.14 uses sadilek's '~6 CLIs' as his ceiling. His comment goes on to say that with his custom UX he now runs '20+ with fun', and that the bottleneck moved to his machine, so he added remote workers. — Stated both numbers. Kept the attention-limit point, which rests on fhub, ultrasandwich and wombat-man. Added sadilek as the counterexample, noting that he built a whole UX to get there. — medium
+- Recommendation 5 (push more bounded extraction to GreenPT) does not restate the hard limits: two calls, EUR 0.01 and one return trip per issue, a EUR 10.00 monthly cap, output that stays a candidate, and no private material. — Added a constraint note to section 6. It frames the recommendation as using the cap John has already approved, packet by packet, never as spending budget down before month end. — medium
+- Recommendations 3, 9 and 14 (question-list reviewer, vanilla bake-off, persona readers) add model calls without counting them against the delegated-call limits: at most 5 delegated calls and 2 parallel workers per packet, and a separate packet for each trial. — Added constraint notes. One integrated reviewer counts as one delegated call. Each bake-off arm is its own approved Experimentation Station packet. Persona readers each count as a delegated call, run at most two wide, and never see docs/private material. — medium
+- The top gold quote ('tell it what complete looks like', 50367037) has no insight or recommendation of its own, although it maps directly onto packet acceptance criteria. — Added insight A1 (4+5+3+5 = 17), backed by thefourthchime, siliconc0w [#50381456] (design up front so it drives toward 'a specific outcome') and cpobuda [#50380633]. Added recommendation 16. — medium
+- Section 4.15 says personal agent platforms 'are unstable [#50373974]'. browningstreet says OpenClaw spiralled and crashed, but calls Hermes Agent 'a core tech for me'. jedisct1 [#50376601] says his use of NBClaw dropped off until it mostly sends summaries; he does not use the word 'dwindle'. — Rewrote the bullet: one platform crashed while another became core for the same user, and jedisct1's use tapered off to a summary bot. — medium
+- Projects from vendors are not flagged. Examples: mschwarz [#50385555] is the OpenRig author replying to an OpenRig user, and Kuyawa [#50373796] says his tool 'never hallucinates'. — Added both to the self-promotion caveat. Kept the alerts idea from 50373796, but not the reliability claim. — low
+- The caveat says droneship was 'posted as a reply twice'. It was posted three times (50371043, 50371049, 50372231). — Corrected to three times. — low
+- Three categories tie at 19 with no tie-break rule. — Added a note: within a tie, rows are ordered by how many independent setups back them, and the order inside a tie is not significant. — low
+- The ADR quote 'raised overall output quality' is in stkni [#50376451], but 4.3 lists tritondev [#50376262] first. tritondev builds Humbug; his point is low dependency. — Cited 50376451 for the quote and 50376262 only as context. — low
+- The '1 billion tokens used 7% of a $10 plan' figure [#50381117] includes cache, which the report does not say. — Added '(including cache)'. — low
+- Some project descriptions are incomplete. Superintendent [#50380990] also has a limits dashboard and an approve/deny queue for refined ideas. sheepscreek's [#50375342] task journal and Codex local-memory tip are missing. virpo [#50378479] uses Codex for image generation as well as review. — Added these details to 4.3, 4.9, 4.1 and section 7. — low
+- The structured project list (175 entries) is missing several linked or bare-domain providers: Venice.ai, Z.ai, artificialanalysis.ai, duck.ai, devin.ai, Abliterated.ai and llama.app. Some second sources are also missing: deepinfra.com is linked by mring33621 [#50380281], pi.dev also by Zambyte [#50374449], Kan also by alok-g [#50374919], Juggler also by julesrms [#50379165], ctlflow also by Scrounger [#50373800], Conductor.build also by jkkorn [#50379292], and eca.dev also by AiAi [#50373811]. — Listed them in a new 'Project list corrections' block in section 7 and in 'missing'. The stonker URL (it carries an access key) and localhost:8080 stay excluded. — low
+- Section 10 does not give an explicit confirm or overturn for each first-pass adoption. — Section 10 now gives each one. Eval vs vanilla then prune: 18 to 16, overturned. Escalate-on-failure: 17 to 16, overturned. HANDOFF plus DECISIONS: 17 to 19, raised. Daily digest: 15 confirmed as an insight, 16 as the phone queue. Cost board: 14 to 17, raised. — low
+- Missing: Insight: 'tell it what complete looks like' as packet acceptance criteria (thefourthchime 50367037, siliconc0w 50381456, cpobuda 50380633)
+- Missing: Insight: route by task type or vendor strength as well as by tier (YuechenLi 50375205: Claude for frontend and debugging, Codex for features and research; virpo 50378479: Codex for images and reviews; phillc73 50367557: GLM5.3 for adversarial batteries and documentation; jedisct1 50376601: a different model for each task type)
+- Missing: sheepscreek 50375342: a task journal holding tribal knowledge, plus 'turn on' Codex local memory
+- Missing: glennfiedler 50375921 caveat: 'for 99% of stuff I need to do Opus 5.5 @ medium is ideal'; he uses extra models mainly for other points of view and security audits
+- Missing: sadilek 50370886: 20+ parallel CLIs with a custom UX (Obeya), then remote workers to spread load across machines
+- Missing: wombat-man 50381009: 'The bottleneck is me understanding what code is going in'
+- Missing: Supply-chain and low-dependency harness concern (kikdij 50378847: 'Way too many dependencies and supply chain attack opportunities'; tritondev 50376262: Humbug, 3 runtime dependencies)
+- Missing: Agents log their work to an Obsidian vault (GoodFriday 50380005, dcferreira 50379944)
+- Missing: kikdij 50378847: the harness writes the plan to the filesystem, hands over to the next session and resets context (further support for insight 3)
+- Missing: a-saleh 50376810: local models for 'personal stuff that I don't want to send to cloud' (better privacy evidence than 50376538)
+- Missing: joegibbs 50376279: orchestration is 'a big gimmick'; barely uses subagents
+- Missing: mschwarz 50385555 is the OpenRig vendor ('mike from OpenRig'); also suggests auto-approving whole classes of findings once trusted
+- Missing: djeastm 50380990 Superintendent: also a limits dashboard and an approve/deny queue
+- Missing: brabel 50376352: a Requesty gateway dashboard; Haiku 5 for simple work, Opus and Argon for big work, 'the difference in price is dramatic'
+- Missing: poelzi 50378157: a queue-manager agent that keeps the workflow engine busy, and decision steps where agents can ask the operator
+- Missing: dgunay 50375407: the chief of staff turns workstreams into beads, and Remuda runs containerised workers
+- Missing: Projects or providers missing from the structured list: Venice.ai (fidelramos 50385740, private hosting), Z.ai (mazone 50373447, alexfortin 50374094 and 50375856, slipwalker 50370716, deathmonger5000 50374678, hypfer 50376056, fzxu22 50385925), artificialanalysis.ai (decoding 50374344), duck.ai (tharkun__ 50374626, npteljes 50377746), devin.ai (fishtoaster 50384905), Abliterated.ai (profdevloper 50373770), llama.app (thibsrn 50377715)
+- Missing: Second sources missing from the project list: deepinfra.com link (mring33621 50380281), pi.dev (Zambyte 50374449, world2vec 50368325, slipwalker 50370716, profdevloper 50373770, rglullis 50376782), Kan (alok-g 50374919), Juggler (julesrms 50379165), ctlflow (Scrounger 50373800), Conductor.build (jkkorn 50379292), eca.dev (AiAi 50373811)
+- Missing: droneship was posted three times (50371043, 50371049, 50372231), not twice
 
 ## Process record
 

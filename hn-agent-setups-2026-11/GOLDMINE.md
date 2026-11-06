@@ -401,7 +401,7 @@ Why: the most-copied idea from the thread and the Reddit summary is to write dow
 
 ## Projects worth a look, top 15 by v2
 
-All 111 are in data/projects_v2.json and on the page, with screenshots.
+All 114 are in data/projects_v2.json and on the page, with screenshots.
 
 | # | Project | Camp | v2 | Working | Note |
 | --- | --- | --- | --- | --- | --- |

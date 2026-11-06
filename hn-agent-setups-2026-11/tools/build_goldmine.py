@@ -100,7 +100,7 @@ M += ['']
 if S.get('disagreements'): M += ['## Where the thread disagrees', ''] + [f'- {txt(d)}' for d in S['disagreements']] + ['']
 if S.get('gold_quotes'): M += ['## Gold quotes', ''] + [f'> {txt(q)}\n' for q in S['gold_quotes']]
 M += [reddit.replace('## ', '## ', 1), '', routing, '',
-      '## Projects worth a look, top 15 by v2', '', 'All 111 are in data/projects_v2.json and on the page, with screenshots.', '',
+      '## Projects worth a look, top 15 by v2', '', 'All 114 are in data/projects_v2.json and on the page, with screenshots.', '',
       tbl(['#', 'Project', 'Camp', 'v2', 'Working', 'Note'],
           [[k + 1, f'[{p["name"]}]({p["url"]})', p['category'], p['v2'], p['v2_working'], p.get('v2_note', '')] for k, p in enumerate(topP)]), '']
 known = {p['url'].rstrip('/').lower() for p in P}

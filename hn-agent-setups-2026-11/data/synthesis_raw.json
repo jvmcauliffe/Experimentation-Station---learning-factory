@@ -1,0 +1,3205 @@
+{
+ "report_markdown": "# Gold mine report: 'Ask HN: What's your current AI agentic setup?'\\n\\nThread: HN item 50366117, 645 comments. Source: eight reader chunks, merged and de-duplicated here. Comment ids are cited as [#id]. Model names, prices and usage figures are as commenters reported them. None of them are verified. This synthesis step made no repository changes and no nested model calls.\\n\\n## 1. The short version\\n\\n- **Cross-vendor review is the pattern with the most support.** At least a dozen independent setups have one provider write and another review, by default [#50370886] [#50373001] [#50378365] [#50389282] [#50376463]. John's harness already works this way. Keep it and sharpen it.\\n- **'Plan strong, execute cheap' is a close second**, ideally with escalation when the cheap tier fails [#50374549] [#50378856] [#50375921]. John's three model routes already follow this pattern. The missing piece is an explicit, logged escalation step.\\n- **Memory belongs in files, not in the context window.** That means HANDOFF.md resets, ADRs, state files and close-out notes [#50375342] [#50376262] [#50377952] [#50375278].\\n- **The minimalists make a lot of noise and are often right.** Newer models need fewer guardrails [#50378434] [#50379944]. But almost nobody tests a custom setup against the vanilla harness [#50379514]. That test is John's best next experiment.\\n- **Cheap open models are now very cheap, and there is real data to show it** [#50381117] [#50375427] [#50385251]. But models still write poor prose [#50367589] [#50373357] [#50375084]. For a content harness this backs the current split: GreenPT does bounded extraction, and the strong owners do the prose and the judgement.\\n- **Wide swarms, personal 'claw' agents and local inference are mostly noise for this setup.**\\n\\n## 2. How the scores work\\n\\nEvery item gets four scores, each from 1 to 5. The total is out of 20.\\n- **Impact:** how much it would improve results.\\n- **Ease:** how cheap it is to adopt.\\n- **Evidence:** how many independent commenters back it, and how specific or data-backed they are.\\n- **Fit:** how well it suits John's harness: three providers, GitHub task packets, receipts, budget caps, review reuse, work from a phone, and content consumers (the chauffeur academy and the Sark retreat site).\\n\\n## 3. Category ranking\\n\\n| Rank | Category | Verdict | Impact+Ease+Evidence+Fit = Total |\\n|---|---|---|---|\\n| 1 | Cross-vendor and cross-model review | adopt | 5+4+5+5 = 19 |\\n| 2 | Tiered routing: plan strong, execute cheap, escalate | adopt | 5+4+5+5 = 19 |\\n| 3 | Context and memory as files | adopt | 4+5+5+5 = 19 |\\n| 4 | Minimalism and evals against vanilla | adopt | 4+5+5+4 = 18 |\\n| 5 | Issues and tickets as the agent interface | adopt | 4+4+5+5 = 18 |\\n| 6 | Deterministic-first workflows | adopt | 5+3+4+5 = 17 |\\n| 7 | Cheap open-weight workers | trial | 4+4+5+4 = 17 |\\n| 8 | Skills, prompts and prose quality | trial | 4+4+4+5 = 17 |\\n| 9 | Cost and quota telemetry | adopt | 4+3+4+5 = 16 |\\n| 10 | Verification beyond code review | trial | 4+3+4+5 = 16 |\\n| 11 | Session control: phone, remote, voice, alerts | trial | 3+4+4+5 = 16 |\\n| 12 | Coordinator-style orchestration | trial | 4+3+4+4 = 15 |\\n| 13 | Sandboxing and credential isolation | trial | 4+3+5+3 = 15 |\\n| 14 | Skeptics, attention limits and wellbeing | adopt (keep caps) | 3+4+5+3 = 15 |\\n| 15 | Personal agents and local inference | watch | 2+2+4+2 = 10 |\\n\\n## 4. Camp by camp\\n\\n### 4.1 Cross-vendor review (19)\\nThis is the most common serious pattern in the thread.\\n- **Author with one vendor, review with another.** Opus writes and Codex reviews by default, with Grok and Gemini added for critical work [#50370886]. Codex Pro works as the second-opinion reviewer [#50373001]. Opus is reviewed by GPT Sol, with both on $20 plans [#50373589]. navels built neal so that Codex reviews Claude or the other way round [#50373463].\\n- **Calling the reviewer.** Some call Codex's review function from inside the Claude CLI [#50378365]. Others run Codex as a pre-PR or post-PR hook [#50376390]. One person pays for a cheap third subscription purely for adversarial review [#50377705].\\n- **Why it works.** In glennfiedler's words, 'each model sees things the others don't' [#50375606]. Even a skeptic finds real bugs with 'now review this' [#50380787].\\n- **Sharper variants.**\\n  - A fresh session reviews with a fixed list of 16 of your own PR questions [#50378899].\\n  - Implementer and clean-context reviewer loops repeat until no serious issue remains [#50379808].\\n  - Reviews are cached and pinned to the commit hash, and an AST-diff after a rebase decides whether a review can be reused [#50378157]. This is close to John's rule 11.\\n- **The warning.** AI review almost always finds something, even straight after you fix the last round [#50374732]. You need a stop rule.\\n\\n### 4.2 Tiered routing (19)\\n- **Plan strong, execute cheap.** Opus plans and Sonnet executes [#50374549]. Claude files issues and OpenCode with DeepSeek picks them up [#50373974]. oh-my-pi's 'prewalk' pairs an Opus planner with a DeepSeek executor [#50376454]. Claude ($20) plans, Codex ($20) reviews and DeepSeek ($1-3 a day) implements, all for under $100 a month [#50378856]. Opus plans and reviews, Sonnet writes code and Haiku does the mechanical work [#50389538].\\n- **Escalation.** An Opus coordinator puts each card in a tier: flash, pro, heavy or frontier. A card that fails moves up a tier [#50375921]. Others use the top model only when stuck or on a high-value step [#50374502], or only for big-picture planning [#50381009].\\n- **Raise effort only where it pays.** Use it for architecture work, and split implementation into small pieces that need low reasoning [#50367589].\\n- **For John.** The routes exist already. Make escalation a recorded event on the receipt, triggered by a failed deterministic check, not by judgement.\\n\\n### 4.3 Context and memory as files (19)\\n- **Reset instead of compacting.** The agent writes HANDOFF.md, listing the subtasks, their status, what was learnt and what remains. Then a fresh agent starts from it [#50375342].\\n- **A memory folder in version control.** bottom999mottob keeps LOG.md, HANDOFF.md and DECISIONS.md plus a plan folder [#50375274].\\n- **ADRs written as the project goes.** stkni found they 'raised overall output quality' [#50376262] [#50376451].\\n- **A shared-memory repo with rules and state.** There is one rules file (especially what is forbidden) and one state file per repo. Each task has an Org-mode file naming its owner agent and model. Hooks keep it all current [#50377952].\\n- **A close-out routine.** At the end of a session, the agent writes hints into AGENTS.md [#50375278].\\n- **A full trace.** A 'status repo' records everything, but it eats tokens [#50375619].\\n- **Keep context small.** Keep the context window under 10% full and start fresh from markdown [#50375856].\\n- **The contrarian.** Re-explaining forces better thinking about architecture [#50376204]. The answer is to keep these files short, not to drop them.\\n\\n### 4.4 Minimalism and evals against vanilla (18)\\n- **Plain setups go a long way.** Many people run plain Claude Code or Codex and stop there [#50373208] [#50380407] [#50375079].\\n- **Complex setups age fast.** 'Almost all of the intelligence is in the model', so complex setups are obsolete within months [#50373351].\\n- **Newer models need less scaffolding.** Since the 5.5 models arrived, they 'need less skills and guardrails' [#50378434]. Organisation structures need less attention as models improve [#50379944].\\n- **Broad context hurts.** Broad skills and tool access poison the context [#50380583]. One commenter added a switch that ignores bloated repo instructions [#50375302].\\n- **The sharpest point.** 'All of these gas towns and no one running evals to compare to the vanilla harness' [#50379514].\\n- **Ways to compare.** Use a locked-down baseline harness [#50375145]. Or benchmark on your own past sessions rather than leaderboards [#50378628].\\n- **For John.** His ~19-rule CLAUDE.md is exactly what this camp would challenge. The fair answer is a bake-off, not a debate.\\n\\n### 4.5 Issues and tickets as the interface (18)\\n- **GitHub issues as the hand-off.** One person says this is 'simple and resilient enough' [#50373974]. claudeflow turns issues into Claude one-shots and handles CI and landing the PR [#50374380]. A Pi GitHub Action runs an issue-and-PR workflow [#50374094].\\n- **Tickets as the conversation.** jiraude makes tickets the whole interface. Questions come back in the ticket, and side findings become new tickets [#50376058] [#50384746].\\n- **Kanban as plain files.** Kan keeps cards as files in the repo, with dependencies and a `kan ready` query [#50374498].\\n- **For John.** He already works this way. The thread confirms it is a strong design, not over-engineering.\\n\\n### 4.6 Deterministic-first workflows (17)\\n- **Promote what works.** Start a workflow as a skill and make it deterministic once it proves useful [#50367326]. When you need throughput, automate the deterministic parts first [#50367587].\\n- **Scripts first, agents as fallback.** poelzi runs 40+ step workflows that are mostly scripts, with agents only as fallbacks. Each failure hardens the workflow, and runs can resume [#50378157].\\n- **Turn token sinks into code.** When Fordec hits his weekly limit, he studies his consumption data and turns the biggest token sinks into ordinary code [#50374764].\\n- **Mechanical gates.** One example: no remote push without approval [#50367557].\\n- **For John.** This matches his rules 4 and 17. The new idea is the regular token-sink review.\\n\\n### 4.7 Cheap open-weight workers (17)\\n- **The data.**\\n  - 1 billion tokens used 7% of a $10 plan [#50381117].\\n  - A 99% cache hit rate keeps long jobs at about $20 a week [#50375427].\\n  - 'Billions of tokens per week for maybe ~20 bucks' [#50385251].\\n  - $4.37 in 30 days [#50376778].\\n  - A long code review cost about $0.033 [#50377633].\\n- **The counterpoint.** 'In practice all of these open models are more expensive than a Claude subscription' [#50380381]. DeepSeek 4.1 Flash is still on the high side [#50384114].\\n- **For John.** GreenPT's EUR 10 cap is the cheap worker. John has already said to use it more. The thread supports pushing more bounded extraction to it.\\n\\n### 4.8 Skills, prompts and prose quality (17)\\n- **Prose is the weak spot.** All models struggle with prose such as reports and PR summaries [#50367589]. Open models are 'incredible tool callers, but their prose is insufferable' [#50373357]. Flash models give approximately-correct text, while frontier models are concise and correct [#50376087].\\n- **A hard boundary on slop.** 'I don't like making other people read AI slop, but I don't mind having AIs read it' [#50375084].\\n- **Small prompt wins.** One line, 'answer me like a Vulcan', cut verbosity [#50380005]. Turn any prompt you run often into a skill and keep refining it [#50384236].\\n- **For a content harness, this is the key finding.** Cheap models must never own final prose.\\n\\n### 4.9 Cost and quota telemetry (16)\\n- **Visible limits and spend.** People build usage-limit trackers [#50373740], public usage pages [#50374094] and per-loop cost views in a control room [#50376390]. A gateway dashboard shows real speed and cost [#50376352].\\n- **Using quota well.** A scheduler spends leftover capacity on queued improvements before the reset [#50380990]. A dispatcher switches provider when quota runs low [#50378856].\\n- **For John.** Receipts already carry running totals. A single board that reads them is cheap and useful.\\n\\n### 4.10 Verification beyond code review (16)\\n- **Persona testing.** A dogfood rig tests as user personas. Persistent 'returning users' give much better feedback than blank-slate ones [#50385555].\\n- **Browser testing.** A strong model does exploratory testing in a real browser, in a loop [#50376216].\\n- **Visual checks.** The agent builds review pages so you can check visual work [#50382792].\\n- **Binary gates.** Each gate is CLEAR or DISCREPANCY, 'never a numeric score' [#50380633].\\n- **A clean-up pass.** Plan one after high-throughput fleet work [#50375606].\\n- **A warning.** Agents drift into 'productivity porn': reports and evidence packs, but nothing shipped [#50381456].\\n- **For the academy and Sark.** Persona readers are a natural fit.\\n\\n### 4.11 Session control: phone, remote, voice and alerts (16)\\n- **From the phone.** Keep remote control running in every project so the phone apps work [#50374380] [#50377004]. Remote control can reach a real GPU from the phone [#50376177].\\n- **Alerts.** One bell for 'done' and a gong for 'needs an answer' [#50373796]. A Stream Deck shows which agent has finished [#50378479].\\n- **Voice.** Push-to-talk, with an intentional 'turn' [#50381098]. Local dictation [#50374502].\\n- **For John,** who works mostly from a phone, the useful idea is two different kinds of alert: done, and needs John.\\n\\n### 4.12 Coordinator-style orchestration (15)\\n- **A coordinator that doesn't build.** Tell the main thread not to implement anything, only coordinate [#50375347] [#50376582]. A 'chief of staff' Opus requires at least one round of agentic review before a PR reaches the human [#50375407]. A pm-intake seat checks feedback against the roadmap and batches a daily digest for bulk approve or deny [#50385555].\\n- **Against.** Wide swarms are 'a waste of token' [#50375205]. Sessions that message each other drift into chaos [#50376476].\\n- **Verdict.** A narrow coordinator yes, a swarm no.\\n\\n### 4.13 Sandboxing and credentials (15)\\n- **Keys out of reach.** A proxy injects credentials so the LLM never sees keys [#50367803] [#50379377] [#50381875]. 'NO KEYS IN THE VM' [#50387654].\\n- **Push from the host.** Agents commit inside the sandbox and the host does the pushing [#50379089] [#50379206].\\n- **Don't trust the harness's own sandbox.** Claude has been seen disabling its own [#50380164]. Agents also remember secrets they saw a week ago [#50387438].\\n- **For John.** Cloud sessions and the push hook already cover most of this, which is why fit is only 3.\\n\\n### 4.14 Skeptics, attention limits and wellbeing (15)\\n- **Attention limits.** 'I can do 5 things concurrently for about a day max' [#50373117]. ~6 CLIs was sadilek's ceiling [#50370886]. 'I can't even handle 4 parallel tasks' [#50376632].\\n- **Burnout.** Warnings in [#50373236] [#50390416].\\n- **Thread bias.** The thread over-represents power users [#50375972].\\n- **For John.** His two-worker cap is well judged.\\n\\n### 4.15 Personal agents and local inference (10)\\n- **Personal agents.** These platforms are unstable [#50373974], dwindle into digest bots [#50376601] and amount to 'just a cronjob' [#50370886].\\n- **Local models.** They need hardware, and they don't suit phone-first cloud work.\\n- **What to keep.** The privacy-routing idea: private material goes only to private models, and diffs are redacted before cloud review [#50385740] [#50377307].\\n\\n## 5. Top insights (top 30; the full list of 56 is in the structured data)\\n\\n| # | Insight | Working | Ids |\\n|---|---|---|---|\\n| 1 | One vendor authors, another reviews, by default | 5+4+5+5 = 19 | 50370886, 50373001, 50378365, 50389282 |\\n| 2 | Strong model plans, cheap model executes | 5+4+5+5 = 19 | 50374549, 50378856, 50376454, 50389538 |\\n| 3 | Reset context via HANDOFF.md rather than compaction | 5+5+4+5 = 19 | 50375342, 50378847, 50375856 |\\n| 4 | Escalate a task up tiers when it fails | 5+4+3+5 = 17 | 50375921, 50374502 |\\n| 5 | Agents write ADRs as they go | 4+5+3+5 = 17 | 50376262, 50376451 |\\n| 6 | Deterministic scripts first, agents as fallback | 5+3+4+5 = 17 | 50378157, 50367326, 50367587 |\\n| 7 | Fresh-session review driven by your own question list | 5+5+2+5 = 17 | 50378899 |\\n| 8 | Models still write poor prose; strong models or humans own it | 5+3+4+5 = 17 | 50367589, 50373357, 50375084 |\\n| 9 | Cheap open models: hard cost data | 4+4+5+4 = 17 | 50381117, 50375427, 50385251 |\\n| 10 | GitHub issues as the planner-to-worker hand-off | 4+4+4+5 = 17 | 50373974, 50374380, 50374094 |\\n| 11 | A single usage and cost board | 4+4+4+5 = 17 | 50373740, 50374094, 50376390 |\\n| 12 | Route private material only to private models; redact first | 4+4+4+5 = 17 | 50385740, 50376538, 50377307 |\\n| 13 | Eval custom setups against vanilla | 5+3+3+5 = 16 | 50379514, 50375145, 50378628 |\\n| 14 | Newer models need fewer guardrails | 4+4+4+4 = 16 | 50378434, 50379944, 50381456 |\\n| 15 | A memory folder in version control plus per-repo state file | 4+4+3+5 = 16 | 50375274, 50377952 |\\n| 16 | Close-out routine writes hints to AGENTS.md | 4+5+2+5 = 16 | 50375278 |\\n| 17 | AI review always finds something: set a stop rule | 4+5+2+5 = 16 | 50374732 |\\n| 18 | Main thread only coordinates | 4+5+3+4 = 16 | 50375347, 50376058 |\\n| 19 | Subagents burn limits fastest; use them for map-reduce only | 4+5+3+4 = 16 | 50373445, 50373364 |\\n| 20 | Human attention caps parallelism at about 3-6 | 3+5+5+3 = 16 | 50373117, 50376632 |\\n| 21 | Spec-first: Vision, then Features, then Tasks | 4+4+4+4 = 16 | 50382792, 50380633 |\\n| 22 | Agents commit; only the host pushes | 4+4+4+4 = 16 | 50379089, 50379206 |\\n| 23 | Credential-injecting proxy; no keys in the sandbox | 4+5+4+3 = 16 | 50367803, 50387654 |\\n| 24 | Binary CLEAR/DISCREPANCY gates, not scores | 4+4+2+5 = 15 | 50380633 |\\n| 25 | Implementer and clean reviewer loop | 4+4+3+4 = 15 | 50379808 |\\n| 26 | Daily digest for bulk approve or deny | 4+4+2+5 = 15 | 50385555 |\\n| 27 | Warning: 'productivity porn' with nothing shipped | 4+5+1+5 = 15 | 50381456 |\\n| 28 | Broad skills poison context | 4+4+3+4 = 15 | 50380583, 50375302 |\\n| 29 | Separate 'done' and 'needs you' alerts | 3+5+2+5 = 15 | 50373796, 50378479 |\\n| 30 | Cheap inter-agent channels: shared .md file, send-keys | 3+4+4+4 = 15 | 50373684, 50388928 |\\n\\n## 6. Recommendations for John's harness\\n\\n| # | Change | Working | John decides? |\\n|---|---|---|---|\\n| 1 | Write HANDOFF.md and DECISIONS.md at packet close | 5+5+4+5 = 19 | no |\\n| 2 | Escalation rule across model routes, logged on receipts | 5+4+4+5 = 18 | yes |\\n| 3 | Question-list reviewer with binary verdicts | 5+5+3+5 = 18 | no |\\n| 4 | Review stop rule (round limit and severity threshold) | 4+5+3+5 = 17 | yes |\\n| 5 | Push more bounded extraction to GreenPT, inside the cap | 4+4+4+5 = 17 | no |\\n| 6 | One cost and quota board read from receipts | 4+4+4+5 = 17 | no |\\n| 7 | Deterministic guard for private paths before GreenPT | 4+4+4+5 = 17 | no |\\n| 8 | Keep width at two workers; no swarm tooling | 3+5+5+4 = 17 | no |\\n| 9 | Bake-off: vanilla against the full harness, then prune | 5+3+3+5 = 16 | yes |\\n| 10 | Phone digest: one queue of 'needs John' items | 4+4+3+5 = 16 | no |\\n| 11 | Spec-first content packets that must ship an artefact | 4+4+3+5 = 16 | no |\\n| 12 | Prune CLAUDE.md; move rules into hooks | 4+4+4+4 = 16 | yes |\\n| 13 | Monthly turn-sink review, scripting the top sink | 4+3+3+5 = 15 | no |\\n| 14 | Persona readers for academy and Sark content | 4+3+2+5 = 14 | yes |\\n| 15 | AST/content-diff check to decide review reuse | 4+3+1+5 = 13 | no |\\n\\nThe structured recommendations explain how each one works inside the harness. The best first step is to trial items 1, 3 and 9 in Experimentation Station before touching any consumer.\\n\\n## 7. Projects worth opening (inspiration 4-5)\\n\\n- **tix.im** [#50378157]: Nix workflows that are mostly deterministic, plus a commit-pinned review cache. This is the project closest in spirit to John's harness.\\n- **skills-sdlc** [#50378856]: an /implement skill where Claude plans, Codex reviews and DeepSeek implements.\\n- **neal** [#50373463]: cross-provider review loop.\\n- **jiraude** [#50384746] and **claudeflow** [#50374380]: tickets and issues as the interface.\\n- **Kan** [#50374498]: kanban as files in the repo.\\n- **status repo skill gist** [#50375619] and **Claude Code TPP write-up** [#50375879]: memory as files.\\n- **nova-bus / nova-sprint** [#50375606]: tier escalation and multi-model review at scale.\\n- **Spool** [#50376390]: mission loops, egress allowlists, per-loop cost.\\n- **alexfortin usage page** [#50374094]: a public usage board.\\n- **virpo levels** [#50378479]: 100 tips an agent can audit your setup against.\\n- **Helyn follow-the-money** [#50380633]: binary-gate protocol.\\n- **Obeya** [#50370886]: card canvas with narrated video demos.\\n- **Superintendent** [#50380990]: spends spare capacity (no URL given).\\n\\nThe structured data lists all 150+ projects, including weak ones.\\n\\n## 8. Disagreements and verdicts\\n\\n- **Swarms against a single loop.** Coordinators and fleets [#50375606] [#50373324] versus 'a single good human in the loop beats any automated orchestration tool' [#50375205]. Verdict: a narrow coordinator plus a reviewer, no swarm.\\n- **Are skills still useful?** Yes [#50384236] [#50378336]. Less so [#50367037] [#50380583]. Verdict: a few specific, refined skills; prune broad ones.\\n- **Persist context, or re-explain?** Persist [#50375342] versus re-explain [#50376204]. Verdict: persist decisions and hand-offs, and keep them short.\\n- **Are open models cheaper?** Cheaper [#50381117] versus dearer than a subscription [#50380381]. Verdict: measure. For John, GreenPT is capped anyway.\\n- **Minimal setup or heavy protocol?** [#50380407] versus [#50380633]. Verdict: heavy only where it is deterministic, and prove it against vanilla.\\n- **Cloud agent privacy.** No worse than local [#50377537] versus worse [#50377189]. Verdict: keep docs/private out of cheap providers by mechanical check.\\n- **Tell the model to use subagents, or let it decide?** [#50375851] versus [#50373767]. Verdict: let it decide, inside the budget caps.\\n- **Opus or Fable?** [#50378628] versus [#50380023]. Verdict: the main difference is price; benchmark on your own tasks.\\n- **Cheap flash correctness.** Fast output 'pretty much always correct' [#50376062] versus approximately correct [#50376087]. Verdict: fine for extraction, not for final prose.\\n- **Is lightweight isolation enough?** [#50379089] versus [#50380164]. Verdict: use an external sandbox. Cloud sessions already give one.\\n- **Is nonstop building healthy?** [#50374802] versus [#50390416]. Verdict: keep the caps.\\n- **Do model differences matter?** Parity [#50377263] versus big differences in price and prose [#50376352]. Verdict: they still matter for prose and price.\\n\\n## 9. Gold quotes\\n\\n- 'I'd say the biggest trick is just to tell it what complete looks like.' (thefourthchime) [#50367037]\\n- 'Models be dumb sometimes.' (ctolsen) [#50367326]\\n- 'All of these gas towns and no one running evals to compare to the vanilla harness.' (SOLAR_FIELDS) [#50379514]\\n- 'If a card fails at a particular tier, it's going to get escalated up tiers until it gets sorted.' (glennfiedler) [#50375921]\\n- 'Each model sees things the others don't.' (glennfiedler) [#50375606]\\n- 'the review is pinned to the commit hash.' (poelzi) [#50378157]\\n- 'Reset your context frequently instead of only relying on compaction.' (sheepscreek) [#50375342]\\n- 'it almost always inevitably finds something wrong' (smashed) [#50374732]\\n- 'a phase is either CLEAR (GREEN) or DISCREPANCY (RED) — never a numeric score' (cpobuda) [#50380633]\\n- 'I don't like making other people read AI slop, but I don't mind having AIs read it.' (martincsweiss) [#50375084]\\n- 'their prose is insufferable.' (guhcampos) [#50373357]\\n- 'defects cost time and money later.' (gregwebs) [#50378856]\\n- 'My ABSOLUTE rule is NO KEYS IN THE VM.' (allen-munsch) [#50387654]\\n- 'This thread is super biased by the power users' (ex-aws-dude) [#50375972]\\n\\nThe structured data holds the full set of 24.\\n\\n## 10. Changes from the first pass\\n\\n- **Cross-model review: 16 to 19.** It is the most independently backed pattern in the thread (12+ setups).\\n- **Tiered routing: 17 to 19.** Plan-strong, execute-cheap appears in 10+ setups. Escalate-on-failure is confirmed but rests mainly on glennfiedler and contingencies.\\n- **Context-as-files: 17 to 19,** widened to cover ADRs, state files and close-out notes.\\n- **Minimalists: kept at 18,** but reframed. Their strongest point is 'eval against vanilla'. The first pass's 'eval harness then prune' recommendation stands at 16 (evidence is thin, impact is high).\\n- **Tickets and kanban: 13 to 18.** Many independent issue-driven setups, and it is John's existing design.\\n- **Cheap open models: 14 to 17,** because of the hard cost data. It stays at trial because of the counter-evidence.\\n- **Orchestrators: 10 to 15,** as a narrow 'coordinator' pattern only. Big swarms stay weak.\\n- **Session managers: 11, folded into session control (16).** Phone-first fit raises it.\\n- **New categories:** deterministic-first (17), skills, prompts and prose (17), cost telemetry (16) and verification beyond review (16).\\n- **Daily digest: reframed.** As a personal-agent feature it is where agents 'dwindle' [#50376601]. As a bulk approve-or-deny queue [#50385555] it scores 16.\\n- **Cost board: 14 to 17.**\\n- **Sandboxing: 14 to 15.** Strong evidence, but low marginal fit for cloud sessions.\\n\\n## 11. Caveats\\n\\n- **Biased sample.** Power users are the most eager to share [#50375972].\\n- **Self-promotion.** Several projects are authors promoting their own work. droneship was posted as a reply twice.\\n- **Unverified figures.** All spend and throughput figures are self-reported.\\n- **Untrusted link.** One link is a file-host download, not a vendor site (#50375124). Don't install from it.\\n- **Telemetry.** The delegated-call count and spend for this synthesis step are not visible to this agent. Record them as unknown.\\n",
+ "categories": [
+  {
+   "name": "Cross-vendor and cross-model review",
+   "verdict": "adopt",
+   "impact": 5,
+   "ease": 4,
+   "evidence": 5,
+   "fit": 5,
+   "summary": "One provider authors, another reviews, by default. The most independently backed pattern in the thread. Variants: question-list reviews in a fresh session, clean-context review loops, commit-pinned review caches. Warning: review always finds something, so it needs a stop rule.",
+   "comment_count_estimate": 30,
+   "key_people": "sadilek, devinegan, entrope, navels, sgarland, enesalatas, chrisvalleybay, lgunsch, KronisLV, poelzi, glennfiedler, smashed"
+  },
+  {
+   "name": "Tiered routing: plan strong, execute cheap, escalate",
+   "verdict": "adopt",
+   "impact": 5,
+   "ease": 4,
+   "evidence": 5,
+   "fit": 5,
+   "summary": "An expensive model plans or reviews and a cheap model executes. An Opus coordinator classifies tasks into tiers and escalates a failing card up the tiers. Effort is raised only for architecture work.",
+   "comment_count_estimate": 35,
+   "key_people": "glennfiedler, gregwebs, smashed, browningstreet, tomasulo, contingencies, peepee1982, WhiteMart, Xonzo, ActionHank"
+  },
+  {
+   "name": "Context and memory as files",
+   "verdict": "adopt",
+   "impact": 4,
+   "ease": 5,
+   "evidence": 5,
+   "fit": 5,
+   "summary": "HANDOFF.md resets instead of compaction, plus ADRs, DECISIONS/LOG files, per-repo state files, close-out notes to AGENTS.md and status repos. Contrarian: re-explaining forces better thinking, so keep these files short.",
+   "comment_count_estimate": 25,
+   "key_people": "sheepscreek, bottom999mottob, tritondev, stkni, Asmod4n, coeneedell, ehostunreach, alexfortin, kikdij, hypfer (contra)"
+  },
+  {
+   "name": "Minimalism and evals against vanilla",
+   "verdict": "adopt",
+   "impact": 4,
+   "ease": 5,
+   "evidence": 5,
+   "fit": 4,
+   "summary": "Vanilla Claude Code or Codex goes a long way. 5.5-era models need fewer guardrails, and broad skills poison context. Hardly anyone evaluates custom setups against the vanilla harness, which is the key test.",
+   "comment_count_estimate": 30,
+   "key_people": "willio58, Aozora7, SOLAR_FIELDS, ryanthedev, dcferreira, RamblingCTO, leofree, kbbgl87, joshheitzman, nedt"
+  },
+  {
+   "name": "Issues and tickets as the agent interface",
+   "verdict": "adopt",
+   "impact": 4,
+   "ease": 4,
+   "evidence": 5,
+   "fit": 5,
+   "summary": "GitHub issues, Jira/Linear or kanban-as-files hand work from a planner to an executor. Questions and side findings come back as tickets. This is John's existing design and the thread backs it strongly.",
+   "comment_count_estimate": 25,
+   "key_people": "browningstreet, sudhirj, kuboble, amterp, pglevy, alexfortin, parkersweb, earthdeity, dgunay, rcgeorge23"
+  },
+  {
+   "name": "Deterministic-first workflows",
+   "verdict": "adopt",
+   "impact": 5,
+   "ease": 3,
+   "evidence": 4,
+   "fit": 5,
+   "summary": "Start as a skill, harden into scripts, and use agents only as fallbacks. Make workflows resumable, and turn the biggest token sinks into ordinary code when limits bite.",
+   "comment_count_estimate": 12,
+   "key_people": "poelzi, ctolsen, dgb23, Fordec, phillc73, MITSardine, biggestriverman"
+  },
+  {
+   "name": "Cheap open-weight workers",
+   "verdict": "trial",
+   "impact": 4,
+   "ease": 4,
+   "evidence": 5,
+   "fit": 4,
+   "summary": "DeepSeek and GLM flash models through cheap plans or PAYG, with hard cost data (1B tokens for 7% of a $10 plan; ~$20/week at a 99% cache hit rate). Counter-evidence says they can cost more than a subscription in practice.",
+   "comment_count_estimate": 40,
+   "key_people": "ggregoire, anigbrowl, Primer81, techman001, internet_points, Footprint0521, jpardoe (contra), jeffyaw"
+  },
+  {
+   "name": "Skills, prompts and prose quality",
+   "verdict": "trial",
+   "impact": 4,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 5,
+   "summary": "Models, cheap ones especially, still write poor prose, so humans or strong models should own final text. Small prompt wins (the 'Vulcan' tone line) and refined frequent-prompt skills help. Broad skills don't.",
+   "comment_count_estimate": 20,
+   "key_people": "peepee1982, guhcampos, martincsweiss, haizhung, GoodFriday, jeffyaw, virpo, brabel"
+  },
+  {
+   "name": "Cost and quota telemetry",
+   "verdict": "adopt",
+   "impact": 4,
+   "ease": 3,
+   "evidence": 4,
+   "fit": 5,
+   "summary": "Usage-limit trackers, public usage pages, per-loop cost control rooms, gateway dashboards, spare-capacity schedulers and quota dispatchers.",
+   "comment_count_estimate": 15,
+   "key_people": "shepherdjerred, alexfortin, enesalatas, djeastm, gregwebs, netsroht, brabel, Fordec"
+  },
+  {
+   "name": "Verification beyond code review",
+   "verdict": "trial",
+   "impact": 4,
+   "ease": 3,
+   "evidence": 4,
+   "fit": 5,
+   "summary": "Persona dogfood rigs, browser exploratory QA loops, agent-built review pages, binary CLEAR/DISCREPANCY gates and clean-up passes after fleet work. Includes the warning about 'productivity porn'.",
+   "comment_count_estimate": 15,
+   "key_people": "mschwarz, rcgeorge23, drltaidev, cpobuda, glennfiedler, siliconc0w, genxy, SftwareRenderer"
+  },
+  {
+   "name": "Session control: phone, remote, voice and alerts",
+   "verdict": "trial",
+   "impact": 3,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 5,
+   "summary": "Remote control per project, phone apps, chat front doors, push-to-talk voice and separate 'done' and 'needs you' alerts. Session managers (Herdr, T3, Orca) are useful, but this is tooling rather than method.",
+   "comment_count_estimate": 45,
+   "key_people": "sudhirj, m4tthumphrey, onion2k, Kuyawa, virpo, robviren, gogoro, paustint, laxjester"
+  },
+  {
+   "name": "Coordinator-style orchestration",
+   "verdict": "trial",
+   "impact": 4,
+   "ease": 3,
+   "evidence": 4,
+   "fit": 4,
+   "summary": "The main thread only coordinates. A chief-of-staff agent requires agentic review before a human sees a PR, and a pm-intake seat batches findings into a digest. Wide swarms and free inter-session messaging drift into chaos.",
+   "comment_count_estimate": 30,
+   "key_people": "sheepscreek, kuboble, dgunay, mschwarz, l9o, jeswin, 2001zhaozhao, joegibbs (contra), YuechenLi (contra)"
+  },
+  {
+   "name": "Sandboxing and credential isolation",
+   "verdict": "trial",
+   "impact": 4,
+   "ease": 3,
+   "evidence": 5,
+   "fit": 3,
+   "summary": "Credential-injecting proxies, no keys in VMs, push only from the host, scoped read-only credentials and external sandboxes, because Claude has been seen disabling its own. Cloud sessions and the push hook already cover much of this for John.",
+   "comment_count_estimate": 40,
+   "key_people": "auslegung, allen-munsch, weightedreply, kikdij, rdg1991, kbbgl87, 0xbadcafebee, Primer81, thehours, elendee"
+  },
+  {
+   "name": "Skeptics, attention limits and wellbeing",
+   "verdict": "adopt",
+   "impact": 3,
+   "ease": 4,
+   "evidence": 5,
+   "fit": 3,
+   "summary": "Human attention caps parallelism at about 3-6 sessions, and there are many burnout warnings. Single-threaded work keeps the mental model intact. Supports keeping John's two-worker cap.",
+   "comment_count_estimate": 30,
+   "key_people": "fhub, sadilek, ultrasandwich, thibsrn, f3b5, LittleBox, thefourthchime, ex-aws-dude"
+  },
+  {
+   "name": "Personal agents and local inference",
+   "verdict": "watch",
+   "impact": 2,
+   "ease": 2,
+   "evidence": 4,
+   "fit": 2,
+   "summary": "Claw-style personal agents are unstable and dwindle into digest bots. Local models need hardware and don't suit phone-first cloud work. The one transferable idea is privacy routing: private material goes only to private models.",
+   "comment_count_estimate": 70,
+   "key_people": "browningstreet, jedisct1, sadilek, vidarh, guhcampos, fidelramos, voodooEntity, benbojangles"
+  }
+ ],
+ "top_insights": [
+  {
+   "claim": "Cross-vendor review by default: one provider authors, another reviews, with more providers added for critical work",
+   "category": "multi_model_review",
+   "comment_ids": [
+    "50370886",
+    "50373001",
+    "50373589",
+    "50373463",
+    "50376463",
+    "50376390",
+    "50377121",
+    "50378365",
+    "50377705",
+    "50380522",
+    "50389282",
+    "50379643"
+   ],
+   "authors": [
+    "sadilek",
+    "devinegan",
+    "entrope",
+    "navels",
+    "fonrex",
+    "enesalatas",
+    "chrisvalleybay",
+    "sgarland",
+    "gabriel-uribe",
+    "petesergeant",
+    "Reebz",
+    "jlgarhdez"
+   ],
+   "impact": 5,
+   "ease": 4,
+   "evidence": 5,
+   "fit": 5,
+   "detail": "Includes calling Codex review from inside the Claude CLI and running Codex as a pre/post-PR hook."
+  },
+  {
+   "claim": "Plan with a strong model and execute with a cheap one",
+   "category": "models_routing",
+   "comment_ids": [
+    "50374549",
+    "50373974",
+    "50376454",
+    "50377195",
+    "50377387",
+    "50378856",
+    "50378776",
+    "50379104",
+    "50389538",
+    "50367589",
+    "50373135"
+   ],
+   "authors": [
+    "smashed",
+    "browningstreet",
+    "tomasulo",
+    "netless",
+    "gl0wa",
+    "gregwebs",
+    "Xonzo",
+    "ActionHank",
+    "WhiteMart",
+    "peepee1982",
+    "mv4"
+   ],
+   "impact": 5,
+   "ease": 4,
+   "evidence": 5,
+   "fit": 5,
+   "detail": "gregwebs: Claude plans, Codex reviews, DeepSeek implements, for under $100/mo, about 3x slower but low-defect."
+  },
+  {
+   "claim": "Reset context with a HANDOFF.md summary instead of relying on compaction, and keep context fill low",
+   "category": "context_memory",
+   "comment_ids": [
+    "50375342",
+    "50378847",
+    "50375856",
+    "50379612",
+    "50381009"
+   ],
+   "authors": [
+    "sheepscreek",
+    "kikdij",
+    "alexfortin",
+    "FrameworkFred",
+    "wombat-man"
+   ],
+   "impact": 5,
+   "ease": 5,
+   "evidence": 4,
+   "fit": 5
+  },
+  {
+   "claim": "Escalate a failing task up model tiers (flash, pro, heavy, frontier) until it is solved",
+   "category": "models_routing",
+   "comment_ids": [
+    "50375921",
+    "50374502"
+   ],
+   "authors": [
+    "glennfiedler",
+    "contingencies"
+   ],
+   "impact": 5,
+   "ease": 4,
+   "evidence": 3,
+   "fit": 5,
+   "detail": "An Opus coordinator does the classifying. contingencies uses the top model only when stuck or on a high-value step."
+  },
+  {
+   "claim": "Have agents write ADRs as the project goes, so new sessions learn the intent and flag conflicts",
+   "category": "context_memory",
+   "comment_ids": [
+    "50376262",
+    "50376451"
+   ],
+   "authors": [
+    "tritondev",
+    "stkni"
+   ],
+   "impact": 4,
+   "ease": 5,
+   "evidence": 3,
+   "fit": 5,
+   "detail": "stkni says it raised overall output quality and picked up proposed-but-unbuilt features."
+  },
+  {
+   "claim": "Make workflows mostly deterministic scripts with agents only as fallbacks, harden them on each failure, and make them resumable",
+   "category": "orchestration",
+   "comment_ids": [
+    "50378157",
+    "50367326",
+    "50367587"
+   ],
+   "authors": [
+    "poelzi",
+    "ctolsen",
+    "dgb23"
+   ],
+   "impact": 5,
+   "ease": 3,
+   "evidence": 4,
+   "fit": 5
+  },
+  {
+   "claim": "Review in a fresh session driven by a fixed list of your own PR-review questions",
+   "category": "multi_model_review",
+   "comment_ids": [
+    "50378899"
+   ],
+   "authors": [
+    "lgunsch"
+   ],
+   "impact": 5,
+   "ease": 5,
+   "evidence": 2,
+   "fit": 5,
+   "detail": "16 questions that mirror the human's own. Called a game changer for simpler, cleaner code."
+  },
+  {
+   "claim": "Models still write poor prose, so humans or strong models should own final text and humans shouldn't have to read slop",
+   "category": "prompting_skills",
+   "comment_ids": [
+    "50367589",
+    "50373357",
+    "50375084",
+    "50376087"
+   ],
+   "authors": [
+    "peepee1982",
+    "guhcampos",
+    "martincsweiss",
+    "haizhung"
+   ],
+   "impact": 5,
+   "ease": 3,
+   "evidence": 4,
+   "fit": 5,
+   "detail": "Directly relevant to a content harness: GreenPT output stays a candidate and never becomes final prose."
+  },
+  {
+   "claim": "Cheap open models now cost very little, with concrete figures",
+   "category": "cost",
+   "comment_ids": [
+    "50381117",
+    "50375427",
+    "50385251",
+    "50376778",
+    "50377633",
+    "50375326"
+   ],
+   "authors": [
+    "ggregoire",
+    "anigbrowl",
+    "Primer81",
+    "techman001",
+    "internet_points",
+    "jonwinstanley"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 5,
+   "fit": 4,
+   "detail": "1B tokens used 7% of a $10 plan; ~$20/week at a 99% cache hit rate; $4.37 in 30 days; a long review cost about $0.033."
+  },
+  {
+   "claim": "Use GitHub issues as the hand-off from a strong planner to a cheap scheduled executor",
+   "category": "tickets_planning",
+   "comment_ids": [
+    "50373974",
+    "50374380",
+    "50374094"
+   ],
+   "authors": [
+    "browningstreet",
+    "sudhirj",
+    "alexfortin"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 5
+  },
+  {
+   "claim": "Build one usage and cost board across subscriptions and loops",
+   "category": "cost",
+   "comment_ids": [
+    "50373740",
+    "50374094",
+    "50376390",
+    "50376352"
+   ],
+   "authors": [
+    "shepherdjerred",
+    "alexfortin",
+    "enesalatas",
+    "brabel"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 5
+  },
+  {
+   "claim": "Route private material only to private or local models, and redact diffs before cloud review",
+   "category": "sandbox_security",
+   "comment_ids": [
+    "50385740",
+    "50376538",
+    "50376810",
+    "50377307"
+   ],
+   "authors": [
+    "fidelramos",
+    "voodooEntity",
+    "a-saleh",
+    "internet_points"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 5
+  },
+  {
+   "claim": "Evaluate custom orchestration against the vanilla harness, a locked-down baseline or your own past sessions, not leaderboards",
+   "category": "testing_verification",
+   "comment_ids": [
+    "50379514",
+    "50379686",
+    "50375145",
+    "50378628",
+    "50380023"
+   ],
+   "authors": [
+    "SOLAR_FIELDS",
+    "linsomniac",
+    "joshheitzman",
+    "nedt",
+    "felixgallo"
+   ],
+   "impact": 5,
+   "ease": 3,
+   "evidence": 3,
+   "fit": 5
+  },
+  {
+   "claim": "5.5-era models need fewer skills, guardrails and organisation structures",
+   "category": "harness_choice",
+   "comment_ids": [
+    "50378434",
+    "50379944",
+    "50381456",
+    "50373351"
+   ],
+   "authors": [
+    "ryanthedev",
+    "dcferreira",
+    "siliconc0w",
+    "Aozora7"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 4
+  },
+  {
+   "claim": "Keep a version-controlled memory folder (LOG, HANDOFF, DECISIONS, plan folder) and one state file per repo kept current by hooks",
+   "category": "context_memory",
+   "comment_ids": [
+    "50375274",
+    "50377952"
+   ],
+   "authors": [
+    "bottom999mottob",
+    "Asmod4n"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 3,
+   "fit": 5
+  },
+  {
+   "claim": "End sessions with a close-out routine that writes hints into AGENTS.md, aimed at what frustrated you most",
+   "category": "context_memory",
+   "comment_ids": [
+    "50375278"
+   ],
+   "authors": [
+    "coeneedell"
+   ],
+   "impact": 4,
+   "ease": 5,
+   "evidence": 2,
+   "fit": 5
+  },
+  {
+   "claim": "AI code review almost always finds something, even straight after fixes, so set a stop rule",
+   "category": "testing_verification",
+   "comment_ids": [
+    "50374732"
+   ],
+   "authors": [
+    "smashed"
+   ],
+   "impact": 4,
+   "ease": 5,
+   "evidence": 2,
+   "fit": 5,
+   "detail": "Findings are often debatable or describe unreachable states."
+  },
+  {
+   "claim": "Make the main thread a pure coordinator that never implements",
+   "category": "orchestration",
+   "comment_ids": [
+    "50375347",
+    "50376058",
+    "50376582"
+   ],
+   "authors": [
+    "sheepscreek",
+    "kuboble",
+    "mickeyp"
+   ],
+   "impact": 4,
+   "ease": 5,
+   "evidence": 3,
+   "fit": 4
+  },
+  {
+   "claim": "Subagents are the quickest way to burn limits; use them for map-reduce-shaped tasks",
+   "category": "orchestration",
+   "comment_ids": [
+    "50373445",
+    "50373364",
+    "50376279"
+   ],
+   "authors": [
+    "sillysaurusx",
+    "mholm",
+    "joegibbs"
+   ],
+   "impact": 4,
+   "ease": 5,
+   "evidence": 3,
+   "fit": 4
+  },
+  {
+   "claim": "Human attention caps parallelism at about 3-6 sessions",
+   "category": "skeptic_wellbeing",
+   "comment_ids": [
+    "50373117",
+    "50370886",
+    "50373357",
+    "50376632",
+    "50375378"
+   ],
+   "authors": [
+    "fhub",
+    "sadilek",
+    "guhcampos",
+    "ultrasandwich",
+    "woopsn"
+   ],
+   "impact": 3,
+   "ease": 5,
+   "evidence": 5,
+   "fit": 3
+  },
+  {
+   "claim": "Spec-first: no drafting until the spec is unambiguous; Vision.md, then Features.md, then Tasks.md",
+   "category": "tickets_planning",
+   "comment_ids": [
+    "50382792",
+    "50380633",
+    "50378376",
+    "50376782",
+    "50380703"
+   ],
+   "authors": [
+    "drltaidev",
+    "cpobuda",
+    "tegeek",
+    "rglullis",
+    "chasd00"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 4
+  },
+  {
+   "claim": "Agents commit inside the sandbox; only the host or human pushes",
+   "category": "sandbox_security",
+   "comment_ids": [
+    "50379089",
+    "50379377",
+    "50379206",
+    "50379048"
+   ],
+   "authors": [
+    "kikdij",
+    "weightedreply",
+    "samvher",
+    "zulban"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 4
+  },
+  {
+   "claim": "Hide keys behind a credential-injecting proxy: no keys in the agent VM",
+   "category": "sandbox_security",
+   "comment_ids": [
+    "50367803",
+    "50376836",
+    "50379377",
+    "50381875",
+    "50387654"
+   ],
+   "authors": [
+    "auslegung",
+    "salt-licker",
+    "weightedreply",
+    "NortySpock",
+    "allen-munsch"
+   ],
+   "impact": 4,
+   "ease": 5,
+   "evidence": 4,
+   "fit": 3
+  },
+  {
+   "claim": "Gate phases as binary CLEAR or DISCREPANCY, never numeric scores, and use fresh-eyed reviewers",
+   "category": "testing_verification",
+   "comment_ids": [
+    "50380633"
+   ],
+   "authors": [
+    "cpobuda"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 2,
+   "fit": 5
+  },
+  {
+   "claim": "Loop implementer subagents with clean-context reviewer subagents until no serious issues remain",
+   "category": "multi_model_review",
+   "comment_ids": [
+    "50379808"
+   ],
+   "authors": [
+    "KronisLV"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 3,
+   "fit": 4
+  },
+  {
+   "claim": "Treat tickets as the human-agent interface: questions come back in tickets and side findings become new tickets",
+   "category": "tickets_planning",
+   "comment_ids": [
+    "50376058",
+    "50384746"
+   ],
+   "authors": [
+    "kuboble"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 2,
+   "fit": 5
+  },
+  {
+   "claim": "A pm-intake agent checks findings against the roadmap and batches them into a daily digest for bulk approve or deny, later auto-approving whole classes",
+   "category": "orchestration",
+   "comment_ids": [
+    "50385555"
+   ],
+   "authors": [
+    "mschwarz"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 2,
+   "fit": 5
+  },
+  {
+   "claim": "Without up-front design, agents drift into 'productivity porn': reports, plans and evidence packs with nothing implemented",
+   "category": "tickets_planning",
+   "comment_ids": [
+    "50381456"
+   ],
+   "authors": [
+    "siliconc0w"
+   ],
+   "impact": 4,
+   "ease": 5,
+   "evidence": 1,
+   "fit": 5
+  },
+  {
+   "claim": "Broad skills and tool access poison context; add a switch to ignore bloated repo instructions",
+   "category": "context_memory",
+   "comment_ids": [
+    "50380583",
+    "50375302"
+   ],
+   "authors": [
+    "RamblingCTO",
+    "kbbgl87"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 3,
+   "fit": 4
+  },
+  {
+   "claim": "Use different alerts for 'task finished' and 'agent needs an answer'",
+   "category": "voice_ui",
+   "comment_ids": [
+    "50373796",
+    "50378479"
+   ],
+   "authors": [
+    "Kuyawa",
+    "virpo"
+   ],
+   "impact": 3,
+   "ease": 5,
+   "evidence": 2,
+   "fit": 5
+  },
+  {
+   "claim": "Cheap inter-agent channels are enough: a shared .md file, tmux send-keys, or sessions messaging each other directly",
+   "category": "orchestration",
+   "comment_ids": [
+    "50373684",
+    "50388928",
+    "50373985",
+    "50367876"
+   ],
+   "authors": [
+    "tcdent",
+    "Yifeioffloop",
+    "Arubis",
+    "l9o"
+   ],
+   "impact": 3,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 4
+  },
+  {
+   "claim": "When limits bite, study consumption data and turn the biggest token sinks into deterministic code",
+   "category": "cost",
+   "comment_ids": [
+    "50374764"
+   ],
+   "authors": [
+    "Fordec"
+   ],
+   "impact": 4,
+   "ease": 3,
+   "evidence": 2,
+   "fit": 5
+  },
+  {
+   "claim": "Dogfood with personas: blank-slate new users plus persistent returning users, who give much better feedback",
+   "category": "testing_verification",
+   "comment_ids": [
+    "50385555"
+   ],
+   "authors": [
+    "mschwarz"
+   ],
+   "impact": 4,
+   "ease": 3,
+   "evidence": 2,
+   "fit": 5
+  },
+  {
+   "claim": "'Build the builder, not the feature': when output is off, fix the orchestrator and prompts rather than the code (but watch for overfitting)",
+   "category": "orchestration",
+   "comment_ids": [
+    "50377582"
+   ],
+   "authors": [
+    "sebra"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 1,
+   "fit": 5
+  },
+  {
+   "claim": "Mechanical gates in the harness, such as no remote git push without prior approval, and one scripting language only",
+   "category": "sandbox_security",
+   "comment_ids": [
+    "50367557"
+   ],
+   "authors": [
+    "phillc73"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 1,
+   "fit": 5
+  },
+  {
+   "claim": "Give agents scoped, temporary or read-only credentials per task, and per-chat git credentials for traceability",
+   "category": "sandbox_security",
+   "comment_ids": [
+    "50375302",
+    "50383038",
+    "50379596",
+    "50385251"
+   ],
+   "authors": [
+    "kbbgl87",
+    "0xbadcafebee",
+    "ddarolfi",
+    "Primer81"
+   ],
+   "impact": 4,
+   "ease": 3,
+   "evidence": 4,
+   "fit": 3
+  },
+  {
+   "claim": "Keep remote control running in every project so phone apps can drive real machines",
+   "category": "session_mgmt",
+   "comment_ids": [
+    "50374380",
+    "50377004",
+    "50376177"
+   ],
+   "authors": [
+    "sudhirj",
+    "m4tthumphrey",
+    "onion2k"
+   ],
+   "impact": 3,
+   "ease": 4,
+   "evidence": 3,
+   "fit": 4
+  },
+  {
+   "claim": "Nonstop agent building feels like addiction and risks burnout",
+   "category": "skeptic_wellbeing",
+   "comment_ids": [
+    "50373236",
+    "50390416",
+    "50375890",
+    "50378487"
+   ],
+   "authors": [
+    "thefourthchime",
+    "LittleBox",
+    "pavas",
+    "bkaae"
+   ],
+   "impact": 3,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 3
+  },
+  {
+   "claim": "Make any prompt you run often a skill and keep refining it",
+   "category": "prompting_skills",
+   "comment_ids": [
+    "50384236",
+    "50378336"
+   ],
+   "authors": [
+    "jeffyaw",
+    "parkersweb"
+   ],
+   "impact": 3,
+   "ease": 5,
+   "evidence": 2,
+   "fit": 4
+  },
+  {
+   "claim": "Parallelise across separate projects, not within one (Amdahl's law)",
+   "category": "orchestration",
+   "comment_ids": [
+    "50375921",
+    "50377263",
+    "50376262"
+   ],
+   "authors": [
+    "glennfiedler",
+    "asim",
+    "tritondev"
+   ],
+   "impact": 3,
+   "ease": 4,
+   "evidence": 3,
+   "fit": 4
+  },
+  {
+   "claim": "Keep an open model as a fallback for refusals",
+   "category": "models_routing",
+   "comment_ids": [
+    "50374417",
+    "50374455",
+    "50374764",
+    "50375312",
+    "50376505"
+   ],
+   "authors": [
+    "easterncalculus",
+    "mariofdistrust",
+    "Fordec",
+    "noahbp",
+    "athrowaway3z"
+   ],
+   "impact": 3,
+   "ease": 4,
+   "evidence": 5,
+   "fit": 2
+  },
+  {
+   "claim": "Cache reviews pinned to the commit hash and use an AST-diff after a rebase to decide whether to reuse them",
+   "category": "multi_model_review",
+   "comment_ids": [
+    "50378157"
+   ],
+   "authors": [
+    "poelzi"
+   ],
+   "impact": 4,
+   "ease": 3,
+   "evidence": 1,
+   "fit": 5
+  },
+  {
+   "claim": "Spend leftover subscription capacity on queued improvements before the reset",
+   "category": "cost",
+   "comment_ids": [
+    "50380990"
+   ],
+   "authors": [
+    "djeastm"
+   ],
+   "impact": 4,
+   "ease": 3,
+   "evidence": 1,
+   "fit": 5
+  },
+  {
+   "claim": "A strong model does exploratory and regression testing in a real browser, looped until clean",
+   "category": "testing_verification",
+   "comment_ids": [
+    "50376216"
+   ],
+   "authors": [
+    "rcgeorge23"
+   ],
+   "impact": 4,
+   "ease": 3,
+   "evidence": 2,
+   "fit": 4
+  },
+  {
+   "claim": "Budget a hands-on clean-up and hardening pass after fleet work, because isolated models produce a pastiche",
+   "category": "testing_verification",
+   "comment_ids": [
+    "50375606"
+   ],
+   "authors": [
+    "glennfiedler"
+   ],
+   "impact": 4,
+   "ease": 4,
+   "evidence": 1,
+   "fit": 4
+  },
+  {
+   "claim": "Kanban as plain files in the repo, with dependencies and a 'ready' query for director agents",
+   "category": "tickets_planning",
+   "comment_ids": [
+    "50374498",
+    "50374774",
+    "50375046"
+   ],
+   "authors": [
+    "amterp",
+    "SftwareRenderer",
+    "earthdeity"
+   ],
+   "impact": 3,
+   "ease": 4,
+   "evidence": 2,
+   "fit": 4
+  },
+  {
+   "claim": "Automate quota-aware provider switching or drain the account that resets soonest",
+   "category": "cost",
+   "comment_ids": [
+    "50378856",
+    "50378737",
+    "50374678",
+    "50379150"
+   ],
+   "authors": [
+    "gregwebs",
+    "netsroht",
+    "deathmonger5000",
+    "gszr"
+   ],
+   "impact": 3,
+   "ease": 3,
+   "evidence": 4,
+   "fit": 3
+  },
+  {
+   "claim": "Have your agent audit your setup against a curated list of 100 tips",
+   "category": "prompting_skills",
+   "comment_ids": [
+    "50378479"
+   ],
+   "authors": [
+    "virpo"
+   ],
+   "impact": 3,
+   "ease": 5,
+   "evidence": 1,
+   "fit": 4
+  },
+  {
+   "claim": "One AGENTS.md line, 'answer me like a Vulcan', kills verbose and sycophantic tone",
+   "category": "prompting_skills",
+   "comment_ids": [
+    "50380005"
+   ],
+   "authors": [
+    "GoodFriday"
+   ],
+   "impact": 3,
+   "ease": 5,
+   "evidence": 1,
+   "fit": 4
+  },
+  {
+   "claim": "Push-to-talk voice with an intentional turn; local dictation; voice ideation while driving",
+   "category": "voice_ui",
+   "comment_ids": [
+    "50381098",
+    "50374502",
+    "50368526"
+   ],
+   "authors": [
+    "robviren",
+    "contingencies",
+    "grep_name"
+   ],
+   "impact": 3,
+   "ease": 3,
+   "evidence": 3,
+   "fit": 4
+  },
+  {
+   "claim": "Overnight research or builds distilled into a package to read in the morning",
+   "category": "personal_agents",
+   "comment_ids": [
+    "50385812",
+    "50380777"
+   ],
+   "authors": [
+    "monch1962",
+    "chasd00"
+   ],
+   "impact": 3,
+   "ease": 4,
+   "evidence": 2,
+   "fit": 4,
+   "detail": "chasd00: a daily blog of status and decision reasons tracks an unattended agent well."
+  },
+  {
+   "claim": "Always-on personal agents dwindle into digest bots or 'just a cronjob'",
+   "category": "personal_agents",
+   "comment_ids": [
+    "50376601",
+    "50377290",
+    "50370886"
+   ],
+   "authors": [
+    "jedisct1",
+    "tgel0",
+    "sadilek"
+   ],
+   "impact": 2,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 3
+  },
+  {
+   "claim": "Sessions that message each other freely hand out unrelated tasks, and you lose track",
+   "category": "orchestration",
+   "comment_ids": [
+    "50376476"
+   ],
+   "authors": [
+    "joegibbs"
+   ],
+   "impact": 3,
+   "ease": 4,
+   "evidence": 1,
+   "fit": 4
+  },
+  {
+   "claim": "Don't trust a harness-controlled sandbox: Claude has been seen disabling its own, so wrap it externally",
+   "category": "sandbox_security",
+   "comment_ids": [
+    "50380164",
+    "50383403"
+   ],
+   "authors": [
+    "rdg1991",
+    "f53d"
+   ],
+   "impact": 4,
+   "ease": 3,
+   "evidence": 2,
+   "fit": 3
+  },
+  {
+   "claim": "Have the agent build dedicated review pages for visual output instead of reading code",
+   "category": "testing_verification",
+   "comment_ids": [
+    "50382792"
+   ],
+   "authors": [
+    "drltaidev"
+   ],
+   "impact": 3,
+   "ease": 4,
+   "evidence": 1,
+   "fit": 4
+  },
+  {
+   "claim": "Lower effort and weaker models are often better aligned; top models are worth it mainly for review",
+   "category": "models_routing",
+   "comment_ids": [
+    "50377284"
+   ],
+   "authors": [
+    "jbvlkt"
+   ],
+   "impact": 3,
+   "ease": 4,
+   "evidence": 1,
+   "fit": 4
+  }
+ ],
+ "recommendations": [
+  {
+   "title": "Write HANDOFF.md and DECISIONS.md at packet close",
+   "what": "At the end of each packet, the owning model writes a short committed HANDOFF.md (status, what was learnt, what remains) and appends to DECISIONS.md (or an ADR). The next packet starts fresh from these files rather than from compacted context.",
+   "how_in_harness": "Add an in-scope path such as docs/handover/ to packet templates. Trial it in Experimentation Station first. A deterministic lint checks that the files exist and are under a size cap before closeout. This fits the existing rule that handover belongs in committed in-scope files, not /tmp.",
+   "impact": 5,
+   "ease": 5,
+   "evidence": 4,
+   "fit": 5,
+   "needs_john_decision": false,
+   "source_ids": [
+    "50375342",
+    "50375274",
+    "50376262",
+    "50375278",
+    "50377952"
+   ]
+  },
+  {
+   "title": "Explicit escalation rule across model routes",
+   "what": "Begin bounded work on bounded_extraction (GreenPT). Escalate to standard_reasoning only when a deterministic check fails, and to highest_reasoning only via the existing premium command. Each escalation is recorded on the receipt with its trigger.",
+   "how_in_harness": "Add an 'escalated_from', 'escalated_to' and 'failed_check' field to receipts, and a lint that refuses a route change without a failed-check reference.",
+   "impact": 5,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 5,
+   "needs_john_decision": true,
+   "source_ids": [
+    "50375921",
+    "50374502",
+    "50378856",
+    "50374549"
+   ]
+  },
+  {
+   "title": "Question-list reviewer with binary verdicts",
+   "what": "Turn John's own review questions for content (facts needing verification, UK English, tone, claims, links, private-material leaks) into a fixed checklist. The independent Codex or Claude reviewer answers each question CLEAR or DISCREPANCY, with no numeric scores.",
+   "how_in_harness": "Commit the checklist per consumer, for example review/questions.md. The reviewer prompt quotes it verbatim, and a script parses the binary verdicts into the receipt. Its hash joins the policy hash for review reuse under rule 11.",
+   "impact": 5,
+   "ease": 5,
+   "evidence": 3,
+   "fit": 5,
+   "needs_john_decision": false,
+   "source_ids": [
+    "50378899",
+    "50380633",
+    "50379808"
+   ]
+  },
+  {
+   "title": "Review stop rule",
+   "what": "Because AI review always finds something, cap review rounds per candidate. After the cap, only findings at or above a set severity block. Everything else becomes a follow-up issue.",
+   "how_in_harness": "Add 'max_review_rounds' and 'blocking_severity' to the packet schema and enforce them in the validate_*_task lint. Non-blocking findings are written to a new issue rather than retried, which keeps correction attempts inside the packet ceiling.",
+   "impact": 4,
+   "ease": 5,
+   "evidence": 3,
+   "fit": 5,
+   "needs_john_decision": true,
+   "source_ids": [
+    "50374732",
+    "50379808",
+    "50376058"
+   ]
+  },
+  {
+   "title": "Use GreenPT more for bounded extraction, inside the cap",
+   "what": "Send more mechanical pre-work to GreenPT: extracting claims for fact-checking, link and glossary consistency lists, structured summaries of source notes. Prose and judgement stay with Claude and Codex. Near month end, queue pre-approved low-risk extraction packets to use spare cap.",
+   "how_in_harness": "Keep using [greenpt-task-v1] packets with the per-issue limits unchanged. A small queue file in Experimentation Station lists ready bounded tasks. The session triggers them only while the bridge's running total stays below EUR 10.00.",
+   "impact": 4,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 5,
+   "needs_john_decision": false,
+   "source_ids": [
+    "50381117",
+    "50375427",
+    "50380990",
+    "50367589",
+    "50373357"
+   ]
+  },
+  {
+   "title": "One cost and quota board read from receipts",
+   "what": "A deterministic script reads the sealed receipts and produces one page. It shows the GreenPT month total against the cap, app-started Claude and Codex counts against 250 each, packets, retries and escalations. Missing telemetry is shown as unknown.",
+   "how_in_harness": "A script in Experimentation Station runs on demand, with output committed or published as a private page John can open from his phone. It makes no model calls.",
+   "impact": 4,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 5,
+   "needs_john_decision": false,
+   "source_ids": [
+    "50373740",
+    "50374094",
+    "50376390",
+    "50376352"
+   ]
+  },
+  {
+   "title": "Deterministic private-path guard before GreenPT",
+   "what": "Before any GreenPT trigger, refuse a packet whose inputs reference docs/private/ or match a redaction pattern list. Mirrors commenters who route personal data only to private models and redact diffs before cloud review.",
+   "how_in_harness": "If greenpt_bridge.py --lint does not already check this, add the check there with a unit test in the existing suite. The PreToolUse hook then blocks the trigger automatically.",
+   "impact": 4,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 5,
+   "needs_john_decision": false,
+   "source_ids": [
+    "50385740",
+    "50377307",
+    "50376538",
+    "50376810"
+   ]
+  },
+  {
+   "title": "Keep width at two workers; decline swarm tooling",
+   "what": "Formally keep the current caps (two parallel workers, five delegated calls). Do not adopt swarm or orchestrator products; human attention and token burn are the binding limits.",
+   "how_in_harness": "No rule change. Note the evidence in docs/standing-directives.md if John wants a record.",
+   "impact": 3,
+   "ease": 5,
+   "evidence": 5,
+   "fit": 4,
+   "needs_john_decision": false,
+   "source_ids": [
+    "50373117",
+    "50376632",
+    "50375205",
+    "50376279",
+    "50373445"
+   ]
+  },
+  {
+   "title": "Bake-off: vanilla against the full harness",
+   "what": "Run the same 3-5 small content tasks two ways: a single vanilla Claude Code session with a short CLAUDE.md, and the full packet harness. Compare defects John finds, turns, spend and elapsed time. Prune rules that don't earn their keep.",
+   "how_in_harness": "Report-only packets in Experimentation Station, one candidate each, with results bound to commit hashes. The outcome feeds the pruning recommendation below.",
+   "impact": 5,
+   "ease": 3,
+   "evidence": 3,
+   "fit": 5,
+   "needs_john_decision": true,
+   "source_ids": [
+    "50379514",
+    "50375145",
+    "50378628",
+    "50378434"
+   ]
+  },
+  {
+   "title": "Phone digest: one queue of 'needs John' items",
+   "what": "A single daily or on-demand digest lists every pending item that needs John: candidates awaiting approval, blocked packets and unresolved findings. Each has an approve or deny line he can act on from the phone. 'Done' notices stay separate from 'needs John' notices.",
+   "how_in_harness": "A deterministic script collects open issues by label and posts one comment on a fixed issue. Bulk decisions are still recorded as John's own comments, so the authority rules are unchanged.",
+   "impact": 4,
+   "ease": 4,
+   "evidence": 3,
+   "fit": 5,
+   "needs_john_decision": false,
+   "source_ids": [
+    "50385555",
+    "50379826",
+    "50373796",
+    "50380777"
+   ]
+  },
+  {
+   "title": "Spec-first content packets that must ship an artefact",
+   "what": "Each implementation packet carries a brief (purpose, audience, sections, acceptance checks) that must be unambiguous before drafting starts. The packet must change a content file, not only produce reports, to avoid 'productivity porn'.",
+   "how_in_harness": "Add 'brief' and 'deliverable_paths' fields to the Claude task packet, with a lint that the PR diff touches at least one deliverable path.",
+   "impact": 4,
+   "ease": 4,
+   "evidence": 3,
+   "fit": 5,
+   "needs_john_decision": false,
+   "source_ids": [
+    "50382792",
+    "50381456",
+    "50380633",
+    "50378376"
+   ]
+  },
+  {
+   "title": "Prune CLAUDE.md and move rules into hooks",
+   "what": "Measure the CLAUDE.md size. Move every mechanically checkable rule into hooks or lint, and keep the prose file short, because broad instructions poison context and newer models need fewer guardrails.",
+   "how_in_harness": "Make a report-only inventory packet first: list each rule, whether a hook enforces it, and a proposed keep, merge or move. John approves any removal.",
+   "impact": 4,
+   "ease": 4,
+   "evidence": 4,
+   "fit": 4,
+   "needs_john_decision": true,
+   "source_ids": [
+    "50380583",
+    "50378434",
+    "50375302",
+    "50380407",
+    "50379944"
+   ]
+  },
+  {
+   "title": "Monthly turn-sink review",
+   "what": "Once a month, list which packet stages consumed the most turns, retries and delegated calls. Turn the single biggest sink into a deterministic script.",
+   "how_in_harness": "Use the receipt-reading script from the cost board, with an output table per stage. The conversion work goes in a normal implement-and-open-pr packet.",
+   "impact": 4,
+   "ease": 3,
+   "evidence": 3,
+   "fit": 5,
+   "needs_john_decision": false,
+   "source_ids": [
+    "50374764",
+    "50378157",
+    "50367326"
+   ]
+  },
+  {
+   "title": "Persona readers for academy and Sark content",
+   "what": "Add an optional candidate review in which a model reads pages as defined personas, such as a first-time chauffeur learner, a returning learner and a first-time retreat guest. Persistent persona notes improve the feedback.",
+   "how_in_harness": "One delegated call inside the existing ceiling, with output kept as a candidate. Persona files are committed per consumer. Not a gate unless the consumer manifest adds it.",
+   "impact": 4,
+   "ease": 3,
+   "evidence": 2,
+   "fit": 5,
+   "needs_john_decision": true,
+   "source_ids": [
+    "50385555",
+    "50376216"
+   ]
+  },
+  {
+   "title": "Content-diff check for review reuse",
+   "what": "Extend review reuse (rule 11) with a mechanical check. After a rebase or other unrelated change, a normalised diff of the reviewed files decides whether the cached review still applies.",
+   "how_in_harness": "A script compares the reviewed file hashes and normalised content against the recorded receipt and outputs reuse or rerun. Aggregation still reruns whenever interactions may have changed.",
+   "impact": 4,
+   "ease": 3,
+   "evidence": 1,
+   "fit": 5,
+   "needs_john_decision": false,
+   "source_ids": [
+    "50378157"
+   ]
+  }
+ ],
+ "projects": [
+  {
+   "name": "Claude Code Desktop docs",
+   "url": "https://code.claude.com/docs/en/desktop",
+   "category": "harness",
+   "what": "Docs for Claude Code Desktop",
+   "author": "thefourthchime",
+   "comment_id": "50368880",
+   "inspiration": 2
+  },
+  {
+   "name": "Wooten Labs",
+   "url": "https://wooten-labs.com",
+   "category": "other",
+   "what": "Personal site of agent-built apps",
+   "author": "thefourthchime",
+   "comment_id": "50373236",
+   "inspiration": 1
+  },
+  {
+   "name": "Cool Walk",
+   "url": "https://wooten-labs.com/coolwalk",
+   "category": "verification",
+   "what": "Agent-built app whose App Store button didn't work (a QA-gap example)",
+   "author": "abhishekbasu",
+   "comment_id": "50376565",
+   "inspiration": 1
+  },
+  {
+   "name": "Stonks sim",
+   "url": "https://stonks.jettdigital.app",
+   "category": "personal_agents",
+   "what": "Vibe-coded stock simulator that agent bots trade on",
+   "author": "chasd00",
+   "comment_id": "50383211",
+   "inspiration": 2
+  },
+  {
+   "name": "stonker bot daily posts",
+   "url": "https://stonker.jettdigital.app/ (access-key parameter in original link omitted)",
+   "category": "personal_agents",
+   "what": "Daily blog written by an unattended portfolio agent",
+   "author": "chasd00",
+   "comment_id": "50383211",
+   "inspiration": 3
+  },
+  {
+   "name": "llm-desktop-electron",
+   "url": "https://github.com/mkornreich/llm-desktop-electron",
+   "category": "harness",
+   "what": "Electron desktop LLM client used with OpenRouter",
+   "author": "enjoyyourlife",
+   "comment_id": "50367146",
+   "inspiration": 1
+  },
+  {
+   "name": "Conductor",
+   "url": "https://www.conductor.build/",
+   "category": "session_control",
+   "what": "Parallel Claude sessions across worktrees; reported shut down (#50379292)",
+   "author": "dewey",
+   "comment_id": "50367546",
+   "inspiration": 2
+  },
+  {
+   "name": "Amp",
+   "url": "https://ampcode.com/",
+   "category": "harness",
+   "what": "Coding agent and cloud agents; now lets you bring your own subscriptions",
+   "author": "dewey",
+   "comment_id": "50367546",
+   "inspiration": 2
+  },
+  {
+   "name": "Melious",
+   "url": "https://melious.ai",
+   "category": "providers",
+   "what": "EU inference provider with cheap DeepSeek",
+   "author": "phillc73",
+   "comment_id": "50367557",
+   "inspiration": 2
+  },
+  {
+   "name": "Entrim",
+   "url": "https://entrim.ai",
+   "category": "providers",
+   "what": "Cheap PAYG model API",
+   "author": "phillc73",
+   "comment_id": "50367557",
+   "inspiration": 1
+  },
+  {
+   "name": "Maki",
+   "url": "https://maki.sh/",
+   "category": "harness",
+   "what": "Harness with token-saving strategies; used with mechanical gates",
+   "author": "phillc73",
+   "comment_id": "50367557",
+   "inspiration": 3
+  },
+  {
+   "name": "Droneship",
+   "url": "https://www.droneship.run",
+   "category": "sandbox",
+   "what": "Suggested agent sandbox, posted twice in replies (#50371049); likely self-promotion",
+   "author": "sharathr",
+   "comment_id": "50371043",
+   "inspiration": 1
+  },
+  {
+   "name": "Filestash agents",
+   "url": "https://www.filestash.app/agents/",
+   "category": "orchestration",
+   "what": "Shared, permissioned, auditable folder synced between agents",
+   "author": "mickael-kerjean",
+   "comment_id": "50373293",
+   "inspiration": 2
+  },
+  {
+   "name": "filestash",
+   "url": "https://github.com/mickael-kerjean/filestash",
+   "category": "other",
+   "what": "Storage control plane (S3, SFTP, NFS, SMB)",
+   "author": "mickael-kerjean",
+   "comment_id": "50373293",
+   "inspiration": 1
+  },
+  {
+   "name": "fdrive",
+   "url": "https://github.com/mickael-kerjean/fdrive",
+   "category": "other",
+   "what": "Edge sync client for the Filestash agent folder",
+   "author": "mickael-kerjean",
+   "comment_id": "50373293",
+   "inspiration": 1
+  },
+  {
+   "name": "jail",
+   "url": "https://github.com/andrei-dubovik/jail",
+   "category": "sandbox",
+   "what": "bubblewrap+pasta wrapper that also splits history and memory per project",
+   "author": "h45x1",
+   "comment_id": "50376030",
+   "inspiration": 3
+  },
+  {
+   "name": "yaac",
+   "url": "https://github.com/bsklaroff/yaac",
+   "category": "sandbox",
+   "what": "gVisor-containerised agents with proxy-injected credentials and a URL allowlist",
+   "author": "salt-licker",
+   "comment_id": "50376836",
+   "inspiration": 3
+  },
+  {
+   "name": "key",
+   "url": "https://github.com/resolveworks/key",
+   "category": "context",
+   "what": "Cascading contexts over HTTP on Pi durable",
+   "author": "monneyboi",
+   "comment_id": "50367849",
+   "inspiration": 2
+  },
+  {
+   "name": "nono.sh",
+   "url": "nono.sh",
+   "category": "sandbox",
+   "what": "Sandbox with network/file limits and a key-hiding proxy",
+   "author": "auslegung",
+   "comment_id": "50367803",
+   "inspiration": 2
+  },
+  {
+   "name": "hoplite.sh",
+   "url": "hoplite.sh",
+   "category": "sandbox",
+   "what": "Cloud agent environment service",
+   "author": "fishtoaster",
+   "comment_id": "50384905",
+   "inspiration": 2
+  },
+  {
+   "name": "Buzzpot",
+   "url": "Buzzpot.app",
+   "category": "harness",
+   "what": "Commenter's own app used as a harness",
+   "author": "skorobogatko",
+   "comment_id": "50367619",
+   "inspiration": 1
+  },
+  {
+   "name": "T3 Code",
+   "url": "T3.codes",
+   "category": "session_control",
+   "what": "Unified front-end over Claude Code, Codex and Pi with remote environments, snooze and diffs",
+   "author": "senordevnyc",
+   "comment_id": "50378013",
+   "inspiration": 3
+  },
+  {
+   "name": "t3code video",
+   "url": "https://www.youtube.com/watch?v=dLhcLqoff6k",
+   "category": "session_control",
+   "what": "Video that convinced one user to switch to t3code",
+   "author": "gogoro",
+   "comment_id": "50376898",
+   "inspiration": 2
+  },
+  {
+   "name": "Superintendent",
+   "url": "(none given)",
+   "category": "cost",
+   "what": "Drives T3 Code to spend spare subscription capacity on queued improvements",
+   "author": "djeastm",
+   "comment_id": "50380990",
+   "inspiration": 4
+  },
+  {
+   "name": "svall.dev",
+   "url": "https://svall.dev/",
+   "category": "orchestration",
+   "what": "Homebuilt orchestration tool",
+   "author": "laserlinus",
+   "comment_id": "50367976",
+   "inspiration": 1
+  },
+  {
+   "name": "Belfry",
+   "url": "https://belfry.robgough.net",
+   "category": "session_control",
+   "what": "Visualiser for Claude Code across tmux sessions on several laptops",
+   "author": "robgough",
+   "comment_id": "50368640",
+   "inspiration": 2
+  },
+  {
+   "name": "3code",
+   "url": "https://github.com/capocasa/3code",
+   "category": "harness",
+   "what": "Small harness with built-in sandbox",
+   "author": "warpspin",
+   "comment_id": "50370419",
+   "inspiration": 2
+  },
+  {
+   "name": "Obeya",
+   "url": "https://github.com/sadilek/obeya",
+   "category": "session_control",
+   "what": "Card canvas, each card spawning an agent in a worktree; narrated video demos; phone companion",
+   "author": "sadilek",
+   "comment_id": "50370886",
+   "inspiration": 4
+  },
+  {
+   "name": "pi.dev",
+   "url": "https://pi.dev",
+   "category": "harness",
+   "what": "Minimal provider-agnostic harness with SDK and extensions",
+   "author": "alexfortin",
+   "comment_id": "50374094",
+   "inspiration": 3
+  },
+  {
+   "name": "OpenBot",
+   "url": "https://github.com/regnull/openbot",
+   "category": "personal_agents",
+   "what": "Open-source personal agent on OpenRouter",
+   "author": "regnull",
+   "comment_id": "50373129",
+   "inspiration": 2
+  },
+  {
+   "name": "Cinnamon",
+   "url": "getcinnamon.ai",
+   "category": "personal_agents",
+   "what": "Own harness used by the family",
+   "author": "mv4",
+   "comment_id": "50373135",
+   "inspiration": 1
+  },
+  {
+   "name": "muster.town",
+   "url": "https://muster.town/",
+   "category": "orchestration",
+   "what": "WIP orchestration tool",
+   "author": "bitforger",
+   "comment_id": "50373322",
+   "inspiration": 1
+  },
+  {
+   "name": "miniclaw",
+   "url": "https://github.com/mitchellgordon95/miniclaw",
+   "category": "personal_agents",
+   "what": "Custom personal agent setup",
+   "author": "bitforger",
+   "comment_id": "50373322",
+   "inspiration": 1
+  },
+  {
+   "name": "ctlflow",
+   "url": "https://www.ctlflow.com",
+   "category": "orchestration",
+   "what": "Dozens of agents on non-coding work such as equity analysis",
+   "author": "jeswin",
+   "comment_id": "50373324",
+   "inspiration": 2
+  },
+  {
+   "name": "neal",
+   "url": "https://github.com/navels/neal",
+   "category": "review",
+   "what": "Orchestrator for Codex reviewing Claude or the other way round",
+   "author": "navels",
+   "comment_id": "50373463",
+   "inspiration": 4
+  },
+  {
+   "name": "Vekmem",
+   "url": "www.vekmem.com",
+   "category": "harness",
+   "what": "Harness for local and cloud models",
+   "author": "minimaxa",
+   "comment_id": "50373561",
+   "inspiration": 1
+  },
+  {
+   "name": "Rollout Rhino",
+   "url": "https://rolloutrhino.com/",
+   "category": "other",
+   "what": "Side-hustle product built with Codex",
+   "author": "keithnz",
+   "comment_id": "50373649",
+   "inspiration": 1
+  },
+  {
+   "name": "Herdr",
+   "url": "https://herdr.dev/",
+   "category": "session_control",
+   "what": "Agent-aware terminal workspace that flags done/blocked agents; widely used",
+   "author": "paustint",
+   "comment_id": "50373956",
+   "inspiration": 3
+  },
+  {
+   "name": "Herdr TUI",
+   "url": "https://herdr.dev/tui/",
+   "category": "session_control",
+   "what": "Herdr's TUI for managing Pi agents",
+   "author": "Zambyte",
+   "comment_id": "50374449",
+   "inspiration": 2
+  },
+  {
+   "name": "Lex Fridman podcast (DHH episode)",
+   "url": "https://lexfridman.com/podcast",
+   "category": "other",
+   "what": "Episode on agentic engineering where Herdr came up",
+   "author": "paustint",
+   "comment_id": "50373956",
+   "inspiration": 1
+  },
+  {
+   "name": "jobs-lang",
+   "url": "https://github.com/kuyawa/jobs-lang",
+   "category": "other",
+   "what": "LLM-designed language; doubted by svnt (#50380162)",
+   "author": "Kuyawa",
+   "comment_id": "50378790",
+   "inspiration": 1
+  },
+  {
+   "name": "alexfortin public usage page",
+   "url": "https://a.l3x.in/usage",
+   "category": "cost",
+   "what": "Public dashboard of subscription and credit usage",
+   "author": "alexfortin",
+   "comment_id": "50374094",
+   "inspiration": 4
+  },
+  {
+   "name": "alexfortin on AI",
+   "url": "https://a.l3x.in/ai",
+   "category": "other",
+   "what": "Blog post on his take on AI",
+   "author": "alexfortin",
+   "comment_id": "50374094",
+   "inspiration": 2
+  },
+  {
+   "name": "awesome-pi-coding-agent",
+   "url": "https://github.com/shaftoe/awesome-pi-coding-agent/",
+   "category": "tickets",
+   "what": "GitHub Action on the Pi SDK for issue/PR-driven agent work",
+   "author": "alexfortin",
+   "comment_id": "50374094",
+   "inspiration": 3
+  },
+  {
+   "name": "f",
+   "url": "https://github.com/seanturner026/f",
+   "category": "session_control",
+   "what": "Glue CLI (Claude Code + Herdr + nvim + beads) with cross-repo feature sessions",
+   "author": "strangelove026",
+   "comment_id": "50374135",
+   "inspiration": 2
+  },
+  {
+   "name": "claudeflow",
+   "url": "https://github.com/common-pattern/claudeflow",
+   "category": "tickets",
+   "what": "Turns GitHub issues into Claude one-shots; handles CI, commits and PR landing",
+   "author": "sudhirj",
+   "comment_id": "50374380",
+   "inspiration": 4
+  },
+  {
+   "name": "openspec",
+   "url": "https://openspec.dev",
+   "category": "tickets",
+   "what": "Spec-driven development tool used with Pi",
+   "author": "Zambyte",
+   "comment_id": "50374449",
+   "inspiration": 3
+  },
+  {
+   "name": "codealong",
+   "url": "https://github.com/codealong/codealong",
+   "category": "session_control",
+   "what": "Manager for several harnesses",
+   "author": "ghempton",
+   "comment_id": "50374491",
+   "inspiration": 2
+  },
+  {
+   "name": "Muster",
+   "url": "https://github.com/amterp/muster",
+   "category": "orchestration",
+   "what": "Agent-aware terminal giving agents a CLI to spawn and message each other",
+   "author": "amterp",
+   "comment_id": "50374498",
+   "inspiration": 3
+  },
+  {
+   "name": "Kan",
+   "url": "https://github.com/amterp/kan",
+   "category": "tickets",
+   "what": "Kanban as plain files in VCS with dependencies and 'kan ready'",
+   "author": "amterp",
+   "comment_id": "50374498",
+   "inspiration": 4
+  },
+  {
+   "name": "Handy",
+   "url": "https://handy.computer/",
+   "category": "voice",
+   "what": "Local voice-to-text (Parakeet)",
+   "author": "contingencies",
+   "comment_id": "50374502",
+   "inspiration": 3
+  },
+  {
+   "name": "Kilo Code",
+   "url": "https://kilo.ai",
+   "category": "harness",
+   "what": "IDE extension with credits for many models at API pricing",
+   "author": "alok-g",
+   "comment_id": "50374637",
+   "inspiration": 1
+  },
+  {
+   "name": "Goose",
+   "url": "https://goose-docs.ai",
+   "category": "harness",
+   "what": "General agent used with OpenRouter",
+   "author": "alok-g",
+   "comment_id": "50374637",
+   "inspiration": 1
+  },
+  {
+   "name": "Circus Chief",
+   "url": "https://github.com/ferrislucas/Circus-Chief",
+   "category": "cost",
+   "what": "Workflow orchestrator with tiered fallback across subscriptions",
+   "author": "deathmonger5000",
+   "comment_id": "50374678",
+   "inspiration": 3
+  },
+  {
+   "name": "mattpocock/skills",
+   "url": "https://github.com/mattpocock/skills",
+   "category": "skills",
+   "what": "Skills collection",
+   "author": "semireg",
+   "comment_id": "50374679",
+   "inspiration": 3
+  },
+  {
+   "name": "optio",
+   "url": "https://github.com/jonwiggins/optio",
+   "category": "orchestration",
+   "what": "Trigger-started Claude/Codex/Gemini agents on laptop and k8s, reachable from phone",
+   "author": "jawiggins",
+   "comment_id": "50374982",
+   "inspiration": 2
+  },
+  {
+   "name": "magenta.cryptograss.live",
+   "url": "https://magenta.cryptograss.live/",
+   "category": "other",
+   "what": "Multiplayer environment where friends prompt shared 'emergents'",
+   "author": "jMyles",
+   "comment_id": "50375020",
+   "inspiration": 1
+  },
+  {
+   "name": "quarterdeck",
+   "url": "https://github.com/oscscull/quarterdeck",
+   "category": "tickets",
+   "what": "Personal work manager: kanban, multi-machine sync, tickets parked until a condition or time",
+   "author": "earthdeity",
+   "comment_id": "50375046",
+   "inspiration": 3
+  },
+  {
+   "name": "autofab",
+   "url": "(none given; planned PyPI package)",
+   "category": "tickets",
+   "what": "Planned spec-driven system on existing harnesses",
+   "author": "seanmcdirmid",
+   "comment_id": "50374261",
+   "inspiration": 1
+  },
+  {
+   "name": "Egzo",
+   "url": "(none given; link in author's HN profile)",
+   "category": "sandbox",
+   "what": "Orchestration, sandboxing and access management tool",
+   "author": "smashed",
+   "comment_id": "50374549",
+   "inspiration": 1
+  },
+  {
+   "name": "Rufus",
+   "url": "https://rufus.ie/en/",
+   "category": "sandbox",
+   "what": "USB creator used for an offline Windows 11 agent VM",
+   "author": "vivzkestrel",
+   "comment_id": "50375124",
+   "inspiration": 1
+  },
+  {
+   "name": "Windows 11 ISO download",
+   "url": "https://www.microsoft.com/en-us/software-download/windows11",
+   "category": "other",
+   "what": "Official Windows 11 ISO",
+   "author": "vivzkestrel",
+   "comment_id": "50375124",
+   "inspiration": 1
+  },
+  {
+   "name": "Revo Uninstaller Pro (file-host link)",
+   "url": "https://onefiles.net/9d170d01078634b5",
+   "category": "other",
+   "what": "Third-party file-host download, not the vendor site; treat as untrusted",
+   "author": "vivzkestrel",
+   "comment_id": "50375124",
+   "inspiration": 1
+  },
+  {
+   "name": "UniGetUI",
+   "url": "https://devolutions.net/unigetui/",
+   "category": "other",
+   "what": "Windows package manager GUI",
+   "author": "vivzkestrel",
+   "comment_id": "50375124",
+   "inspiration": 1
+  },
+  {
+   "name": "fnm",
+   "url": "https://github.com/Schniz/fnm",
+   "category": "other",
+   "what": "Node version manager",
+   "author": "vivzkestrel",
+   "comment_id": "50375124",
+   "inspiration": 1
+  },
+  {
+   "name": "jvms",
+   "url": "https://github.com/ystyle/jvms",
+   "category": "other",
+   "what": "Java version manager for Windows",
+   "author": "vivzkestrel",
+   "comment_id": "50375124",
+   "inspiration": 1
+  },
+  {
+   "name": "OpenCode Go",
+   "url": "https://opencode.ai/console/go",
+   "category": "providers",
+   "what": "Cheap plan widely used for DeepSeek/GLM flash",
+   "author": "vivzkestrel",
+   "comment_id": "50375124",
+   "inspiration": 3
+  },
+  {
+   "name": "rea",
+   "url": "https://github.com/morluto/rea",
+   "category": "other",
+   "what": "Reverse-engineering agent tool",
+   "author": "vivzkestrel",
+   "comment_id": "50375124",
+   "inspiration": 1
+  },
+  {
+   "name": "fluximp",
+   "url": "https://github.com/fluxmoot/fluximp",
+   "category": "harness",
+   "what": "Commenter's own coding agent, benchmarked against a locked-down baseline",
+   "author": "joshheitzman",
+   "comment_id": "50375145",
+   "inspiration": 2
+  },
+  {
+   "name": "DeepInfra",
+   "url": "https://deepinfra.com",
+   "category": "providers",
+   "what": "Cheap inference provider (also cited in #50380281)",
+   "author": "joshheitzman",
+   "comment_id": "50375145",
+   "inspiration": 2
+  },
+  {
+   "name": "Friendli AI",
+   "url": "https://friendli.ai",
+   "category": "providers",
+   "what": "Inference provider for GLM",
+   "author": "joshheitzman",
+   "comment_id": "50375145",
+   "inspiration": 1
+  },
+  {
+   "name": "status repo skill (gist)",
+   "url": "https://gist.github.com/vkalintiris/3ad526e71a75bcba013aaadc9d9d0837",
+   "category": "context",
+   "what": "Skill keeping a sibling git repo that records everything about a task",
+   "author": "ehostunreach",
+   "comment_id": "50375619",
+   "inspiration": 4
+  },
+  {
+   "name": "Netdata",
+   "url": "https://github.com/netdata/netdata",
+   "category": "context",
+   "what": "Observability platform; idea of sending LLM OTel traces there (author works there)",
+   "author": "ehostunreach",
+   "comment_id": "50375619",
+   "inspiration": 2
+  },
+  {
+   "name": "Claude Code TPP write-up",
+   "url": "https://photostructure.com/coding/claude-code-tpp/",
+   "category": "context",
+   "what": "Agents keep task context current so switching harnesses is trivial",
+   "author": "mceachen",
+   "comment_id": "50375879",
+   "inspiration": 4
+  },
+  {
+   "name": "gnosh.ai",
+   "url": "https://gnosh.ai",
+   "category": "harness",
+   "what": "Called a 'frontier harness'; no details",
+   "author": "jaekwon",
+   "comment_id": "50375257",
+   "inspiration": 1
+  },
+  {
+   "name": "railvio",
+   "url": "https://railvio.com",
+   "category": "harness",
+   "what": "App-building harness with Jira/Confluence clones",
+   "author": "drgoodvibe",
+   "comment_id": "50375265",
+   "inspiration": 1
+  },
+  {
+   "name": "DevArch",
+   "url": "https://devarch.ai/",
+   "category": "harness",
+   "what": "Engineering harness on top of Claude Code",
+   "author": "ChicagoDave",
+   "comment_id": "50375338",
+   "inspiration": 2
+  },
+  {
+   "name": "Remuda",
+   "url": "https://github.com/yendo-eng/remuda",
+   "category": "orchestration",
+   "what": "Launcher for containerised agents with harness/model profiles",
+   "author": "dgunay",
+   "comment_id": "50375407",
+   "inspiration": 3
+  },
+  {
+   "name": "nova-tools / nova-bus",
+   "url": "https://github.com/mas-bandwidth/nova-tools",
+   "category": "orchestration",
+   "what": "Redis message bus for multi-model coordination and review",
+   "author": "glennfiedler",
+   "comment_id": "50375606",
+   "inspiration": 4
+  },
+  {
+   "name": "nova-sprint",
+   "url": "https://github.com/mas-bandwidth/nova-sprint",
+   "category": "orchestration",
+   "what": "Sprint cards with tier escalation across a machine fleet",
+   "author": "glennfiedler",
+   "comment_id": "50375606",
+   "inspiration": 4
+  },
+  {
+   "name": "schema",
+   "url": "https://github.com/mas-bandwidth/schema",
+   "category": "other",
+   "what": "Protobuf replacement built in parallel across 15 languages",
+   "author": "glennfiedler",
+   "comment_id": "50375943",
+   "inspiration": 2
+  },
+  {
+   "name": "schema ROADMAP",
+   "url": "https://github.com/mas-bandwidth/schema/blob/main/ROADMAP.md",
+   "category": "other",
+   "what": "Roadmap for schema",
+   "author": "glennfiedler",
+   "comment_id": "50375943",
+   "inspiration": 2
+  },
+  {
+   "name": "masbandwidth Patreon",
+   "url": "https://patreon.com/masbandwidth",
+   "category": "other",
+   "what": "More of his AI coding work",
+   "author": "glennfiedler",
+   "comment_id": "50375943",
+   "inspiration": 1
+  },
+  {
+   "name": "Sprint system live view",
+   "url": "http://37.27.135.206",
+   "category": "orchestration",
+   "what": "Live view of the sprint system",
+   "author": "glennfiedler",
+   "comment_id": "50375964",
+   "inspiration": 2
+  },
+  {
+   "name": "fixed3d",
+   "url": "https://github.com/mas-bandwidth/fixed3d",
+   "category": "other",
+   "what": "box3d physics in fixed point",
+   "author": "glennfiedler",
+   "comment_id": "50376018",
+   "inspiration": 1
+  },
+  {
+   "name": "fixed",
+   "url": "https://github.com/mas-bandwidth/fixed",
+   "category": "other",
+   "what": "Fixed-point maths library",
+   "author": "glennfiedler",
+   "comment_id": "50376018",
+   "inspiration": 1
+  },
+  {
+   "name": "fixed roadmap.sexp",
+   "url": "https://github.com/mas-bandwidth/fixed/blob/main/docs/roadmap.sexp",
+   "category": "context",
+   "what": "S-expression roadmap notes for agents",
+   "author": "genxy",
+   "comment_id": "50386404",
+   "inspiration": 2
+  },
+  {
+   "name": "Juggler",
+   "url": "https://github.com/juggler-ai/juggler",
+   "category": "session_control",
+   "what": "Harness/session manager with control and insight; same across local and remote (#50379165)",
+   "author": "hypfer",
+   "comment_id": "50376056",
+   "inspiration": 2
+  },
+  {
+   "name": "jiraude",
+   "url": "https://github.com/kuba97531/jiraude",
+   "category": "tickets",
+   "what": "Per-project ticket system as the interface to one coordinating Claude session",
+   "author": "kuboble",
+   "comment_id": "50384746",
+   "inspiration": 4
+  },
+  {
+   "name": "dreamcoder.ai",
+   "url": "https://dreamcoder.ai",
+   "category": "harness",
+   "what": "Own harness with tiling window manager",
+   "author": "mickeyp",
+   "comment_id": "50375966",
+   "inspiration": 2
+  },
+  {
+   "name": "DeepSeek platform",
+   "url": "https://platform.deepseek.com",
+   "category": "providers",
+   "what": "DeepSeek API with off-peak pricing",
+   "author": "TheArcane",
+   "comment_id": "50376062",
+   "inspiration": 2
+  },
+  {
+   "name": "tensorx.ai",
+   "url": "https://tensorx.ai",
+   "category": "providers",
+   "what": "EU inference provider",
+   "author": "haizhung",
+   "comment_id": "50376642",
+   "inspiration": 1
+  },
+  {
+   "name": "Humbug",
+   "url": "https://github.com/m6r-ai/humbug",
+   "category": "harness",
+   "what": "Low-dependency GUI harness with inter-AI delegation and ADRs",
+   "author": "tritondev",
+   "comment_id": "50376262",
+   "inspiration": 3
+  },
+  {
+   "name": "Spool",
+   "url": "https://github.com/enes-alatas/spool",
+   "category": "orchestration",
+   "what": "Mission-driven Claude Code loops, egress-allowlisted containers, control room with costs",
+   "author": "enesalatas",
+   "comment_id": "50376390",
+   "inspiration": 4
+  },
+  {
+   "name": "loa",
+   "url": "https://github.com/laughingmandev/loa",
+   "category": "harness",
+   "what": "Harness for long hands-off tasks on local inference",
+   "author": "voodooEntity",
+   "comment_id": "50376538",
+   "inspiration": 2
+  },
+  {
+   "name": "maximizepm",
+   "url": "https://github.com/mhalstrom/maximizepm",
+   "category": "orchestration",
+   "what": "Orchestrator on top of vanilla Claude",
+   "author": "biggestriverman",
+   "comment_id": "50376567",
+   "inspiration": 1
+  },
+  {
+   "name": "Toolscaled agents docs",
+   "url": "https://app.toolscaled.com/docs/agents/how-agents-work/",
+   "category": "cost",
+   "what": "Routes automations to subscription agents, then converts them to workflows",
+   "author": "biggestriverman",
+   "comment_id": "50376567",
+   "inspiration": 2
+  },
+  {
+   "name": "GIN",
+   "url": "https://github.com/8lamaster8/GIN",
+   "category": "harness",
+   "what": "Experimental agent system",
+   "author": "8lamaster8",
+   "comment_id": "50376692",
+   "inspiration": 1
+  },
+  {
+   "name": "NodeCode",
+   "url": "https://nodecode.ai/",
+   "category": "context",
+   "what": "Harness said not to need regular compaction",
+   "author": "abstractcontrol",
+   "comment_id": "50376722",
+   "inspiration": 2
+  },
+  {
+   "name": "VectorStep",
+   "url": "https://vectorstep.io",
+   "category": "orchestration",
+   "what": "Platform for trusted production agent workflows",
+   "author": "bantex01",
+   "comment_id": "50376733",
+   "inspiration": 1
+  },
+  {
+   "name": "SpurCode",
+   "url": "https://github.com/getspur/SpurCode",
+   "category": "orchestration",
+   "what": "Agent that orchestrates Codex, Claude and Goose",
+   "author": "mf_kevintruong",
+   "comment_id": "50376746",
+   "inspiration": 2
+  },
+  {
+   "name": "SpurLab",
+   "url": "https://getspur.dev/spurlab",
+   "category": "context",
+   "what": "Notebook workbench where agents ground themselves before coding",
+   "author": "mf_kevintruong",
+   "comment_id": "50376746",
+   "inspiration": 2
+  },
+  {
+   "name": "techaddo thread summary",
+   "url": "https://techaddo.com/posts/ai-agentic-setups",
+   "category": "other",
+   "what": "Summary of this HN thread",
+   "author": "flavius37",
+   "comment_id": "50376814",
+   "inspiration": 2
+  },
+  {
+   "name": "Coterie",
+   "url": "https://github.com/ASIXicle/Coterie",
+   "category": "context",
+   "what": "tmux + MCP harness with persistent semantic memory",
+   "author": "asixicle",
+   "comment_id": "50376872",
+   "inspiration": 2
+  },
+  {
+   "name": "Swival",
+   "url": "Swival.dev",
+   "category": "harness",
+   "what": "Coding harness used with Clef model routing",
+   "author": "jedisct1",
+   "comment_id": "50376601",
+   "inspiration": 1
+  },
+  {
+   "name": "exe.dev",
+   "url": "exe.dev",
+   "category": "sandbox",
+   "what": "Subscription dev environment service",
+   "author": "jeffrallen",
+   "comment_id": "50376381",
+   "inspiration": 1
+  },
+  {
+   "name": "ollama.com (cloud)",
+   "url": "ollama.com",
+   "category": "providers",
+   "what": "Hosted inference with cheap DeepSeek Flash",
+   "author": "tritondev",
+   "comment_id": "50376262",
+   "inspiration": 2
+  },
+  {
+   "name": "Paseo",
+   "url": "(none given)",
+   "category": "session_control",
+   "what": "Mobile/desktop UI and agent runtime for Claude Code/Codex",
+   "author": "boudra",
+   "comment_id": "50376167",
+   "inspiration": 2
+  },
+  {
+   "name": "Open Chamber",
+   "url": "(none given)",
+   "category": "tickets",
+   "what": "OpenCode UI with a task plugin giving each ticket a fresh context",
+   "author": "rcgeorge23",
+   "comment_id": "50376216",
+   "inspiration": 3
+  },
+  {
+   "name": "ThinkRail (JetBrains)",
+   "url": "(none given)",
+   "category": "harness",
+   "what": "Experimental agent IDE with easy worktrees and spec-driven development",
+   "author": "brabel",
+   "comment_id": "50376352",
+   "inspiration": 1
+  },
+  {
+   "name": "Requesty",
+   "url": "(none given)",
+   "category": "cost",
+   "what": "Model gateway dashboard comparing speed and cost",
+   "author": "brabel",
+   "comment_id": "50376352",
+   "inspiration": 3
+  },
+  {
+   "name": "oh-my-pi prewalk",
+   "url": "(none given)",
+   "category": "routing",
+   "what": "Pairs a planner model with an executor model",
+   "author": "tomasulo",
+   "comment_id": "50376454",
+   "inspiration": 3
+  },
+  {
+   "name": "MLX-Serve + Clef",
+   "url": "(none given)",
+   "category": "local_models",
+   "what": "Local server with a routing model choosing a model per task",
+   "author": "jedisct1",
+   "comment_id": "50376601",
+   "inspiration": 2
+  },
+  {
+   "name": "Strata / oMLX",
+   "url": "(none given)",
+   "category": "local_models",
+   "what": "Local inference; Strata streams experts for larger MoE models",
+   "author": "a-saleh",
+   "comment_id": "50376810",
+   "inspiration": 1
+  },
+  {
+   "name": "pi-deck / Pillish",
+   "url": "(none given; unpublished)",
+   "category": "session_control",
+   "what": "Pi in Emacs with a Herdr-like layer; do/delegate primitives",
+   "author": "athrowaway3z",
+   "comment_id": "50376505",
+   "inspiration": 2
+  },
+  {
+   "name": "Rex",
+   "url": "(none given)",
+   "category": "session_control",
+   "what": "Terminal multiplexer used instead of tmux/cmux",
+   "author": "chrisvalleybay",
+   "comment_id": "50377121",
+   "inspiration": 1
+  },
+  {
+   "name": "libvirt per-project VM CLI",
+   "url": "(none given; not yet open-sourced)",
+   "category": "sandbox",
+   "what": "Per-project VMs from copy-on-write golden images",
+   "author": "mnahkies",
+   "comment_id": "50376357",
+   "inspiration": 2
+  },
+  {
+   "name": "Hetzner Inference API",
+   "url": "(none given)",
+   "category": "providers",
+   "what": "Currently free inference API used as a custom provider",
+   "author": "fhcbix",
+   "comment_id": "50376941",
+   "inspiration": 2
+  },
+  {
+   "name": "Hangar",
+   "url": "https://github.com/jeffer1312/hangar",
+   "category": "session_control",
+   "what": "Self-hosted manager for tmux agent sessions across machines, followable from phone",
+   "author": "jefferfelizardo",
+   "comment_id": "50377945",
+   "inspiration": 3
+  },
+  {
+   "name": "pi_group",
+   "url": "https://github.com/PAndreew/pi_group",
+   "category": "session_control",
+   "what": "Multiplayer group chat with a Pi agent and shared context",
+   "author": "PAndreew",
+   "comment_id": "50377956",
+   "inspiration": 2
+  },
+  {
+   "name": "Retirement blog post",
+   "url": "https://eamonnsullivan.co.uk/posts/2026-10-20-retirement/",
+   "category": "other",
+   "what": "Context for an affordable personal AI setup",
+   "author": "eamonnsullivan",
+   "comment_id": "50378067",
+   "inspiration": 1
+  },
+  {
+   "name": "Editor Code Assistant (ECA)",
+   "url": "https://eca.dev/",
+   "category": "harness",
+   "what": "Editor-agnostic assistant used in Emacs",
+   "author": "eamonnsullivan",
+   "comment_id": "50378067",
+   "inspiration": 1
+  },
+  {
+   "name": "tix.im (vx-maintainer)",
+   "url": "https://tix.im/",
+   "category": "review",
+   "what": "Nix-defined mostly deterministic workflows, commit-pinned review cache with AST-diff reuse, agent+human tracker",
+   "author": "poelzi",
+   "comment_id": "50378157",
+   "inspiration": 5
+  },
+  {
+   "name": "Kiro specs docs",
+   "url": "https://kiro.dev/docs/specs/",
+   "category": "tickets",
+   "what": "Spec-driven development: requirements, design, tasks",
+   "author": "tegeek",
+   "comment_id": "50378376",
+   "inspiration": 3
+  },
+  {
+   "name": "Yiin stack",
+   "url": "https://stack.yiin.lt",
+   "category": "other",
+   "what": "Commenter's simple stack",
+   "author": "Yiin",
+   "comment_id": "50378387",
+   "inspiration": 1
+  },
+  {
+   "name": "agentcron.ai",
+   "url": "agentcron.ai",
+   "category": "tickets",
+   "what": "MCP kanban boards",
+   "author": "option_greek",
+   "comment_id": "50377430",
+   "inspiration": 2
+  },
+  {
+   "name": "agent-swarm.dev",
+   "url": "agent-swarm.dev",
+   "category": "orchestration",
+   "what": "Self-hosted MIT agent swarm",
+   "author": "tarasyarema",
+   "comment_id": "50378028",
+   "inspiration": 1
+  },
+  {
+   "name": "OpenRig",
+   "url": "(none given)",
+   "category": "orchestration",
+   "what": "Role-based 'rigs' of Codex/Claude seats; dogfood persona rig and pm-intake seat per founder (#50385555)",
+   "author": "crisopolis",
+   "comment_id": "50377449",
+   "inspiration": 3
+  },
+  {
+   "name": "Lab",
+   "url": "(none given)",
+   "category": "session_control",
+   "what": "Front-end for many chats with resume and central skill/MCP management",
+   "author": "itsloopyo",
+   "comment_id": "50378016",
+   "inspiration": 2
+  },
+  {
+   "name": "Hivemind",
+   "url": "(none given)",
+   "category": "orchestration",
+   "what": "Agent collaboration layer with file reservations and resource locks",
+   "author": "itsloopyo",
+   "comment_id": "50378016",
+   "inspiration": 2
+  },
+  {
+   "name": "Mastra",
+   "url": "(none given)",
+   "category": "orchestration",
+   "what": "Open-source framework for agentic workflows",
+   "author": "vekker",
+   "comment_id": "50377455",
+   "inspiration": 1
+  },
+  {
+   "name": "Vercel agent-browser",
+   "url": "(none given)",
+   "category": "verification",
+   "what": "Browser agent skill used for persona dogfood testing",
+   "author": "mschwarz",
+   "comment_id": "50385555",
+   "inspiration": 3
+  },
+  {
+   "name": "virpo levels (100 tips)",
+   "url": "https://virpo.io/levels",
+   "category": "skills",
+   "what": "100 setup tips your agent can audit your setup against",
+   "author": "virpo",
+   "comment_id": "50378479",
+   "inspiration": 4
+  },
+  {
+   "name": "iceghost",
+   "url": "https://github.com/sharkjets/iceghost",
+   "category": "session_control",
+   "what": "Take over claude/codex/pi sessions from anywhere",
+   "author": "SkidVis",
+   "comment_id": "50378518",
+   "inspiration": 2
+  },
+  {
+   "name": "ninfer-4090",
+   "url": "https://github.com/tensorninja/ninfer-4090",
+   "category": "local_models",
+   "what": "Custom inference engine for local Qwen",
+   "author": "netsroht",
+   "comment_id": "50378737",
+   "inspiration": 1
+  },
+  {
+   "name": "Caudra decisions",
+   "url": "https://caudra.ai/features/decisions/",
+   "category": "local_models",
+   "what": "Local model for screening and re-ranking decisions",
+   "author": "netsroht",
+   "comment_id": "50378737",
+   "inspiration": 2
+  },
+  {
+   "name": "Caudra",
+   "url": "https://github.com/caudra/caudra",
+   "category": "cost",
+   "what": "Harness with multi-account strategies (drain the soonest-reset account)",
+   "author": "netsroht",
+   "comment_id": "50378737",
+   "inspiration": 3
+  },
+  {
+   "name": "Caudra swarm discussion",
+   "url": "https://github.com/caudra/caudra/discussions/2",
+   "category": "orchestration",
+   "what": "Plans for a Caudra swarm",
+   "author": "netsroht",
+   "comment_id": "50378737",
+   "inspiration": 1
+  },
+  {
+   "name": "Lynx",
+   "url": "lynx.railcode.dev",
+   "category": "harness",
+   "what": "Agent coding interface",
+   "author": "yakkomajuri",
+   "comment_id": "50378756",
+   "inspiration": 1
+  },
+  {
+   "name": "yoloai",
+   "url": "https://github.com/kstenerud/yoloai",
+   "category": "sandbox",
+   "what": "Key-hiding proxy, Docker file sandbox and diff inspection before apply",
+   "author": "NortySpock",
+   "comment_id": "50381875",
+   "inspiration": 3
+  },
+  {
+   "name": "bubblewrap",
+   "url": "https://github.com/containers/bubblewrap",
+   "category": "sandbox",
+   "what": "Unprivileged Linux sandbox",
+   "author": "tikkabhuna",
+   "comment_id": "50379187",
+   "inspiration": 2
+  },
+  {
+   "name": "ZeroStack",
+   "url": "https://github.com/gi-dellav/zerostack",
+   "category": "sandbox",
+   "what": "Tool using bubblewrap isolation",
+   "author": "Matl",
+   "comment_id": "50379315",
+   "inspiration": 1
+  },
+  {
+   "name": "Repo-native tooling for sandboxes (blog)",
+   "url": "https://epiq.sh/blog/repo-native-tooling-for-sandboxes",
+   "category": "sandbox",
+   "what": "Write-up on repo-native tooling, sandboxing and request proxying",
+   "author": "ionetan",
+   "comment_id": "50380605",
+   "inspiration": 2
+  },
+  {
+   "name": "drop",
+   "url": "https://github.com/wrr/drop",
+   "category": "sandbox",
+   "what": "Simple agent sandbox",
+   "author": "jvinet",
+   "comment_id": "50382618",
+   "inspiration": 2
+  },
+  {
+   "name": "pise",
+   "url": "https://codeberg.org/dannyfritz/dotfiles/src/commit/f5d082d285ff40f35b4d140816f48e637f3c95ad/bin/pise",
+   "category": "sandbox",
+   "what": "Script running pi inside bubblewrap",
+   "author": "dannyfritz07",
+   "comment_id": "50383344",
+   "inspiration": 2
+  },
+  {
+   "name": "skills-sdlc",
+   "url": "https://github.com/gregwebs/skills-sdlc",
+   "category": "routing",
+   "what": "/implement skill: Claude plans, Codex reviews, DeepSeek implements and orchestrates",
+   "author": "gregwebs",
+   "comment_id": "50378856",
+   "inspiration": 5
+  },
+  {
+   "name": "pi-quota-dispatcher",
+   "url": "https://github.com/gregwebs/pi-quota-dispatcher",
+   "category": "cost",
+   "what": "Pi plugin switching provider when quota runs low",
+   "author": "gregwebs",
+   "comment_id": "50378856",
+   "inspiration": 3
+  },
+  {
+   "name": "Agenta",
+   "url": "https://github.com/agenta-ai/agenta",
+   "category": "orchestration",
+   "what": "Scheduled agents shared via Slack/Telegram, switching codex/claude/pi",
+   "author": "resiros",
+   "comment_id": "50378890",
+   "inspiration": 2
+  },
+  {
+   "name": "Sleeper Service",
+   "url": "https://sleeperservice.io/",
+   "category": "orchestration",
+   "what": "Back-office agent platform: centralised agents, decentralised orchestration",
+   "author": "wj",
+   "comment_id": "50379016",
+   "inspiration": 2
+  },
+  {
+   "name": "Lunar",
+   "url": "https://github.com/gszr/lunar",
+   "category": "cost",
+   "what": "Harness switching xAI/OpenAI subscriptions mid-session",
+   "author": "gszr",
+   "comment_id": "50379150",
+   "inspiration": 2
+  },
+  {
+   "name": "ontouchstart log gist",
+   "url": "https://gist.github.com/ontouchstart/b6a08b068cf863f0523bbd8880c88cf4",
+   "category": "other",
+   "what": "A personal log offered as learning material",
+   "author": "ontouchstart",
+   "comment_id": "50379205",
+   "inspiration": 1
+  },
+  {
+   "name": "Warp",
+   "url": "https://www.warp.dev/",
+   "category": "verification",
+   "what": "Said to make it easy to compare agent workflows and configs",
+   "author": "linsomniac",
+   "comment_id": "50379686",
+   "inspiration": 2
+  },
+  {
+   "name": "freellmapi",
+   "url": "https://github.com/tashfeenahmed/freellmapi",
+   "category": "cost",
+   "what": "Free LLM API access",
+   "author": "elestor",
+   "comment_id": "50379530",
+   "inspiration": 1
+  },
+  {
+   "name": "Orca",
+   "url": "onorca.dev",
+   "category": "session_control",
+   "what": "Multi-worktree agent IDE/orchestrator with mobile app",
+   "author": "jlgarhdez",
+   "comment_id": "50379643",
+   "inspiration": 2
+  },
+  {
+   "name": "How I use agents (blog)",
+   "url": "https://dcferreira.com/post/2026-10-how-i-use-agents/",
+   "category": "orchestration",
+   "what": "Vanilla Claude Code + Obsidian + Herdr with a PM/tech-lead session pair",
+   "author": "dcferreira",
+   "comment_id": "50379944",
+   "inspiration": 3
+  },
+  {
+   "name": "Karajan",
+   "url": "(none given)",
+   "category": "orchestration",
+   "what": "Mac app exposing an MCP so the Claude app can start, stop and review agents",
+   "author": "jlgarhdez",
+   "comment_id": "50379643",
+   "inspiration": 2
+  },
+  {
+   "name": "Workforce",
+   "url": "(none given)",
+   "category": "orchestration",
+   "what": "Own agent factory that builds and deploys itself",
+   "author": "itsdavesanders",
+   "comment_id": "50379352",
+   "inspiration": 1
+  },
+  {
+   "name": "meat_proxy",
+   "url": "(none given)",
+   "category": "sandbox",
+   "what": "Pulls the agent user's commits and pushes to bare repos acting as CI",
+   "author": "kikdij",
+   "comment_id": "50379089",
+   "inspiration": 3
+  },
+  {
+   "name": "Agent control room",
+   "url": "(none given)",
+   "category": "session_control",
+   "what": "Rails control room with one queue of items needing the human",
+   "author": "rufugee",
+   "comment_id": "50379826",
+   "inspiration": 3
+  },
+  {
+   "name": "Hax",
+   "url": "https://usehax.dev/",
+   "category": "harness",
+   "what": "Coding agent harness",
+   "author": "mring33621",
+   "comment_id": "50380281",
+   "inspiration": 1
+  },
+  {
+   "name": "voiceio",
+   "url": "voiceio.dev",
+   "category": "voice",
+   "what": "FOSS Linux voice input with Parakeet",
+   "author": "montenegrohugo",
+   "comment_id": "50380334",
+   "inspiration": 2
+  },
+  {
+   "name": "joemattie.com",
+   "url": "joemattie.com",
+   "category": "other",
+   "what": "Personal site of AI-built projects",
+   "author": "JoeMattie",
+   "comment_id": "50380371",
+   "inspiration": 1
+  },
+  {
+   "name": "epiq",
+   "url": "https://epiq.sh",
+   "category": "tickets",
+   "what": "Local TUI issue board optimised for agents",
+   "author": "samuell",
+   "comment_id": "50380609",
+   "inspiration": 2
+  },
+  {
+   "name": "Helyn follow-the-money (Helyn Implement protocol)",
+   "url": "https://helyn.com/follow-the-money",
+   "category": "verification",
+   "what": "Phased spec-first protocol with creator/reviewer loops and binary gates",
+   "author": "cpobuda",
+   "comment_id": "50380633",
+   "inspiration": 4
+  },
+  {
+   "name": "Docker Sandboxes",
+   "url": "https://www.docker.com/products/docker-sandboxes/",
+   "category": "sandbox",
+   "what": "MicroVM sandboxes for coding agents (closed source per #50389999)",
+   "author": "alentred",
+   "comment_id": "50380849",
+   "inspiration": 2
+  },
+  {
+   "name": "OpenHands",
+   "url": "https://www.openhands.dev/",
+   "category": "harness",
+   "what": "Open agent platform",
+   "author": "alentred",
+   "comment_id": "50380849",
+   "inspiration": 1
+  },
+  {
+   "name": "Agentic patterns catalogue",
+   "url": "https://graphs.univerlab.org/patterns",
+   "category": "review",
+   "what": "Catalogue of agentic patterns including adversarial validation",
+   "author": "JheisonMB",
+   "comment_id": "50385108",
+   "inspiration": 3
+  },
+  {
+   "name": "jagt",
+   "url": "https://github.com/GulDmitry/jagt",
+   "category": "orchestration",
+   "what": "Own orchestration tool used with Claude Code in tmux",
+   "author": "WhiteMart",
+   "comment_id": "50389538",
+   "inspiration": 1
+  },
+  {
+   "name": "clawpatrol",
+   "url": "(none given)",
+   "category": "sandbox",
+   "what": "Action-approval rules and credentials layer for external APIs",
+   "author": "rihegher",
+   "comment_id": "50380252",
+   "inspiration": 2
+  },
+  {
+   "name": "Varyz AI",
+   "url": "(none given)",
+   "category": "orchestration",
+   "what": "Business overseen by an orchestration agent",
+   "author": "egrm",
+   "comment_id": "50384963",
+   "inspiration": 1
+  },
+  {
+   "name": "Compound Engineering plugin",
+   "url": "(none given)",
+   "category": "orchestration",
+   "what": "Plugin used as the primary Claude-builds/Codex-reviews loop",
+   "author": "Reebz",
+   "comment_id": "50389282",
+   "inspiration": 2
+  },
+  {
+   "name": "Custom OWUI plugins",
+   "url": "(none given)",
+   "category": "sandbox",
+   "what": "Per-chat terminal grants and per-chat git credentials",
+   "author": "Primer81",
+   "comment_id": "50385251",
+   "inspiration": 2
+  },
+  {
+   "name": "Claude code-review wrapper",
+   "url": "(none given)",
+   "category": "review",
+   "what": "Lets Claude call Codex/Grok/GLM for review",
+   "author": "petesergeant",
+   "comment_id": "50380522",
+   "inspiration": 3
+  },
+  {
+   "name": "Voice interface for Claude Code",
+   "url": "(none given)",
+   "category": "voice",
+   "what": "Push-to-talk headset turn with kokoro TTS and Parakeet ASR",
+   "author": "robviren",
+   "comment_id": "50381098",
+   "inspiration": 3
+  },
+  {
+   "name": "Multi-device coding harness (unnamed)",
+   "url": "(none given)",
+   "category": "harness",
+   "what": "Planned BYOK OpenRouter harness for ZDR endpoints",
+   "author": "carterschonwald",
+   "comment_id": "50380401",
+   "inspiration": 1
+  }
+ ],
+ "disagreements": [
+  {
+   "topic": "Do swarms and multi-agent orchestration pay off?",
+   "side_a": "Yes: coordinators, fleets and chief-of-staff agents raise throughput (glennfiedler #50375606, jeswin #50373324, dgunay #50375407, 2001zhaozhao #50373432).",
+   "side_b": "No: swarms waste tokens, a single human in the loop beats orchestration, and inter-session messaging becomes chaos (YuechenLi #50375205, joegibbs #50376476, PAndreew #50377956, SOLAR_FIELDS #50379514).",
+   "verdict": "Use a narrow coordinator plus an independent reviewer. No wide swarms for John; his two-worker cap stands."
+  },
+  {
+   "topic": "Are skills still useful?",
+   "side_a": "Yes: make frequent prompts into skills; MCP-backed skills transformed a workflow (jeffyaw #50384236, parkersweb #50378336, ctolsen #50367326).",
+   "side_b": "Less so: little use when switching stacks; broad skills poison context (thefourthchime #50367037, bartread #50378288, RamblingCTO #50380583).",
+   "verdict": "Keep a few narrow, refined skills and promote proven ones to scripts. Prune broad ones."
+  },
+  {
+   "topic": "Persist agent context, or re-explain each time?",
+   "side_a": "Persist: HANDOFF, DECISIONS, ADRs, state files, close-out notes (sheepscreek #50375342, bottom999mottob #50375274, tritondev #50376262).",
+   "side_b": "Re-explain: it forces better thinking about architecture; code should be self-evident (hypfer #50376204).",
+   "verdict": "Persist, but keep the files short and decision-focused, which captures hypfer's point."
+  },
+  {
+   "topic": "Are open models via PAYG cheaper than subscriptions?",
+   "side_a": "Yes: about 1/20th the cost; 1B tokens for 7% of a $10 plan (creativeSlumber #50378366, ggregoire #50381117).",
+   "side_b": "Not in practice: more expensive than a Claude subscription; DS4.1 Flash on the high side (jpardoe #50380381, jeffyaw #50384114, scosman #50380185).",
+   "verdict": "Measure per task. For John the question is moot: GreenPT is hard-capped, so use the cap fully for bounded work."
+  },
+  {
+   "topic": "Minimal setup or heavy protocol?",
+   "side_a": "Minimal: vanilla Claude Code with few skills; fancy setups get abandoned (leofree #50380407, nonethewiser #50380782, Aozora7 #50373351).",
+   "side_b": "Heavy: phased protocols with review panels and deterministic workflows work well (cpobuda #50380633, poelzi #50378157).",
+   "verdict": "Make it heavy only where it is deterministic and cheap to run. Prove the rest against vanilla with a bake-off."
+  },
+  {
+   "topic": "Privacy of cloud agents",
+   "side_a": "No worse than running Claude/Codex locally (iainmerrick #50377537).",
+   "side_b": "Worse: the provider clones the full source and needs write/Actions access (OJFord #50377189, #50383635).",
+   "verdict": "For repos already on GitHub, cloud sessions are fine. Keep docs/private out of cheap third-party providers with a mechanical check."
+  },
+  {
+   "topic": "Should you tell the model to use subagents?",
+   "side_a": "Yes: 'use subagents as applicable', 'use sonnet for simpler tasks' (mceachen #50375851, chris1993 #50372070, sillysaurusx #50373445).",
+   "side_b": "No: let it decide; over-optimising saves nothing (willio58 #50373767).",
+   "verdict": "Let the model decide, inside John's declared delegation ceiling."
+  },
+  {
+   "topic": "Opus 5.5 or Fable?",
+   "side_a": "Opus solves nearly everything; the main difference is price (nedt #50378628, willio58 #50373208).",
+   "side_b": "Fable goes deeper on obscure analysis and real development (felixgallo #50380023, tcdent #50374230).",
+   "verdict": "Benchmark on your own tasks. Reserve the premium route for the explicit premium command."
+  },
+  {
+   "topic": "Is cheap DeepSeek flash output correct enough?",
+   "side_a": "'Pretty much always correct' and keeps you in flow (TheArcane #50376062).",
+   "side_b": "Lots of approximately-correct text; frontier models are concise and correct (haizhung #50376087); open-model prose is insufferable (guhcampos #50373357).",
+   "verdict": "Good enough for extraction and mechanical work. Not for final content prose."
+  },
+  {
+   "topic": "Is lightweight isolation enough?",
+   "side_a": "A dedicated OS user or the harness's bubblewrap is a fair compromise (kikdij #50379089, tikkabhuna #50379187).",
+   "side_b": "No: Claude disables its own sandbox; use an external VM or microVM (rdg1991 #50380164, f53d #50383403, thehours #50379505).",
+   "verdict": "Use external isolation. John's cloud sessions and push hook already provide it."
+  },
+  {
+   "topic": "Is nonstop agent building healthy?",
+   "side_a": "'You are doing everything right' (glennfiedler #50374802).",
+   "side_b": "It is addiction and will cause burnout (LittleBox #50390416, pavas #50375890, bkaae #50378487).",
+   "verdict": "Keep turn, timeout and width caps. They protect the human as well as the budget."
+  },
+  {
+   "topic": "Personal agent platforms",
+   "side_a": "Life-integrated and valuable (Quibblingeek #50373248, robgough #50368640, vekker #50377455).",
+   "side_b": "Unstable, just a cronjob, little real use (sadilek #50370886, browningstreet #50373974, jedisct1 #50376601).",
+   "verdict": "Watch only. Not part of the content harness."
+  },
+  {
+   "topic": "Do model differences still matter?",
+   "side_a": "Frontier models have reached 'good enough' parity (darkamaul #50376908, asim #50377263).",
+   "side_b": "Big differences in speed, price and prose quality (brabel #50376352, felixgallo #50380023).",
+   "verdict": "They matter for prose and price, which are exactly the axes a content harness routes on."
+  }
+ ],
+ "gold_quotes": [
+  {
+   "quote": "I'd say the biggest trick is just to tell it what complete looks like.",
+   "author": "thefourthchime",
+   "comment_id": "50367037"
+  },
+  {
+   "quote": "I generally start a workflow with a simple skill and if it proves useful I like to make it deterministic if possible. Models be dumb sometimes.",
+   "author": "ctolsen",
+   "comment_id": "50367326"
+  },
+  {
+   "quote": "All of these gas towns and no one running evals to compare to the vanilla harness. AI is very good at making one feel like they are being productive",
+   "author": "SOLAR_FIELDS",
+   "comment_id": "50379514"
+  },
+  {
+   "quote": "If a card fails at a particular tier, it's going to get escalated up tiers until it gets sorted.",
+   "author": "glennfiedler",
+   "comment_id": "50375921"
+  },
+  {
+   "quote": "I find that using nova-bus to coordinate multiple model/harness review of codebase in very effective at increasing code quality. Each model sees things the others don't.",
+   "author": "glennfiedler",
+   "comment_id": "50375606"
+  },
+  {
+   "quote": "review is cached, but the review is pinned to the commit hash. When restarted and rebase is on, a ast-diff is generated to check if the review can be reused.",
+   "author": "poelzi",
+   "comment_id": "50378157"
+  },
+  {
+   "quote": "Reset your context frequently instead of only relying on compaction.",
+   "author": "sheepscreek",
+   "comment_id": "50375342"
+  },
+  {
+   "quote": "Being forced to re-explain stuff to the LLM is good, actually, as that way, one actually thinks about the architecture, choices and limitations.",
+   "author": "hypfer",
+   "comment_id": "50376204"
+  },
+  {
+   "quote": "What's funny though is that it almost always inevitably finds something wrong, even if you just ran it in another window and fixed everything it found.",
+   "author": "smashed",
+   "comment_id": "50374732"
+  },
+  {
+   "quote": "I've discovered that giving Claude questions to ask during code review improves things quite a bit.",
+   "author": "lgunsch",
+   "comment_id": "50378899"
+  },
+  {
+   "quote": "a phase is either CLEAR (GREEN) or DISCREPANCY (RED) — never a numeric score",
+   "author": "cpobuda",
+   "comment_id": "50380633"
+  },
+  {
+   "quote": "When I hit my limits for the week, I spend the remainder of the waiting time going over the framework data to see what are my largest sources of consumption",
+   "author": "Fordec",
+   "comment_id": "50374764"
+  },
+  {
+   "quote": "I don't like making other people read AI slop, but I don't mind having AIs read it.",
+   "author": "martincsweiss",
+   "comment_id": "50375084"
+  },
+  {
+   "quote": "GLM, Qwen and Deepseek are incredible tool callers, but their prose is insufferable.",
+   "author": "guhcampos",
+   "comment_id": "50373357"
+  },
+  {
+   "quote": "I think as the models get better, the organization structures need less attention.",
+   "author": "dcferreira",
+   "comment_id": "50379944"
+  },
+  {
+   "quote": "It is probably at least 3x slower than just asking for an implementation, but defects cost time and money later.",
+   "author": "gregwebs",
+   "comment_id": "50378856"
+  },
+  {
+   "quote": "it can wander into 'productivity porn' territory where it's just creating reams of reports, plans, or 'evidence packs' and nothing real gets implemented.",
+   "author": "siliconc0w",
+   "comment_id": "50381456"
+  },
+  {
+   "quote": "I can do 5 things concurrently for about a day max. 3 things concurrently all week and my weekends are spent untangling my brain.",
+   "author": "fhub",
+   "comment_id": "50373117"
+  },
+  {
+   "quote": "Just know that there’s no quicker way to hit your limits than to use subagents.",
+   "author": "sillysaurusx",
+   "comment_id": "50373445"
+  },
+  {
+   "quote": "My ABSOLUTE rule is NO KEYS IN THE VM.",
+   "author": "allen-munsch",
+   "comment_id": "50387654"
+  },
+  {
+   "quote": "Claude frequently has decided to disable its own sandbox when I've had it running so I absolutely do not trust their implementation.",
+   "author": "rdg1991",
+   "comment_id": "50380164"
+  },
+  {
+   "quote": "The persistent agents remember why things are as they are without having to look everything up and their feedback is generally much better than a blank slate user.",
+   "author": "mschwarz",
+   "comment_id": "50385555"
+  },
+  {
+   "quote": "My approach is to build the builder rather than the feature.",
+   "author": "sebra",
+   "comment_id": "50377582"
+  },
+  {
+   "quote": "This thread is super biased by the power users, they are the most excited to share",
+   "author": "ex-aws-dude",
+   "comment_id": "50375972"
+  }
+ ],
+ "changes_vs_first_pass": [
+  "Cross-model review goes up from 16 to 19 and is now joint first. It is the most independently backed pattern, with 12+ setups doing cross-vendor review by default.",
+  "Tiered routing goes up from 17 to 19. Plan-strong, execute-cheap appears in 10+ setups. Escalate-on-failure itself rests mainly on glennfiedler and contingencies, so the escalation recommendation scores 18, not 19.",
+  "Context-as-files goes up from 17 to 19 and widens from HANDOFF+DECISIONS to ADRs, per-repo state files, close-out notes and the low-context-fill discipline. The HANDOFF/DECISIONS recommendation rises from 17 to 19 and is now the top recommendation.",
+  "The Minimalists stay at 18 but are reframed. Their strongest contribution is 'evaluate against vanilla' plus 'newer models need fewer guardrails'. The first-pass top recommendation (eval harness against vanilla, then prune) is confirmed but rescored from 18 to 16, because direct evidence is thin (SOLAR_FIELDS, joshheitzman, nedt).",
+  "Tickets and kanban rise sharply from 13 to 18. Many independent issue-driven hand-off setups exist, and this is John's existing design.",
+  "Cheap open models rise from 14 to 17 on hard cost data. The verdict stays at trial because of counter-claims that they cost more than subscriptions in practice.",
+  "Orchestrators rise from 10 to 15, but only as a narrow coordinator pattern (main thread does not implement; agentic review before a human sees work). Wide swarms remain weak.",
+  "Session managers (11) are folded into 'Session control: phone, remote, voice, alerts' at 16. John's phone-first working raises the fit.",
+  "Skeptics stay at 15, now merged with attention limits and wellbeing. The evidence supports keeping John's two-worker cap.",
+  "Sandboxing rises slightly from 14 to 15. The evidence is strong, but the marginal fit is low because cloud sessions and the push hook already cover most of it.",
+  "New categories that the first pass missed: Deterministic-first workflows (17), Skills, prompts and prose quality (17), Cost and quota telemetry (16), and Verification beyond code review (16). The prose-quality finding matters most for a content harness.",
+  "The daily digest is reframed. As a personal-agent feature it is where agents 'dwindle' (#50376601). As a bulk approve-or-deny queue for John (#50385555) it scores 16.",
+  "The cost board rises from 14 to 17, backed by several independent usage trackers and control rooms.",
+  "New recommendations not in the first pass: a question-list reviewer with binary verdicts, a review stop rule, a private-path guard before GreenPT, a monthly turn-sink review, and persona readers for consumer content."
+ ]
+}

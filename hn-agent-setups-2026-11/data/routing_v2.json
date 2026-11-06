@@ -1,0 +1,27 @@
+{
+ "recommendations": [
+  {
+   "title": "Write one role-to-model routing table",
+   "source_ids": [
+    "50367557",
+    "50379104",
+    "50367676",
+    "50378776",
+    "50377888"
+   ],
+   "impact": 4,
+   "ease": 5,
+   "evidence": 4,
+   "fit": 5,
+   "v1": "4+5+4+5 = 18",
+   "v2": 20.0,
+   "v2_working": "4×5×1.0÷1 = 20.0",
+   "v2_authors": 5.0,
+   "v2_conf_source": "counted",
+   "gated": false,
+   "what": "Write down which job goes to which provider and route: monitoring by scripts, extraction by GreenPT, planning and coding by Claude, review by a different provider from the author, final calls by John. Three rows are proposals."
+  }
+ ],
+ "categories": [],
+ "top_insights": []
+}

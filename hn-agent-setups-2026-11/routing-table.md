@@ -13,7 +13,8 @@ Why: the most-copied idea from the thread and the Reddit summary is to write dow
 | 5 | Adversarial and independent review | Codex: **always a different provider from the author** | `standard_reasoning` | Consequential: `highest_reasoning` after the premium command | **proposed: make "reviewer ≠ author's provider" a written rule for content work too.** Today it is only stated for implementation PRs | phillc73 uses "GLM5.3 for adversarial batteries", drbscl #50367676 uses one "mostly for review, second opinion", and ActionHank uses "Occasional call out to claude for a review" |
 | 6 | Fact gate | Codex, or a Claude session that is not the author | `standard_reasoning` | n/a | existing (only when the consumer policy triggers it) | none |
 | 7 | Documentation and handover (HANDOFF.md, receipts summary) | Claude drafts; GreenPT may draft boilerplate that is not private | `bounded_extraction` → `standard_reasoning` | Anything going to a consumer site: Claude | **proposed** | phillc73 uses GLM5.3 for "documentation" |
-| 8 | Final approval, merge, publish, marking facts verified, raising caps | **John only** | n/a | n/a | existing | none |
+| 8 | Merging harness pull requests that meet the written gate | The night runner's merge gate, or a Claude session that reviewed the PR (owner decision, 7 November 2026) | n/a | Gate fails: needs-john | changed | none |
+| 8b | Public publication, marking facts verified, raising caps, safety-critical consumer content, anything a consumer manifest reserves | **John only** | n/a | n/a | existing | none |
 
 **Guardrails that apply on top:** one route per packet (rule 16); nothing private is sent to GreenPT (`docs/private/`); GreenPT output stays a candidate; a stronger model is never used just to repeat unchanged evidence.
 

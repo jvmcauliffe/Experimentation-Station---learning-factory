@@ -22,7 +22,7 @@ Design rules that make this cheap to run:
 1. Scripts first, model never. Every component except C5 is deterministic, no network, no model calls. Model work is only the authoring inside each packet.
 2. One owner per path per wave. `validate_claude_task.py` and `pre_tool_checks.py` are the two contended files; each gets one packet per wave, run last in that wave.
 3. Readers import, they do not re-parse. B9 and B13 import the reader from `harness_report.py` (importing is not editing, so it stays outside their in-scope paths).
-4. Governance stays with John. No packet touches `CLAUDE.md` or `AGENTS.md` (`scripts/prepare_claude_review.py` already excludes them). A build that needs a rule line produces the line in a docs file; John pastes it.
+4. Governance text stays with John. No packet touches `CLAUDE.md` or `AGENTS.md` (`scripts/prepare_claude_review.py` already excludes them). A build that needs a rule line produces the line in a docs file; John pastes it.
 5. Trial in Experimentation Station only when the thing is content, not harness code. All scripts go to content-creation-pipeline because the hooks and tests live there.
 
 ### Waves and dependencies
@@ -205,7 +205,7 @@ Missing from the first draft of this plan: insight 21 was marked "Existing desig
 | 22 | 5.5-era models need fewer guardrails | J2 |
 | 23 | Memory folder and state file | B1, B14 |
 | 24 | Spec-first | B3 |
-| 25 | Agents commit, host pushes | Existing: push hook, no model merges |
+| 25 | Agents commit, host pushes | Changed 7 Nov: the runner's merge gate merges harness PRs on the written criteria; John keeps publication, caps, verified facts and consumer human gates |
 | 26 | Separate done and needs-you alerts | B9 |
 | 27 | Broad skills poison context | J2 |
 | 28 | Cheap inter-agent channels | Labels and receipts read by the runner; PR 13 stays message-only for humans |
@@ -248,5 +248,5 @@ Counts: built or in flight 26 (B1–B14 cover insights 1, 4, 5, 6, 8, 9, 10, 11,
 4. Lint the packet: `python3 scripts/validate_claude_task.py --lint --event EVENT.json --head MAIN_SHA`. Post `@claude run approved packet` only through the GitHub comment tool, never from the shell.
 5. Inside the run: at most five tool calls a turn, eight minutes a turn, the packet's turn and retry figures, one route. Run the unittest command as a single standalone invocation.
 6. Close: draft PR left unmerged for Codex review; handover file under `docs/handover/` once B1 is merged; closing comment with branch, commit, files changed, commands and results, unresolved findings, route, retry count, usage (`unknown` where missing). Count delegated model calls honestly; zero only when none were made.
-7. Never edit `CLAUDE.md` or `AGENTS.md`. Never merge, publish, raise a cap or mark a fact verified.
+7. Never edit `CLAUDE.md` or `AGENTS.md`. Leave the PR for the night runner's merge gate (or merge it yourself after a Codex review with no P1, owner decision 7 Nov). Never publish, raise a cap or mark a fact verified.
 8. A cheaper model is enough to execute any sheet in section 1; they are mechanical once the sheet is read.

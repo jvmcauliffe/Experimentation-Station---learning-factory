@@ -20,6 +20,12 @@ class TwinIsolationTests(unittest.TestCase):
             env = twin_environment()
         self.assertEqual(env, {'PATH': '/bin', 'HOME': '/tmp', 'NOVA_SPRINT_ACTOR': 'boss'})
 
+    def test_home_is_replaced_for_native_processes(self):
+        with mock.patch.dict(os.environ, {'HOME': '/real/home'}, clear=True):
+            env = twin_environment('/scratch/home')
+        self.assertEqual(env['HOME'], '/scratch/home')
+        self.assertEqual(env['USERPROFILE'], '/scratch/home')
+
     def test_live_commands_and_single_dash_overrides_never_launch_binary(self):
         with tempfile.TemporaryDirectory() as scratch:
             command = [sys.executable, str(ROOT / 'twin.py'), '--binary', '/nonexistent-binary',

@@ -26,13 +26,13 @@ def main():
     transcript = []
     # Every operation starts a fresh process and reopens the file-backed state.
     # No server, credentials, external worker or model call is involved.
-    env = twin_environment()
     with tempfile.TemporaryDirectory(prefix='nova-twin-') as scratch:
+        env = twin_environment(scratch)
         state = 'mem:' + str(Path(scratch) / 'sprint.twin')
 
         def run(*words, refused=False):
             result = subprocess.run([binary, words[0], '--redis', state, *words[1:]],
-                                    env=env, text=True, capture_output=True, timeout=30)
+                                    env=env, cwd=scratch, text=True, capture_output=True, timeout=30)
             transcript.append(dict(command=list(words), exit_code=result.returncode,
                                    stdout=result.stdout, stderr=result.stderr))
             if refused:

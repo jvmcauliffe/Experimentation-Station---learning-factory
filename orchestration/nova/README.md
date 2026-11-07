@@ -104,6 +104,10 @@ cannot regenerate any such packet's receipt.
 The Go minimum intentionally rejects pre-releases below Go 1.26.6. An explicitly
 inherited `GOPROXY` is honoured; direct VCS is the default only when unset.
 The bootstrap checks the built engine's reported source commit before use.
+Both simulation entry points run Nova in a scratch working directory with
+an isolated HOME; the binary never runs in the checkout during the simulation.
+Any file-path arguments to `twin.py` must be absolute because its working
+directory is disposable. The explicit state path remains persistent.
 
 Run the wrapper isolation tests with:
 `python3 -B -m unittest discover -s orchestration/nova -p 'test_*.py'`.

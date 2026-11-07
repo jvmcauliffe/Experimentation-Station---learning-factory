@@ -4,16 +4,20 @@ import argparse
 import os
 from pathlib import Path
 import subprocess
+import tempfile
 
 SAFE_COMMANDS = {'init', 'add', 'start', 'stop', 'tick', 'where', 'card', 'log',
                  'take', 'finish', 'read', 'merge', 'queue'}
 
 
-def twin_environment():
+def twin_environment(home=None):
     """Give the simulation no inherited Nova configuration or model credentials."""
     allowed = {'PATH', 'HOME', 'USER', 'LANG', 'LC_ALL', 'TZ', 'TMPDIR', 'TEMP', 'TMP',
                'SYSTEMROOT', 'WINDIR'}
     env = {key: value for key, value in os.environ.items() if key in allowed}
+    if home is not None:
+        env['HOME'] = str(home)
+        env['USERPROFILE'] = str(home)
     env['NOVA_SPRINT_ACTOR'] = 'boss'
     return env
 
@@ -34,8 +38,9 @@ def main():
         parser.error('Connection, credential and execution overrides are not allowed through the local twin wrapper')
     state = args.state.resolve()
     state.parent.mkdir(parents=True, exist_ok=True)
-    return subprocess.run([str(args.binary.resolve()), command[0], '--redis', 'mem:' + str(state),
-                           *command[1:]], env=twin_environment()).returncode
+    with tempfile.TemporaryDirectory(prefix='nova-twin-command-') as scratch:
+        return subprocess.run([str(args.binary.resolve()), command[0], '--redis', 'mem:' + str(state),
+                               *command[1:]], cwd=scratch, env=twin_environment(scratch)).returncode
 
 
 if __name__ == '__main__':

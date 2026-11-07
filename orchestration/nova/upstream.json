@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/mas-bandwidth/nova-sprint.git",
+  "commit": "dde8f4d1e6b9ac80b6170d4a4eaa20442ddc2034",
+  "minimum_go": "1.26.6",
+  "nova_tools_module": "github.com/mas-bandwidth/nova-tools",
+  "nova_tools_version": "v1.5.2",
+  "license": "MIT"
+}

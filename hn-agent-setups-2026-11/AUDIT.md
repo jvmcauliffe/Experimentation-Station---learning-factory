@@ -60,7 +60,7 @@ Short names as in `GOLDMINE.md`. "Existing" means the harness already did it bef
 
 | # | Insight | Verdict | Where, or why not |
 |---|---|---|---|
-| 1 | HANDOFF file instead of compaction | Not done | B1 failed in wave 1. |
+| 1 | HANDOFF file instead of compaction | Done | Gap check 7 Nov: `docs/handover/README.md:3-5` (per-packet note, 4 KB cap, four headings) and `scripts/check_handover.py`. B1 failing did not remove it. |
 | 2 | Main thread only coordinates | Done | The runner coordinates; chat sessions write issues. |
 | 3 | Subagents burn limits | Existing | Rule 15 caps. |
 | 4 | Cross-vendor review by default | Built, unproven | Runner posts `@codex review` on every PR it handles. |
@@ -68,7 +68,7 @@ Short names as in `GOLDMINE.md`. "Existing" means the harness already did it bef
 | 6 | Fixed PR-review question list | Not done | B5 untriggered. |
 | 7 | Credential-injecting proxy | Existing | Cloud session proxy. |
 | 8 | Escalate up tiers | Not done | W1-4. |
-| 9 | ADRs as you go | Not done | B1, B14. |
+| 9 | ADRs as you go | Done differently or half | Gap check 7 Nov: `docs/decisions.md` is one retrospective table; no append-as-decided rule. Smallest fix: one line telling sessions to append dated rows. |
 | 10 | One usage and cost board | Partly | `harness_report.py` exists; B4 lines missing. |
 | 11 | Private material only to private models | Not done in code | Rule exists; B2 lint refusal is not merged. The merge gate does refuse `docs/private/` diffs. |
 | 12 | Close-out hints into AGENTS.md | Not done | B1. |
@@ -82,7 +82,7 @@ Short names as in `GOLDMINE.md`. "Existing" means the harness already did it bef
 | 20 | Cheap models cost little | Not done | B2 queue, W1-2. |
 | 21 | Issues as planner-to-executor hand-off | Done | `night:ready` label plus runner. |
 | 22 | 5.5-era models need fewer guardrails | Left out | J2; no yes yet. |
-| 23 | Memory folder and state file | Not done | B1, B14. |
+| 23 | Memory folder and state file | Done | Gap check 7 Nov: `scripts/harness_memory.py` (`closeout`, `rebuild`, `search`) writes committed `memory/records/<id>.md`. Task state stays in GitHub issues by design. |
 | 24 | Spec-first | Not done | B3. |
 | 25 | Agents commit, host pushes | Changed | The runner now merges on the gate (owner decision 7 Nov). |
 | 26 | Separate done and needs-you alerts | Half | Runner writes one needs-john comment per stop; no digest (B9), no morning post (W0-9). |
@@ -117,7 +117,7 @@ Short names as in `GOLDMINE.md`. "Existing" means the harness already did it bef
 | 55 | Browser exploratory testing loop | Existing on Chauffeur | `make test` runs Playwright; the gate requires checks green. |
 | 56 | Personal agents dwindle to a cronjob | Done | The runner is the cronjob. |
 
-Counts: Done 8, Existing 11, Not done 19, Left out 11, Built unproven 1, Done differently or half 6. Working: 8 + 11 + 19 + 11 + 1 + 6 = 56. Independently recounted by Codex on 7 November: Existing includes one Existing on Chauffeur; Not done includes one Not done in code; the six partial/changed rows are two Done differently, two Half, one Partly and one Changed. These describe this audit's pinned historical baseline, not current harness main.
+Counts: Done 10, Existing 11, Not done 16, Left out 11, Built unproven 1, Done differently or half 7. Working: 10 + 11 + 16 + 11 + 1 + 7 = 56. Rows 1, 9 and 23 corrected on 7 November after a gap check against the harness files; the other counts are unchanged. Independently recounted by Codex on 7 November: Existing includes one Existing on Chauffeur; Not done includes one Not done in code; the six partial/changed rows are two Done differently, two Half, one Partly and one Changed. These describe this audit's pinned historical baseline, not current harness main.
 
 ## 4. The 10 ranked changes and the 6 John-decides items
 

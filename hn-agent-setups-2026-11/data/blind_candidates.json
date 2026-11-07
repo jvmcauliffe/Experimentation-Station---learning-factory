@@ -1,0 +1,26 @@
+[
+ {
+  "key": "neal",
+  "name": "neal",
+  "url": "https://github.com/navels/neal",
+  "what": "A plan-driven multi-agent loop with a separate planner, coder and reviewer."
+ },
+ {
+  "key": "novasprint",
+  "name": "nova-sprint repo",
+  "url": "https://github.com/mas-bandwidth/nova-sprint",
+  "what": "The code behind the board: task queue, tier escalation and verification gates."
+ },
+ {
+  "key": "circus",
+  "name": "Circus-Chief",
+  "url": "https://github.com/ferrislucas/Circus-Chief",
+  "what": "An open-source meta-harness that runs Claude Code, Codex and Kiro side by side."
+ },
+ {
+  "key": "optio",
+  "name": "optio",
+  "url": "https://github.com/jonwiggins/optio",
+  "what": "Workflow orchestration for AI agents, with issue-to-PR pipelines."
+ }
+]

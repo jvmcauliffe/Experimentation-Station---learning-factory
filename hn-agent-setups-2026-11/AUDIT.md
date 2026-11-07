@@ -117,7 +117,7 @@ Short names as in `GOLDMINE.md`. "Existing" means the harness already did it bef
 | 55 | Browser exploratory testing loop | Existing on Chauffeur | `make test` runs Playwright; the gate requires checks green. |
 | 56 | Personal agents dwindle to a cronjob | Done | The runner is the cronjob. |
 
-Counts: Done 10, Built unproven 1, Done differently or half 6, Existing 13, Not done 17, Left out 9. Working: 10 + 1 + 6 + 13 + 17 + 9 = 56.
+Counts: Done 8, Existing 11, Not done 19, Left out 11, Built unproven 1, Done differently or half 6. Working: 8 + 11 + 19 + 11 + 1 + 6 = 56.
 
 ## 4. The 10 ranked changes and the 6 John-decides items
 

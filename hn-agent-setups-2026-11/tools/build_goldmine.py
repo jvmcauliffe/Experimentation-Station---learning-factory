@@ -93,10 +93,17 @@ M += ['## John decides (not ranked)', '', 'These change policy, providers or spe
           [[k + 1, c['name'], c.get('verdict', ''), c['v2'] if c['v2'] is not None else 'John', c['v2_working'], c['v1']] for k, c in enumerate(cats)]), '']
 for c in cats: M += [f'**{c["name"]}** ({c.get("verdict", "")}). {c.get("summary", "")}', '']
 M += ['## Top insights, ranked by v2', '',
-      tbl(['#', 'Insight', 'Camp', 'v2', 'Working', 'Commenters'],
-          [[k + 1, x['claim'], x.get('category', ''), x['v2'] if x['v2'] is not None else 'John', x['v2_working'], x['v2_authors']] for k, x in enumerate(ins)]), '']
+      tbl(['#', 'Insight', 'Camp', 'v2', 'Working', 'Commenters', 'Sources'],
+          [[k + 1, x['claim'], x.get('category', ''), x['v2'] if x['v2'] is not None else 'John', x['v2_working'], x['v2_authors'], ids_md(x.get('comment_ids'))] for k, x in enumerate(ins)]), '']
 for k, x in enumerate(ins): M += [f'{k + 1}. **{x["claim"]}** {x.get("detail", "")} ({ids_md(x.get("comment_ids"))})']
 M += ['']
+coverage_path = os.path.join(os.path.dirname(sp), 'coverage_insights.json')
+if os.path.exists(coverage_path):
+    M += ['## Additional insights from the coverage review (57–62, unranked)', '',
+          'See VERIFICATION.md for the retained snapshot, selection method and limits. These are source-supported candidates, not adopted policy.', '']
+    for item in json.load(open(coverage_path)):
+        M += [f"### {item['id']}. {item['claim']}", '', item['application'], '',
+              f"Sources: {ids_md(item['comment_ids'])}", '', f"Evidence limit: {item['evidence_limit']}", '']
 if S.get('disagreements'): M += ['## Where the thread disagrees', ''] + [f'- {txt(d)}' for d in S['disagreements']] + ['']
 if S.get('gold_quotes'): M += ['## Gold quotes', ''] + [f'> {txt(q)}\n' for q in S['gold_quotes']]
 M += [reddit.replace('## ', '## ', 1), '', routing, '',

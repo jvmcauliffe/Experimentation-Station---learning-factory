@@ -2,6 +2,8 @@
 
 Source: [https://news.ycombinator.com/item?id=50366117](https://news.ycombinator.com/item?id=50366117), 645 comments, mined 6 Nov 2026 by 8 parallel readers, one synthesis and one critic.
 
+Verification of the remaining 30 insights and a 60-comment coverage sample is recorded in [VERIFICATION.md](VERIFICATION.md). Rankings below are historical proposals, not current policy or measured performance.
+
 ## How v2 is scored
 
 Priority = Impact × Fit × Confidence ÷ Effort. Effort = 6 − Ease. Impact, Ease and Fit are 1–5 judgements. Confidence is counted, not judged: distinct commenters behind the cited comments (a self-promoting comment counts 0.5); 3 or more → 1.0, 2 → 0.8, 1 → 0.5. With no cited ids it falls back to the old Evidence score and says "proxy". Anything that needs John's decision, or has Fit ≤ 1, is not ranked; it goes on the John decides list. v1 is the old sum out of 20, kept for comparison.
@@ -166,65 +168,64 @@ These change policy, providers or spend, or fit poorly, so they are listed for y
 
 ## Top insights, ranked by v2
 
-| # | Insight | Camp | v2 | Working | Commenters |
-| --- | --- | --- | --- | --- | --- |
-| 1 | Reset context with a HANDOFF.md summary instead of relying on compaction, and keep context fill low | context_memory | 25.0 | 5×5×1.0÷1 = 25.0 | 5.0 |
-| 2 | Make the main thread a pure coordinator that never implements | orchestration | 16.0 | 4×4×1.0÷1 = 16.0 | 3.0 |
-| 3 | Subagents are the quickest way to burn limits; use them for map-reduce-shaped tasks | orchestration | 16.0 | 4×4×1.0÷1 = 16.0 | 3.0 |
-| 4 | Cross-vendor review by default: one provider authors, another reviews, with more providers added for critical work | multi_model_review | 12.5 | 5×5×1.0÷2 = 12.5 | 11.0 |
-| 5 | Plan with a strong model and execute with a cheap one | models_routing | 12.5 | 5×5×1.0÷2 = 12.5 | 10.5 |
-| 6 | Review in a fresh session driven by a fixed list of your own PR-review questions | multi_model_review | 12.5 | 5×5×0.5÷1 = 12.5 | 1.0 |
-| 7 | Hide keys behind a credential-injecting proxy: no keys in the agent VM | sandbox_security | 12.0 | 4×3×1.0÷1 = 12.0 | 4.5 |
-| 8 | Escalate a failing task up model tiers (flash, pro, heavy, frontier) until it is solved | models_routing | 10.0 | 5×5×0.8÷2 = 10.0 | 2.0 |
-| 9 | Have agents write ADRs as the project goes, so new sessions learn the intent and flag conflicts | context_memory | 10.0 | 4×5×0.5÷1 = 10.0 | 1.5 |
-| 10 | Build one usage and cost board across subscriptions and loops | cost | 10.0 | 4×5×1.0÷2 = 10.0 | 3.5 |
-| 11 | Route private material only to private or local models, and redact diffs before cloud review | sandbox_security | 10.0 | 4×5×1.0÷2 = 10.0 | 3.5 |
-| 12 | End sessions with a close-out routine that writes hints into AGENTS.md, aimed at what frustrated you most | context_memory | 10.0 | 4×5×0.5÷1 = 10.0 | 1.0 |
-| 13 | AI code review almost always finds something, even straight after fixes, so set a stop rule | testing_verification | 10.0 | 4×5×0.5÷1 = 10.0 | 1.0 |
-| 14 | Without up-front design, agents drift into 'productivity porn': reports, plans and evidence packs with nothing implemented | tickets_planning | 10.0 | 4×5×0.5÷1 = 10.0 | 1.0 |
-| 15 | Make any prompt you run often a skill and keep refining it | prompting_skills | 9.6 | 3×4×0.8÷1 = 9.6 | 2.0 |
-| 16 | Human attention caps parallelism at about 3-6 sessions | skeptic_wellbeing | 9.0 | 3×3×1.0÷1 = 9.0 | 4.5 |
-| 17 | Make workflows mostly deterministic scripts with agents only as fallbacks, harden them on each failure, and make them resumable | orchestration | 8.3 | 5×5×1.0÷3 = 8.3 | 3.0 |
-| 18 | Models still write poor prose, so humans or strong models should own final text and humans shouldn't have to read slop | prompting_skills | 8.3 | 5×5×1.0÷3 = 8.3 | 4.0 |
-| 19 | Evaluate custom orchestration against the vanilla harness, a locked-down baseline or your own past sessions, not leaderboards | testing_verification | 8.3 | 5×5×1.0÷3 = 8.3 | 5.0 |
-| 20 | Cheap open models now cost very little, with concrete figures | cost | 8.0 | 4×4×1.0÷2 = 8.0 | 6.0 |
-| 21 | Use GitHub issues as the hand-off from a strong planner to a cheap scheduled executor | tickets_planning | 8.0 | 4×5×0.8÷2 = 8.0 | 2.5 |
-| 22 | 5.5-era models need fewer skills, guardrails and organisation structures | harness_choice | 8.0 | 4×4×1.0÷2 = 8.0 | 4.0 |
-| 23 | Keep a version-controlled memory folder (LOG, HANDOFF, DECISIONS, plan folder) and one state file per repo kept current by hooks | context_memory | 8.0 | 4×5×0.8÷2 = 8.0 | 2.0 |
-| 24 | Spec-first: no drafting until the spec is unambiguous; Vision.md, then Features.md, then Tasks.md | tickets_planning | 8.0 | 4×4×1.0÷2 = 8.0 | 5.0 |
-| 25 | Agents commit inside the sandbox; only the host or human pushes | sandbox_security | 8.0 | 4×4×1.0÷2 = 8.0 | 4.0 |
-| 26 | Use different alerts for 'task finished' and 'agent needs an answer' | voice_ui | 7.5 | 3×5×0.5÷1 = 7.5 | 1.5 |
-| 27 | Broad skills and tool access poison context; add a switch to ignore bloated repo instructions | context_memory | 6.4 | 4×4×0.8÷2 = 6.4 | 2.0 |
-| 28 | Cheap inter-agent channels are enough: a shared .md file, tmux send-keys, or sessions messaging each other directly | orchestration | 6.0 | 3×4×1.0÷2 = 6.0 | 4.0 |
-| 29 | Keep remote control running in every project so phone apps can drive real machines | session_mgmt | 6.0 | 3×4×1.0÷2 = 6.0 | 3.0 |
-| 30 | Have your agent audit your setup against a curated list of 100 tips | prompting_skills | 6.0 | 3×4×0.5÷1 = 6.0 | 0.5 |
-| 31 | One AGENTS.md line, 'answer me like a Vulcan', kills verbose and sycophantic tone | prompting_skills | 6.0 | 3×4×0.5÷1 = 6.0 | 1.0 |
-| 32 | Gate phases as binary CLEAR or DISCREPANCY, never numeric scores, and use fresh-eyed reviewers | testing_verification | 5.0 | 4×5×0.5÷2 = 5.0 | 1.0 |
-| 33 | Treat tickets as the human-agent interface: questions come back in tickets and side findings become new tickets | tickets_planning | 5.0 | 4×5×0.5÷2 = 5.0 | 1.0 |
-| 34 | A pm-intake agent checks findings against the roadmap and batches them into a daily digest for bulk approve or deny, later auto-approving whole classes | orchestration | 5.0 | 4×5×0.5÷2 = 5.0 | 1.0 |
-| 35 | 'Build the builder, not the feature': when output is off, fix the orchestrator and prompts rather than the code (but watch for overfitting) | orchestration | 5.0 | 4×5×0.5÷2 = 5.0 | 1.0 |
-| 36 | Mechanical gates in the harness, such as no remote git push without prior approval, and one scripting language only | sandbox_security | 5.0 | 4×5×0.5÷2 = 5.0 | 1.0 |
-| 37 | Parallelise across separate projects, not within one (Amdahl's law) | orchestration | 4.8 | 3×4×0.8÷2 = 4.8 | 2.5 |
-| 38 | Kanban as plain files in the repo, with dependencies and a 'ready' query for director agents | tickets_planning | 4.8 | 3×4×0.8÷2 = 4.8 | 2.5 |
-| 39 | Overnight research or builds distilled into a package to read in the morning | personal_agents | 4.8 | 3×4×0.8÷2 = 4.8 | 2.0 |
-| 40 | Nonstop agent building feels like addiction and risks burnout | skeptic_wellbeing | 4.5 | 3×3×1.0÷2 = 4.5 | 4.0 |
-| 41 | Loop implementer subagents with clean-context reviewer subagents until no serious issues remain | multi_model_review | 4.0 | 4×4×0.5÷2 = 4.0 | 1.0 |
-| 42 | Give agents scoped, temporary or read-only credentials per task, and per-chat git credentials for traceability | sandbox_security | 4.0 | 4×3×1.0÷3 = 4.0 | 4.0 |
-| 43 | Budget a hands-on clean-up and hardening pass after fleet work, because isolated models produce a pastiche | testing_verification | 4.0 | 4×4×0.5÷2 = 4.0 | 1.0 |
-| 44 | Push-to-talk voice with an intentional turn; local dictation; voice ideation while driving | voice_ui | 4.0 | 3×4×1.0÷3 = 4.0 | 3.0 |
-| 45 | When limits bite, study consumption data and turn the biggest token sinks into deterministic code | cost | 3.3 | 4×5×0.5÷3 = 3.3 | 1.0 |
-| 46 | Dogfood with personas: blank-slate new users plus persistent returning users, who give much better feedback | testing_verification | 3.3 | 4×5×0.5÷3 = 3.3 | 1.0 |
-| 47 | Cache reviews pinned to the commit hash and use an AST-diff after a rebase to decide whether to reuse them | multi_model_review | 3.3 | 4×5×0.5÷3 = 3.3 | 1.0 |
-| 48 | Spend leftover subscription capacity on queued improvements before the reset | cost | 3.3 | 4×5×0.5÷3 = 3.3 | 1.0 |
-| 49 | Don't trust a harness-controlled sandbox: Claude has been seen disabling its own, so wrap it externally | sandbox_security | 3.2 | 4×3×0.8÷3 = 3.2 | 2.0 |
-| 50 | Keep an open model as a fallback for refusals | models_routing | 3.0 | 3×2×1.0÷2 = 3.0 | 5.0 |
-| 51 | Automate quota-aware provider switching or drain the account that resets soonest | cost | 3.0 | 3×3×1.0÷3 = 3.0 | 3.0 |
-| 52 | Sessions that message each other freely hand out unrelated tasks, and you lose track | orchestration | 3.0 | 3×4×0.5÷2 = 3.0 | 1.0 |
-| 53 | Have the agent build dedicated review pages for visual output instead of reading code | testing_verification | 3.0 | 3×4×0.5÷2 = 3.0 | 1.0 |
-| 54 | Lower effort and weaker models are often better aligned; top models are worth it mainly for review | models_routing | 3.0 | 3×4×0.5÷2 = 3.0 | 1.0 |
-| 55 | A strong model does exploratory and regression testing in a real browser, looped until clean | testing_verification | 2.7 | 4×4×0.5÷3 = 2.7 | 1.0 |
-| 56 | Always-on personal agents dwindle into digest bots or 'just a cronjob' | personal_agents | 2.4 | 2×3×0.8÷2 = 2.4 | 2.5 |
-
+| # | Insight | Camp | v2 | Working | Commenters | Sources |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Reset context with a HANDOFF.md summary instead of relying on compaction, and keep context fill low | context_memory | 25.0 | 5×5×1.0÷1 = 25.0 | 5.0 | [#50375342](https://news.ycombinator.com/item?id=50375342), [#50378847](https://news.ycombinator.com/item?id=50378847), [#50375856](https://news.ycombinator.com/item?id=50375856), [#50379612](https://news.ycombinator.com/item?id=50379612), [#50381009](https://news.ycombinator.com/item?id=50381009) |
+| 2 | Make the main thread a pure coordinator that never implements | orchestration | 16.0 | 4×4×1.0÷1 = 16.0 | 3.0 | [#50375347](https://news.ycombinator.com/item?id=50375347), [#50376058](https://news.ycombinator.com/item?id=50376058), [#50376582](https://news.ycombinator.com/item?id=50376582) |
+| 3 | Subagents are the quickest way to burn limits; use them for map-reduce-shaped tasks | orchestration | 16.0 | 4×4×1.0÷1 = 16.0 | 3.0 | [#50373445](https://news.ycombinator.com/item?id=50373445), [#50373364](https://news.ycombinator.com/item?id=50373364), [#50376279](https://news.ycombinator.com/item?id=50376279) |
+| 4 | Cross-vendor review by default: one provider authors, another reviews, with more providers added for critical work | multi_model_review | 12.5 | 5×5×1.0÷2 = 12.5 | 11.0 | [#50370886](https://news.ycombinator.com/item?id=50370886), [#50373001](https://news.ycombinator.com/item?id=50373001), [#50373589](https://news.ycombinator.com/item?id=50373589), [#50373463](https://news.ycombinator.com/item?id=50373463), [#50376463](https://news.ycombinator.com/item?id=50376463), [#50376390](https://news.ycombinator.com/item?id=50376390), [#50377121](https://news.ycombinator.com/item?id=50377121), [#50378365](https://news.ycombinator.com/item?id=50378365), [#50377705](https://news.ycombinator.com/item?id=50377705), [#50380522](https://news.ycombinator.com/item?id=50380522), [#50389282](https://news.ycombinator.com/item?id=50389282), [#50379643](https://news.ycombinator.com/item?id=50379643) |
+| 5 | Plan with a strong model and execute with a cheap one | models_routing | 12.5 | 5×5×1.0÷2 = 12.5 | 10.5 | [#50374549](https://news.ycombinator.com/item?id=50374549), [#50373974](https://news.ycombinator.com/item?id=50373974), [#50376454](https://news.ycombinator.com/item?id=50376454), [#50377195](https://news.ycombinator.com/item?id=50377195), [#50377387](https://news.ycombinator.com/item?id=50377387), [#50378856](https://news.ycombinator.com/item?id=50378856), [#50378776](https://news.ycombinator.com/item?id=50378776), [#50379104](https://news.ycombinator.com/item?id=50379104), [#50389538](https://news.ycombinator.com/item?id=50389538), [#50367589](https://news.ycombinator.com/item?id=50367589), [#50373135](https://news.ycombinator.com/item?id=50373135) |
+| 6 | Review in a fresh session driven by a fixed list of your own PR-review questions | multi_model_review | 12.5 | 5×5×0.5÷1 = 12.5 | 1.0 | [#50378899](https://news.ycombinator.com/item?id=50378899) |
+| 7 | Hide keys behind a credential-injecting proxy: no keys in the agent VM | sandbox_security | 12.0 | 4×3×1.0÷1 = 12.0 | 4.5 | [#50367803](https://news.ycombinator.com/item?id=50367803), [#50376836](https://news.ycombinator.com/item?id=50376836), [#50379377](https://news.ycombinator.com/item?id=50379377), [#50381875](https://news.ycombinator.com/item?id=50381875), [#50387654](https://news.ycombinator.com/item?id=50387654) |
+| 8 | Escalate a failing task up model tiers (flash, pro, heavy, frontier) until it is solved | models_routing | 10.0 | 5×5×0.8÷2 = 10.0 | 2.0 | [#50375921](https://news.ycombinator.com/item?id=50375921), [#50374502](https://news.ycombinator.com/item?id=50374502) |
+| 9 | Have agents write ADRs as the project goes, so new sessions learn the intent and flag conflicts | context_memory | 10.0 | 4×5×0.5÷1 = 10.0 | 1.5 | [#50376262](https://news.ycombinator.com/item?id=50376262), [#50376451](https://news.ycombinator.com/item?id=50376451) |
+| 10 | Build one usage and cost board across subscriptions and loops | cost | 10.0 | 4×5×1.0÷2 = 10.0 | 3.5 | [#50373740](https://news.ycombinator.com/item?id=50373740), [#50374094](https://news.ycombinator.com/item?id=50374094), [#50376390](https://news.ycombinator.com/item?id=50376390), [#50376352](https://news.ycombinator.com/item?id=50376352) |
+| 11 | Route private material only to private or local models, and redact diffs before cloud review | sandbox_security | 10.0 | 4×5×1.0÷2 = 10.0 | 3.5 | [#50385740](https://news.ycombinator.com/item?id=50385740), [#50376538](https://news.ycombinator.com/item?id=50376538), [#50376810](https://news.ycombinator.com/item?id=50376810), [#50377307](https://news.ycombinator.com/item?id=50377307) |
+| 12 | End sessions with a close-out routine that writes hints into AGENTS.md, aimed at what frustrated you most | context_memory | 10.0 | 4×5×0.5÷1 = 10.0 | 1.0 | [#50375278](https://news.ycombinator.com/item?id=50375278) |
+| 13 | AI code review almost always finds something, even straight after fixes, so set a stop rule | testing_verification | 10.0 | 4×5×0.5÷1 = 10.0 | 1.0 | [#50374732](https://news.ycombinator.com/item?id=50374732) |
+| 14 | Without up-front design, agents drift into 'productivity porn': reports, plans and evidence packs with nothing implemented | tickets_planning | 10.0 | 4×5×0.5÷1 = 10.0 | 1.0 | [#50381456](https://news.ycombinator.com/item?id=50381456) |
+| 15 | Make any prompt you run often a skill and keep refining it | prompting_skills | 9.6 | 3×4×0.8÷1 = 9.6 | 2.0 | [#50384236](https://news.ycombinator.com/item?id=50384236), [#50378336](https://news.ycombinator.com/item?id=50378336) |
+| 16 | Human attention caps parallelism at about 3-6 sessions | skeptic_wellbeing | 9.0 | 3×3×1.0÷1 = 9.0 | 4.5 | [#50373117](https://news.ycombinator.com/item?id=50373117), [#50370886](https://news.ycombinator.com/item?id=50370886), [#50373357](https://news.ycombinator.com/item?id=50373357), [#50376632](https://news.ycombinator.com/item?id=50376632), [#50375378](https://news.ycombinator.com/item?id=50375378) |
+| 17 | Make workflows mostly deterministic scripts with agents only as fallbacks, harden them on each failure, and make them resumable | orchestration | 8.3 | 5×5×1.0÷3 = 8.3 | 3.0 | [#50378157](https://news.ycombinator.com/item?id=50378157), [#50367326](https://news.ycombinator.com/item?id=50367326), [#50367587](https://news.ycombinator.com/item?id=50367587) |
+| 18 | Models still write poor prose, so humans or strong models should own final text and humans shouldn't have to read slop | prompting_skills | 8.3 | 5×5×1.0÷3 = 8.3 | 4.0 | [#50367589](https://news.ycombinator.com/item?id=50367589), [#50373357](https://news.ycombinator.com/item?id=50373357), [#50375084](https://news.ycombinator.com/item?id=50375084), [#50376087](https://news.ycombinator.com/item?id=50376087) |
+| 19 | Evaluate custom orchestration against the vanilla harness, a locked-down baseline or your own past sessions, not leaderboards | testing_verification | 8.3 | 5×5×1.0÷3 = 8.3 | 5.0 | [#50379514](https://news.ycombinator.com/item?id=50379514), [#50379686](https://news.ycombinator.com/item?id=50379686), [#50375145](https://news.ycombinator.com/item?id=50375145), [#50378628](https://news.ycombinator.com/item?id=50378628), [#50380023](https://news.ycombinator.com/item?id=50380023) |
+| 20 | Cheap open models now cost very little, with concrete figures | cost | 8.0 | 4×4×1.0÷2 = 8.0 | 6.0 | [#50381117](https://news.ycombinator.com/item?id=50381117), [#50375427](https://news.ycombinator.com/item?id=50375427), [#50385251](https://news.ycombinator.com/item?id=50385251), [#50376778](https://news.ycombinator.com/item?id=50376778), [#50377633](https://news.ycombinator.com/item?id=50377633), [#50375326](https://news.ycombinator.com/item?id=50375326) |
+| 21 | Use GitHub issues as the hand-off from a strong planner to a cheap scheduled executor | tickets_planning | 8.0 | 4×5×0.8÷2 = 8.0 | 2.5 | [#50373974](https://news.ycombinator.com/item?id=50373974), [#50374380](https://news.ycombinator.com/item?id=50374380), [#50374094](https://news.ycombinator.com/item?id=50374094) |
+| 22 | 5.5-era models need fewer skills, guardrails and organisation structures | harness_choice | 8.0 | 4×4×1.0÷2 = 8.0 | 4.0 | [#50378434](https://news.ycombinator.com/item?id=50378434), [#50379944](https://news.ycombinator.com/item?id=50379944), [#50381456](https://news.ycombinator.com/item?id=50381456), [#50373351](https://news.ycombinator.com/item?id=50373351) |
+| 23 | Keep a version-controlled memory folder (LOG, HANDOFF, DECISIONS, plan folder) and one state file per repo kept current by hooks | context_memory | 8.0 | 4×5×0.8÷2 = 8.0 | 2.0 | [#50375274](https://news.ycombinator.com/item?id=50375274), [#50377952](https://news.ycombinator.com/item?id=50377952) |
+| 24 | Spec-first: no drafting until the spec is unambiguous; Vision.md, then Features.md, then Tasks.md | tickets_planning | 8.0 | 4×4×1.0÷2 = 8.0 | 5.0 | [#50382792](https://news.ycombinator.com/item?id=50382792), [#50380633](https://news.ycombinator.com/item?id=50380633), [#50378376](https://news.ycombinator.com/item?id=50378376), [#50376782](https://news.ycombinator.com/item?id=50376782), [#50380703](https://news.ycombinator.com/item?id=50380703) |
+| 25 | Agents commit inside the sandbox; only the host or human pushes | sandbox_security | 8.0 | 4×4×1.0÷2 = 8.0 | 4.0 | [#50379089](https://news.ycombinator.com/item?id=50379089), [#50379377](https://news.ycombinator.com/item?id=50379377), [#50379206](https://news.ycombinator.com/item?id=50379206), [#50379048](https://news.ycombinator.com/item?id=50379048) |
+| 26 | Use different alerts for 'task finished' and 'agent needs an answer' | voice_ui | 7.5 | 3×5×0.5÷1 = 7.5 | 1.5 | [#50373796](https://news.ycombinator.com/item?id=50373796), [#50378479](https://news.ycombinator.com/item?id=50378479) |
+| 27 | Broad skills and tool access poison context; add a switch to ignore bloated repo instructions | context_memory | 6.4 | 4×4×0.8÷2 = 6.4 | 2.0 | [#50380583](https://news.ycombinator.com/item?id=50380583), [#50375302](https://news.ycombinator.com/item?id=50375302) |
+| 28 | Cheap inter-agent channels are enough: a shared .md file, tmux send-keys, or sessions messaging each other directly | orchestration | 6.0 | 3×4×1.0÷2 = 6.0 | 4.0 | [#50373684](https://news.ycombinator.com/item?id=50373684), [#50388928](https://news.ycombinator.com/item?id=50388928), [#50373985](https://news.ycombinator.com/item?id=50373985), [#50367876](https://news.ycombinator.com/item?id=50367876) |
+| 29 | Keep remote control running in every project so phone apps can drive real machines | session_mgmt | 6.0 | 3×4×1.0÷2 = 6.0 | 3.0 | [#50374380](https://news.ycombinator.com/item?id=50374380), [#50377004](https://news.ycombinator.com/item?id=50377004), [#50376177](https://news.ycombinator.com/item?id=50376177) |
+| 30 | Have your agent audit your setup against a curated list of 100 tips | prompting_skills | 6.0 | 3×4×0.5÷1 = 6.0 | 0.5 | [#50378479](https://news.ycombinator.com/item?id=50378479) |
+| 31 | One AGENTS.md line, 'answer me like a Vulcan', kills verbose and sycophantic tone | prompting_skills | 6.0 | 3×4×0.5÷1 = 6.0 | 1.0 | [#50380005](https://news.ycombinator.com/item?id=50380005) |
+| 32 | Gate phases as binary CLEAR or DISCREPANCY, never numeric scores, and use fresh-eyed reviewers | testing_verification | 5.0 | 4×5×0.5÷2 = 5.0 | 1.0 | [#50380633](https://news.ycombinator.com/item?id=50380633) |
+| 33 | Treat tickets as the human-agent interface: questions come back in tickets and side findings become new tickets | tickets_planning | 5.0 | 4×5×0.5÷2 = 5.0 | 1.0 | [#50376058](https://news.ycombinator.com/item?id=50376058), [#50384746](https://news.ycombinator.com/item?id=50384746) |
+| 34 | A pm-intake agent checks findings against the roadmap and batches them into a daily digest for bulk approve or deny, later auto-approving whole classes | orchestration | 5.0 | 4×5×0.5÷2 = 5.0 | 1.0 | [#50385555](https://news.ycombinator.com/item?id=50385555) |
+| 35 | 'Build the builder, not the feature': when output is off, fix the orchestrator and prompts rather than the code (but watch for overfitting) | orchestration | 5.0 | 4×5×0.5÷2 = 5.0 | 1.0 | [#50377582](https://news.ycombinator.com/item?id=50377582) |
+| 36 | Mechanical gates in the harness, such as no remote git push without prior approval, and one scripting language only | sandbox_security | 5.0 | 4×5×0.5÷2 = 5.0 | 1.0 | [#50367557](https://news.ycombinator.com/item?id=50367557) |
+| 37 | Parallelise across separate projects, not within one (Amdahl's law) | orchestration | 4.8 | 3×4×0.8÷2 = 4.8 | 2.5 | [#50375921](https://news.ycombinator.com/item?id=50375921), [#50377263](https://news.ycombinator.com/item?id=50377263), [#50376262](https://news.ycombinator.com/item?id=50376262) |
+| 38 | Kanban as plain files in the repo, with dependencies and a 'ready' query for director agents | tickets_planning | 4.8 | 3×4×0.8÷2 = 4.8 | 2.5 | [#50374498](https://news.ycombinator.com/item?id=50374498), [#50374774](https://news.ycombinator.com/item?id=50374774), [#50375046](https://news.ycombinator.com/item?id=50375046) |
+| 39 | Overnight research or builds distilled into a package to read in the morning | personal_agents | 4.8 | 3×4×0.8÷2 = 4.8 | 2.0 | [#50385812](https://news.ycombinator.com/item?id=50385812), [#50380777](https://news.ycombinator.com/item?id=50380777) |
+| 40 | Nonstop agent building feels like addiction and risks burnout | skeptic_wellbeing | 4.5 | 3×3×1.0÷2 = 4.5 | 4.0 | [#50373236](https://news.ycombinator.com/item?id=50373236), [#50390416](https://news.ycombinator.com/item?id=50390416), [#50375890](https://news.ycombinator.com/item?id=50375890), [#50378487](https://news.ycombinator.com/item?id=50378487) |
+| 41 | Loop implementer subagents with clean-context reviewer subagents until no serious issues remain | multi_model_review | 4.0 | 4×4×0.5÷2 = 4.0 | 1.0 | [#50379808](https://news.ycombinator.com/item?id=50379808) |
+| 42 | Give agents scoped, temporary or read-only credentials per task, and per-chat git credentials for traceability | sandbox_security | 4.0 | 4×3×1.0÷3 = 4.0 | 4.0 | [#50375302](https://news.ycombinator.com/item?id=50375302), [#50383038](https://news.ycombinator.com/item?id=50383038), [#50379596](https://news.ycombinator.com/item?id=50379596), [#50385251](https://news.ycombinator.com/item?id=50385251) |
+| 43 | Budget a hands-on clean-up and hardening pass after fleet work, because isolated models produce a pastiche | testing_verification | 4.0 | 4×4×0.5÷2 = 4.0 | 1.0 | [#50375606](https://news.ycombinator.com/item?id=50375606) |
+| 44 | Push-to-talk voice with an intentional turn; local dictation; voice ideation while driving | voice_ui | 4.0 | 3×4×1.0÷3 = 4.0 | 3.0 | [#50381098](https://news.ycombinator.com/item?id=50381098), [#50374502](https://news.ycombinator.com/item?id=50374502), [#50368526](https://news.ycombinator.com/item?id=50368526) |
+| 45 | When limits bite, study consumption data and turn the biggest token sinks into deterministic code | cost | 3.3 | 4×5×0.5÷3 = 3.3 | 1.0 | [#50374764](https://news.ycombinator.com/item?id=50374764) |
+| 46 | Dogfood with personas: blank-slate new users plus persistent returning users, who give much better feedback | testing_verification | 3.3 | 4×5×0.5÷3 = 3.3 | 1.0 | [#50385555](https://news.ycombinator.com/item?id=50385555) |
+| 47 | Cache reviews pinned to the commit hash and use an AST-diff after a rebase to decide whether to reuse them | multi_model_review | 3.3 | 4×5×0.5÷3 = 3.3 | 1.0 | [#50378157](https://news.ycombinator.com/item?id=50378157) |
+| 48 | Spend leftover subscription capacity on queued improvements before the reset | cost | 3.3 | 4×5×0.5÷3 = 3.3 | 1.0 | [#50380990](https://news.ycombinator.com/item?id=50380990) |
+| 49 | Don't trust a harness-controlled sandbox: Claude has been seen disabling its own, so wrap it externally | sandbox_security | 3.2 | 4×3×0.8÷3 = 3.2 | 2.0 | [#50380164](https://news.ycombinator.com/item?id=50380164), [#50383403](https://news.ycombinator.com/item?id=50383403) |
+| 50 | Keep an open model as a fallback for refusals | models_routing | 3.0 | 3×2×1.0÷2 = 3.0 | 5.0 | [#50374417](https://news.ycombinator.com/item?id=50374417), [#50374455](https://news.ycombinator.com/item?id=50374455), [#50374764](https://news.ycombinator.com/item?id=50374764), [#50375312](https://news.ycombinator.com/item?id=50375312), [#50376505](https://news.ycombinator.com/item?id=50376505) |
+| 51 | Automate quota-aware provider switching or drain the account that resets soonest | cost | 3.0 | 3×3×1.0÷3 = 3.0 | 3.0 | [#50378856](https://news.ycombinator.com/item?id=50378856), [#50378737](https://news.ycombinator.com/item?id=50378737), [#50374678](https://news.ycombinator.com/item?id=50374678), [#50379150](https://news.ycombinator.com/item?id=50379150) |
+| 52 | Sessions that message each other freely hand out unrelated tasks, and you lose track | orchestration | 3.0 | 3×4×0.5÷2 = 3.0 | 1.0 | [#50376476](https://news.ycombinator.com/item?id=50376476) |
+| 53 | Have the agent build dedicated review pages for visual output instead of reading code | testing_verification | 3.0 | 3×4×0.5÷2 = 3.0 | 1.0 | [#50382792](https://news.ycombinator.com/item?id=50382792) |
+| 54 | Lower effort and weaker models are often better aligned; top models are worth it mainly for review | models_routing | 3.0 | 3×4×0.5÷2 = 3.0 | 1.0 | [#50377284](https://news.ycombinator.com/item?id=50377284) |
+| 55 | A strong model does exploratory and regression testing in a real browser, looped until clean | testing_verification | 2.7 | 4×4×0.5÷3 = 2.7 | 1.0 | [#50376216](https://news.ycombinator.com/item?id=50376216) |
+| 56 | Always-on personal agents dwindle into digest bots or 'just a cronjob' | personal_agents | 2.4 | 2×3×0.8÷2 = 2.4 | 2.5 | [#50376601](https://news.ycombinator.com/item?id=50376601), [#50377290](https://news.ycombinator.com/item?id=50377290), [#50370886](https://news.ycombinator.com/item?id=50370886) |
 1. **Reset context with a HANDOFF.md summary instead of relying on compaction, and keep context fill low**  ([#50375342](https://news.ycombinator.com/item?id=50375342), [#50378847](https://news.ycombinator.com/item?id=50378847), [#50375856](https://news.ycombinator.com/item?id=50375856), [#50379612](https://news.ycombinator.com/item?id=50379612), [#50381009](https://news.ycombinator.com/item?id=50381009))
 2. **Make the main thread a pure coordinator that never implements**  ([#50375347](https://news.ycombinator.com/item?id=50375347), [#50376058](https://news.ycombinator.com/item?id=50376058), [#50376582](https://news.ycombinator.com/item?id=50376582))
 3. **Subagents are the quickest way to burn limits; use them for map-reduce-shaped tasks**  ([#50373445](https://news.ycombinator.com/item?id=50373445), [#50373364](https://news.ycombinator.com/item?id=50373364), [#50376279](https://news.ycombinator.com/item?id=50376279))
@@ -281,6 +282,58 @@ These change policy, providers or spend, or fit poorly, so they are listed for y
 54. **Lower effort and weaker models are often better aligned; top models are worth it mainly for review**  ([#50377284](https://news.ycombinator.com/item?id=50377284))
 55. **A strong model does exploratory and regression testing in a real browser, looped until clean**  ([#50376216](https://news.ycombinator.com/item?id=50376216))
 56. **Always-on personal agents dwindle into digest bots or 'just a cronjob'**  ([#50376601](https://news.ycombinator.com/item?id=50376601), [#50377290](https://news.ycombinator.com/item?id=50377290), [#50370886](https://news.ycombinator.com/item?id=50370886))
+
+## Additional insights from the coverage review (57–62, unranked)
+
+Added by Codex on 7 November 2026 after reading the full 60-comment sample described in [VERIFICATION.md](VERIFICATION.md). These extend the original 56; their sources are reports, not independent effectiveness tests. John requested their addition, not automatic implementation or a policy/cap change.
+
+### 57. Define observable completion criteria and compare the delivered result with them
+
+Extend insights 14 and 24: specify what the agent must return, then check the actual output against the plan. A receipt, acknowledgement or green check is not automatically acceptance.
+
+Sources: [#50367037](https://news.ycombinator.com/item?id=50367037), [#50399014](https://news.ycombinator.com/item?id=50399014)
+
+Evidence limit: Two workflow reports; 50399014 promotes its author's product. No measured success-rate improvement.
+
+### 58. Keep unfinished work in durable state and let mechanical dispatch drive it to a result
+
+Extend 17, 23 and 38: persist assignments outside compacting context, dispatch from that state, and give one owner responsibility for the next action and the final handover. An enabled subscription is not proof of delivery or completed work.
+
+Sources: [#50393739](https://news.ycombinator.com/item?id=50393739), [#50375407](https://news.ycombinator.com/item?id=50375407)
+
+Evidence limit: Self-reported orchestration behaviour; product authorship/affiliation is visible. No unattended completion proof for this harness.
+
+### 59. Pair isolation with independent backups and restorable snapshots
+
+Isolation contains access; backups and VM snapshots provide recovery after destructive agent changes. Treat recovery as a separate check rather than assuming a sandbox prevents all loss.
+
+Sources: [#50378897](https://news.ycombinator.com/item?id=50378897)
+
+Evidence limit: One operator reports restoring damaged VMs. Backup integrity and recovery time were not independently tested.
+
+### 60. Budget stakeholder decision load and preserve explainable design rationale
+
+Extend 16: diagrams, data-model and RBAC summaries help the owner retain a mental model. Increasing agent width does not remove decisions that must be explained to stakeholders.
+
+Sources: [#50376110](https://news.ycombinator.com/item?id=50376110), [#50377328](https://news.ycombinator.com/item?id=50377328)
+
+Evidence limit: Two comments by the same person; one independent perspective, not two. No universal attention cap follows.
+
+### 61. Explore a small domain language that enforces business invariants in the substrate
+
+Consider domain-specific nouns and verbs whose semantics handle recurring business rules and edge cases. This is an optional architecture experiment, not a reason to invent a language for every project.
+
+Sources: [#50367941](https://news.ycombinator.com/item?id=50367941)
+
+Evidence limit: One anecdote; no comparative correctness, complexity or maintenance benchmark.
+
+### 62. Include provider continuity and account recovery in workflow risk assessment
+
+Keep a recovery plan for unavailable accounts or sign-up channels. Preserve the disagreement: one commenter fears opaque cancellation, while another challenges the premise. Verify current official terms and actual incidents before drawing conclusions.
+
+Sources: [#50376720](https://news.ycombinator.com/item?id=50376720), [#50395473](https://news.ycombinator.com/item?id=50395473)
+
+Evidence limit: Contested anecdotal evidence; neither source establishes cancellation rates, actual provider policy or a general right to use alternative clients.
 
 ## Where the thread disagrees
 
@@ -348,30 +401,46 @@ These change policy, providers or spend, or fit poorly, so they are listed for y
 
 > “This thread is super biased by the power users, they are the most excited to share” — ex-aws-dude #50375972
 
-## The Reddit summary, checked against all 645 comments
+## The Reddit summary, checked against the retained 677-comment snapshot
 
-Source: r/AI_Agents post by michaelTM_ai, "cheap open models at home, frontier as the second opinion, and nobody trusts the agent platforms". The poster says they read "the top 45 or so" of about 475 comments. This check uses all 645 comments and 388 top-level threads. Counts are the number of comments that mention a term, found with a script search of `thread.json`. No model was used for the counting.
+Source: r/AI_Agents post by michaelTM_ai, "cheap open models at home, frontier as the second opinion, and nobody trusts the agent platforms". The poster says they read "the top 45 or so" of about 475 comments. The original 645-comment count was not reproducible because its regexes and snapshot were not retained together. The counts below were rerun on 7 November 2026 against `verify/thread.json`: 677 comments with text, SHA-256 `8086b4e2955adc1f4e238ad848c032d2499392fa67382016b78da3b4804a6458`. They count comments containing a term, not unique people or measured adoption. HTML tags are stripped, entities decoded and text lowercased. Exact patterns are in `verify/cnt.py`; rerun with `python3 -I verify/cnt.py verify/thread.json`. A fresh Algolia fetch returned HTTP 403 in this environment, so these are retained-snapshot counts, not a live census.
 
 | # | Reddit claim | Verdict | Evidence |
 |---|---|---|---|
-| 1 | DeepSeek Flash came up more than any frontier model in personal setups | **Partly true** | DeepSeek appears in 88 comments, the most of any open model (Qwen 55, GLM 46, Kimi 14). It is level with Opus (85) and well behind GPT/Codex (152) and Claude Code (134). Keyword counts cannot separate personal setups from work setups. |
-| 2 | $10 OpenCode Go plan, or pay as you go through OpenRouter | **True** | OpenCode Go appears in 29 comments and OpenRouter in 66. |
+| 1 | DeepSeek Flash came up more than any frontier model in personal setups | **Partly true** | DeepSeek appears in 89 comments, the most of any open model (Qwen 55, GLM 47, Kimi 14). It is level with Opus (89) and well behind GPT/Codex (184) and Claude Code (138). Keyword counts cannot separate personal setups from work setups. |
+| 2 | $10 OpenCode Go plan, or pay as you go through OpenRouter | **True** | OpenCode Go appears in 28 comments and OpenRouter in 67. |
 | 3 | "Never run out of tokens" | **True** | AaronAPU #50368566: "I never come close to running out of tokens because I still do code reviews often enough to throttle usage." The reason is that reviewing the code themselves slows their usage, not that the plan is cheap. |
 | 4 | Frontier models are becoming the second opinion | **True, but a minority** | Examples: ActionHank #50379104 makes an "Occasional call out to claude for a review on a large change", drbscl #50367676 uses one "mostly for review, second opinion", Xonzo #50378776 uses "Sol 6.1 xHigh for planning/review", and codingbear #50367207 uses Claude "for tricky bits". More commenters go the other way and let a single Opus 5.5 session do everything (thefourthchime #50367037, l9o #50368019, FrameworkFred #50379612). |
-| 5 | Harnesses are getting smaller; the top comment deleted his skills, set Opus to medium and tells it what done looks like | **True** | thefourthchime #50367037, which is the first top-level comment: "I got rid of all my skills and just set it to medium… the biggest trick is just to tell it what complete looks like." pi appears in 87 comments and OpenCode in 91. |
-| 6 | Almost nobody trusts all-in-one agent platforms; OpenClaw and Hermes "fell apart on real work" | **Half wrong** | OpenClaw (35 comments) is mostly "tried it, dropped it": nkotov, vekker, SkidVis, leofree, egrm and others. **Hermes (53 comments) has a loyal user base**, mostly as an always-on personal assistant on a Mac Mini or homelab that people reach by Telegram. browningstreet calls it "core tech for me", and vekker, virpo, Xonzo, diseasedyak, monch1962, hestefisk and ddarolfi are also users. ActionHank says "Hermes Kanban works stupidly well". |
-| 7 | Orchestration is still a human with 3–5 terminal panes | **True** | phillc73 #50367557 runs "a multipane Zellij setup… Orchestration is still human in the loop", m_w_ #50379312 runs 5–6 sessions, anigbrowl #50375427 runs 3–4 projects, and marshalla runs at most 3. tmux appears in 17 comments. |
+| 5 | Harnesses are getting smaller; the top comment deleted his skills, set Opus to medium and tells it what done looks like | **True** | thefourthchime #50367037, which is the first top-level comment: "I got rid of all my skills and just set it to medium… the biggest trick is just to tell it what complete looks like." pi appears in 89 comments and OpenCode in 94. |
+| 6 | Almost nobody trusts all-in-one agent platforms; OpenClaw and Hermes "fell apart on real work" | **Half wrong** | OpenClaw (37 comments) is mostly "tried it, dropped it": nkotov, vekker, SkidVis, leofree, egrm and others. **Hermes (55 comments) has a loyal user base**, mostly as an always-on personal assistant on a Mac Mini or homelab that people reach by Telegram. browningstreet calls it "core tech for me", and vekker, virpo, Xonzo, diseasedyak, monch1962, hestefisk and ddarolfi are also users. ActionHank says "Hermes Kanban works stupidly well". |
+| 7 | Orchestration is still a human with 3–5 terminal panes | **True** | phillc73 #50367557 runs "a multipane Zellij setup… Orchestration is still human in the loop", m_w_ #50379312 runs 5–6 sessions, anigbrowl #50375427 runs 3–4 projects, and marshalla runs at most 3. tmux appears in 18 comments. |
 | 8 | Someone types junk into idle sessions every 30–45 minutes so the cache doesn't expire | **True** | marshalla #50367399 types "silly things into some of them every 30-45 min so they don't expire or auto-compact". |
 | 9 | "Bragging about multiple subscriptions without saying what they use them for" | **True** | ChrisRR #50367618, quoted word for word. |
 | 10 | "GLM flash for coordination, deepseek for coding and GLM for adversarial review: the part worth copying" | **True** | phillc73 #50367557: "GLM5.3 Flash for general chat and co-ordination… Deepseek 1017 for most coding… GML5.3 [sic] for adversarial batteries and documentation." ActionHank #50379104 is close: "Hermes + GLM 5.3 Flash for orchestration. omp + Deepseek 4.1 Flash for coding. Occasional call out to claude for a review on a large change." |
 
-**Score: 7 true, 2 partly true, 1 half wrong.** The post is a fair summary of the top of the thread. Its one real error is lumping Hermes in with OpenClaw.
+**Table labels: 8 true (including one qualified as a minority), 1 partly true, 1 half wrong.** The post is a fair summary of the top of the thread. Its one real error is lumping Hermes in with OpenClaw.
 
 ### What the Reddit summary means for John's harness
 
 - **Claim 10 is your three-provider design**, found independently by someone else. phillc73 also uses mechanical gates, for example "remote git pushes without explicit prior approval", which match your PreToolUse hooks. Worth copying from them: **one written table of roles and models**, with a single line per role: coordination, coding, adversarial review and documentation. Today your routes (bounded_extraction, standard_reasoning, highest_reasoning) say how hard a job is, not which job it is.
-- **Claim 8 costs you money too.** Your Claude Code sessions use a 1-hour prompt cache, so typing filler into them is wasted effort. Keep sessions short and hand over through GitHub issues, which you already do.
+- **Claim 8 costs you money too.** This comment does not establish the cache lifetime or billing of your sessions. Do not send filler simply to keep a cache warm; cache behaviour is provider- and product-specific. Keep sessions short and hand over through GitHub issues, which you already do.
 - **Claim 6: Hermes is the one platform people keep.** If you ever want a phone-reachable assistant that is always on, Hermes on a spare machine is the pattern the thread recommends. It sits outside your packet rules, so it would be a separate experiment.
+
+
+### Exact term patterns
+
+One count per text-bearing comment per case-insensitive pattern after lowercasing. Literal substrings unless shown with a regex boundary:
+
+| Term | Pattern | Count |
+|---|---|---|
+| DeepSeek (headline) | `deepseek` | 89 |
+| DeepSeek (expanded) | `deepseek` or `deep seek` or regex `\bds\s?v?4` | 97 |
+| Qwen / GLM / Kimi | `qwen` / `glm` / `kimi` | 55 / 47 / 14 |
+| Opus / Claude Code | `opus` / `claude code` | 89 / 138 |
+| GPT or Codex | `gpt` or `codex` | 184 |
+| OpenCode Go / OpenRouter / OpenCode | `opencode go` / `openrouter` / `opencode` | 28 / 67 / 94 |
+| OpenClaw / Hermes / tmux | `openclaw` / `hermes` / `tmux` | 37 / 55 / 18 |
+| Pi | regex `\bpi\b` or `pi\.dev` | 89 |
 
 
 ## Role-to-model routing table (draft for John)
@@ -390,6 +459,7 @@ Why: the most-copied idea from the thread and the Reddit summary is to write dow
 | 6 | Fact gate | Codex, or a Claude session that is not the author | `standard_reasoning` | n/a | existing (only when the consumer policy triggers it) | none |
 | 7 | Documentation and handover (HANDOFF.md, receipts summary) | Claude drafts; GreenPT may draft boilerplate that is not private | `bounded_extraction` → `standard_reasoning` | Anything going to a consumer site: Claude | **proposed** | phillc73 uses GLM5.3 for "documentation" |
 | 8 | Merging harness pull requests that meet the written gate | The night runner's merge gate, or a Claude session that reviewed the PR (owner decision, 7 November 2026) | n/a | Gate fails: needs-john | changed | none |
+| 8b | Public publication, marking facts verified, raising caps, safety-critical consumer content, anything a consumer manifest reserves | **John only** | n/a | n/a | existing | none |
 
 **Guardrails that apply on top:** one route per packet (rule 16); nothing private is sent to GreenPT (`docs/private/`); GreenPT output stays a candidate; a stronger model is never used just to repeat unchanged evidence.
 

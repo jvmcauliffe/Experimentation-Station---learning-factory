@@ -1,5 +1,6 @@
 import json,re,html,sys
-G='/home/user/Experimentation-Station---learning-factory/hn-agent-setups-2026-11/GOLDMINE.md'
+from pathlib import Path
+G=Path(__file__).resolve().parents[1]/'GOLDMINE.md'
 T=json.load(open(sys.argv[1]))
 C={}
 def walk(n):

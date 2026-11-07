@@ -14,4 +14,4 @@ for i in map(int,sys.argv[3].split(',')):
         if not c: print(' missing',cid); continue
         x=re.sub(r'\s+',' ',re.sub(r'<[^>]+>',' ',html.unescape(c.get('text') or '')))
         if cid in seen: print(f" [{c['author']} {cid}] (shown above)"); continue
-        seen.add(cid); print(f" [{c['author']} {cid}] {x[:2200]}")
+        seen.add(cid); print(f" [{c['author']} {cid}] {x}")

@@ -65,15 +65,15 @@ Short names as in `GOLDMINE.md`. "Existing" means the harness already did it bef
 | 3 | Subagents burn limits | Existing | Rule 15 caps. |
 | 4 | Cross-vendor review by default | Built, unproven | Runner posts `@codex review` on every PR it handles. |
 | 5 | Plan strong, execute cheap | Not done | Routes exist per packet; nobody routes a plan to a cheaper implementer (W1-3). |
-| 6 | Fixed PR-review question list | Not done | B5 untriggered. |
+| 6 | Fixed PR-review question list | Done | `docs/review/questions.md` and `scripts/check_review_verdicts.py` on CCP main (checked 7 Nov). |
 | 7 | Credential-injecting proxy | Existing | Cloud session proxy. |
 | 8 | Escalate up tiers | Not done | W1-4. |
-| 9 | ADRs as you go | Done differently or half | Gap check 7 Nov: `docs/decisions.md` is one retrospective table; no append-as-decided rule. Smallest fix: one line telling sessions to append dated rows. |
+| 9 | ADRs as you go | Done | CCP #398 (db55814) adds the append-dated-rows rule to `docs/decisions.md`. |
 | 10 | One usage and cost board | Partly | `harness_report.py` exists; B4 lines missing. |
-| 11 | Private material only to private models | Not done in code | Rule exists; B2 lint refusal is not merged. The merge gate does refuse `docs/private/` diffs. |
+| 11 | Private material only to private models | Done | `docs/private/` refusal in `greenpt_bridge.py` and `greenpt_packet.py` on CCP main (checked 7 Nov). |
 | 12 | Close-out hints into AGENTS.md | Not done | B1. |
 | 13 | Review always finds something: stop rule | Done differently | Runner round cap three. |
-| 14 | Productivity porn | Not done | B3. |
+| 14 | Productivity porn | Done | CCP #396, `scripts/check_deliverables.py`. |
 | 15 | Frequent prompts become skills | Not done | B12. |
 | 16 | Attention caps parallelism | Existing | Rule 15. Runner runs one packet at a time. |
 | 17 | Deterministic scripts, agents as fallback | Done | The runner is a script with no model call. |
@@ -83,7 +83,7 @@ Short names as in `GOLDMINE.md`. "Existing" means the harness already did it bef
 | 21 | Issues as planner-to-executor hand-off | Done | `night:ready` label plus runner. |
 | 22 | 5.5-era models need fewer guardrails | Left out | J2; no yes yet. |
 | 23 | Memory folder and state file | Done | Gap check 7 Nov: `scripts/harness_memory.py` (`closeout`, `rebuild`, `search`) writes committed `memory/records/<id>.md`. Task state stays in GitHub issues by design. |
-| 24 | Spec-first | Not done | B3. |
+| 24 | Spec-first | Done | CCP #396, `scripts/check_deliverables.py`. |
 | 25 | Agents commit, host pushes | Changed | The runner now merges on the gate (owner decision 7 Nov). |
 | 26 | Separate done and needs-you alerts | Half | Runner writes one needs-john comment per stop; no digest (B9), no morning post (W0-9). |
 | 27 | Broad skills poison context | Left out | J2. |
@@ -91,9 +91,9 @@ Short names as in `GOLDMINE.md`. "Existing" means the harness already did it bef
 | 29 | Remote control everywhere | Done differently | Scheduler runs in Actions, no laptop needed. |
 | 30 | Audit against 100 tips | Left out | This mining was the audit. |
 | 31 | Vulcan tone line | Left out | J5, John's one-line edit. |
-| 32 | Binary CLEAR or DISCREPANCY gates | Not done | B5. |
+| 32 | Binary CLEAR or DISCREPANCY gates | Done | `scripts/check_review_verdicts.py` on CCP main (checked 7 Nov). |
 | 33 | Tickets as the interface | Half | Packet issues are the interface; free-text intake (W1-1) is not. |
-| 34 | pm-intake daily digest with auto-approved classes | Not done | W0-9 and B9. |
+| 34 | pm-intake daily digest with auto-approved classes | Done differently or half | `scripts/needs_john.py` prints the digest with an Approve / Deny line; no auto-approved classes (checked 7 Nov). |
 | 35 | Build the builder | Left out | Principle; J1 would measure it. |
 | 36 | Mechanical gates | Done | Push hook, trigger lint, merge gate. |
 | 37 | Parallelise across projects | Existing | One owner per path. |

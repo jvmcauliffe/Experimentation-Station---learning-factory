@@ -16,7 +16,7 @@ About me, verbatim: "You have burned through my usage and cannot be trusted to c
 
 ## What the task is
 
-The Hacker News thread "Ask HN: What's your current AI agentic setup?" (item 50366117) was mined into `GOLDMINE.md` (56 insights, 10 ranked changes, J1 to J7, routing rows 0 to 8). It sits in this folder on draft PR #2, branch `claude/hn-agent-setups-goldmine`, repo `jvmcauliffe/Experimentation-Station---learning-factory`. `AUDIT.md` (pushed at 44703ab) maps it to the night runner build. The harness repo is `jvmcauliffe/Content-Creation-Pipeline`.
+The Hacker News thread "Ask HN: What's your current AI agentic setup?" (item 50366117) was mined into `GOLDMINE.md` (56 insights, 10 ranked changes, J1 to J7, routing rows 0 to 8). It sits in this folder on draft PR #2, branch `claude/hn-agent-setups-goldmine`, repo `jvmcauliffe/Experimentation-Station---learning-factory`. `AUDIT.md` (pushed at 44703ab) maps it to the automate loop build. The harness repo is `jvmcauliffe/Content-Creation-Pipeline`.
 
 John asked three questions about quality. I had told him they were "not covered". He asked "Is this not what I asked you to do?". The three gaps:
 
@@ -85,7 +85,7 @@ The qualitative claim in the doc ("DeepSeek is the most-mentioned open model, le
 
 ## Defects found, not yet fixed (no docs edits were made this window)
 
-1. GOLDMINE.md line 392, routing row 8: "Final approval, merge, publish, marking facts verified, raising caps | John only". `routing-table.md` row 8 was already corrected (owner decision, 7 November 2026): "Merging harness pull requests that meet the written gate | The night runner's merge gate, or a Claude session that reviewed the PR". GOLDMINE must match.
+1. GOLDMINE.md line 392, routing row 8: "Final approval, merge, publish, marking facts verified, raising caps | John only". `routing-table.md` row 8 was already corrected (owner decision, 7 November 2026): "Merging harness pull requests that meet the written gate | The automate loop's merge gate, or a Claude session that reviewed the PR". GOLDMINE must match.
 2. AUDIT.md "Counts" line says Done 10, Built unproven 1, Done differently or half 6, Existing 13, Not done 17, Left out 9. The table itself gives: Done 8 (2, 17, 21, 28, 36, 38, 41, 56), Existing 11 (3, 7, 16, 18, 37, 40, 42, 49, 52, 53, 55), Not done 19 (1, 5, 6, 8, 9, 11, 12, 14, 15, 20, 23, 24, 32, 34, 39, 45, 48, 51, 54), Left out 11 (19, 22, 27, 30, 31, 35, 43, 44, 46, 47, 50), Built unproven 1 (4), half/changed/differently 6 (10, 13, 25, 26, 29, 33). The total is 56 either way. Please recount from the table yourself before fixing.
 3. Quote errors in GOLDMINE / reddit-check.md: "GLM5.3" where phillc73 50367557 wrote "GML5.3" (a typo silently fixed inside quotation marks); the word "no" was added to the phillc73 gated-pushes quote. The ActionHank quote is a paraphrase in quote marks: the real comment (50379104) reads "Hermes + GLM 5.3 Flash for orchestration. omp + Deepseek 4.1 Flash for coding. Occasional call out to claude for a review on a large change." I earlier said it was unverified; that was wrong, the source exists.
 4. Reddit-check term counts need the regex and snapshot stated (above).

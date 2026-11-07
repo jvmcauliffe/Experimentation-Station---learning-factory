@@ -1027,7 +1027,7 @@
    "gated": false
   },
   {
-   "claim": "One AGENTS.md line, 'answer me like a Vulcan', kills verbose and sycophantic tone",
+   "claim": "One commenter reports that an AGENTS.md 'answer me like a Vulcan' instruction improves concise tone",
    "category": "prompting_skills",
    "comment_ids": [
     "50380005"
@@ -1148,7 +1148,7 @@
    "gated": false
   },
   {
-   "claim": "Parallelise across separate projects, not within one (Amdahl's law)",
+   "claim": "Several commenters prefer parallel work across separate projects rather than within one",
    "category": "orchestration",
    "comment_ids": [
     "50375921",
@@ -1571,7 +1571,7 @@
    "gated": false
   },
   {
-   "claim": "Always-on personal agents dwindle into digest bots or 'just a cronjob'",
+   "claim": "Some users report that their always-on personal agents became mostly digest bots",
    "category": "personal_agents",
    "comment_ids": [
     "50376601",

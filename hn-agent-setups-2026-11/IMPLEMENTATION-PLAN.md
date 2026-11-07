@@ -2,6 +2,8 @@
 
 Written 7 Nov 2026 from `GOLDMINE.md` (56 insights, 10 ranked changes, 6 John-decides items) and the packets already posted on jvmcauliffe/content-creation-pipeline. This is the plan other chats follow. Each build is one Claude task packet. Nothing here enlarges a packet's authority; the issue is always the scope record.
 
+> **Read WHAT-IS-MISSING.md first (7 November 2026).** Measured against John's definition of complete, this plan is hardening, not the automation. The loop that does the work is W0-1 to W0-9 and W1-1 to W1-5 in that file. B0 is subsumed by W0-3. B1 to B14 follow once the loop runs a night unattended.
+
 ## 0. Architecture, optimised
 
 The 56 insights collapse into six components. Every insight that is built lands in exactly one of them, so no script is written twice and no path has two owners in the same wave.
@@ -180,13 +182,13 @@ Missing from the first draft of this plan: insight 21 was marked "Existing desig
 | # | Insight (short) | Disposition |
 | --- | --- | --- |
 | 1 | HANDOFF.md instead of compaction | B1 |
-| 2 | Main thread only coordinates | Existing: rules 14 and 15 |
+| 2 | Main thread only coordinates | Superseded: the runner (W0-3) coordinates; a chat session only writes task issues |
 | 3 | Subagents burn limits | Existing: five-call, two-worker caps |
-| 4 | Cross-vendor review by default | Existing for PRs; B10 makes it a lint (J6 row 5) |
+| 4 | Cross-vendor review by default | W0-5: the runner posts the review on every PR it opens; B10 lints it |
 | 5 | Plan strong, execute cheap | B7, B8 |
 | 6 | Fixed PR-review question list | B5 |
 | 7 | Credential-injecting proxy | Existing: cloud session proxy and request_credential |
-| 8 | Escalate up tiers | B7 writes the rule; B0 acts on it from the receipt |
+| 8 | Escalate up tiers | W1-4 escalation ladder, run by the runner from the failed receipt |
 | 9 | ADRs as you go | B1, B14 |
 | 10 | One usage and cost board | B4 |
 | 11 | Private material only to private models | B2 |
@@ -195,31 +197,31 @@ Missing from the first draft of this plan: insight 21 was marked "Existing desig
 | 14 | Productivity porn | B3 |
 | 15 | Frequent prompts become skills | B12 |
 | 16 | Attention caps parallelism | Existing cap; B8 records the evidence |
-| 17 | Deterministic scripts, agents as fallback | B0 (resume and retry); B11, B12; the plan's design rule 1 |
+| 17 | Deterministic scripts, agents as fallback | W0-3 runner is the deterministic control flow; models only inside packets |
 | 18 | Models write poor prose | Existing: GreenPT output is a candidate; B8 rows 1 and 7 |
 | 19 | Evaluate against vanilla | J1 |
 | 20 | Cheap models cost little | B2 queue, B4 remainder line |
-| 21 | Issues as planner-to-executor hand-off | **Not existing.** The executor had never completed a packet and nothing schedules or retries one. B0 |
+| 21 | Issues as planner-to-executor hand-off | **Not existing.** W0-2 scheduler and W0-3 runner |
 | 22 | 5.5-era models need fewer guardrails | J2 |
 | 23 | Memory folder and state file | B1, B14 |
 | 24 | Spec-first | B3 |
 | 25 | Agents commit, host pushes | Existing: push hook, no model merges |
 | 26 | Separate done and needs-you alerts | B9 |
 | 27 | Broad skills poison context | J2 |
-| 28 | Cheap inter-agent channels | Existing: PR 13 inbox, message-only |
-| 29 | Remote control everywhere | Declined: phone-first cloud sessions, no local machine to drive |
+| 28 | Cheap inter-agent channels | Labels and receipts read by the runner; PR 13 stays message-only for humans |
+| 29 | Remote control everywhere | Covered differently: the scheduler runs in GitHub Actions, no local machine needed |
 | 30 | Audit against 100 tips | Declined: this mining was the audit |
 | 31 | Vulcan tone line | J5 |
 | 32 | Binary CLEAR or DISCREPANCY gates | B5 |
-| 33 | Tickets as the interface | Existing |
-| 34 | pm-intake daily digest | B9, without auto-approval |
+| 33 | Tickets as the interface | W1-1 intake: one `task` issue is the whole interface |
+| 34 | pm-intake daily digest | W0-9 morning post; rule-approved classes auto-approved; B9 holds only the four needs-John classes |
 | 35 | Build the builder | J1 measures it; otherwise a principle |
 | 36 | Mechanical gates | Existing hooks; B11 |
 | 37 | Parallelise across projects | Existing: one owner per path |
-| 38 | Kanban as files | Declined: duplicates GitHub issues |
-| 39 | Overnight package to read in the morning | B1 plus B9; no separate build |
+| 38 | Kanban as files | Issue labels as states: ready, running, review, fix, merge, needs-john, done (W0-3) |
+| 39 | Overnight package to read in the morning | W0-9 morning post, built from receipts and committed |
 | 40 | Burnout | Existing caps; no build |
-| 41 | Implementer and reviewer loop until clean | Declined: B6 caps at two rounds instead |
+| 41 | Implementer and reviewer loop until clean | W0-6 fix loop: review, fix, review, round cap three, then escalate |
 | 42 | Scoped temporary credentials | Existing: session-scoped GitHub access |
 | 43 | Clean-up pass after fleet work | Not applicable: no fleets; B6 round two is the clean-up |
 | 44 | Push-to-talk voice | Declined: tooling |
@@ -229,12 +231,12 @@ Missing from the first draft of this plan: insight 21 was marked "Existing desig
 | 48 | Spend leftover capacity before reset | B2 queue, B4 |
 | 49 | External sandbox | Existing: cloud container |
 | 50 | Open model fallback for refusals | Declined: refusals go to John, not a weaker judge |
-| 51 | Quota-aware provider switching | Declined: one route per packet (rule 16); B4 shows counts |
+| 51 | Quota-aware provider switching | W1-5: the runner picks the provider with room; rule 16 still holds inside a packet |
 | 52 | Free inter-session messaging is chaos | Existing: message-only authority |
 | 53 | Review pages for visual output | Existing practice: artifacts |
 | 54 | Weaker models often better aligned; top for review | B7, B8 |
-| 55 | Browser exploratory testing loop | Declined for now: no app UI in the content harness |
-| 56 | Personal agents dwindle | B0 is deliberately 'just a cronjob': a deterministic queue runner, not an agent |
+| 55 | Browser exploratory testing loop | Chauffeur already runs Playwright in `make test`; W0-7 gate requires it green |
+| 56 | Personal agents dwindle | W0-2 plus W0-3 is 'just a cronjob' |
 
 Counts: built or in flight 26 (B1–B14 cover insights 1, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 20, 23, 24, 26, 32, 34, 36, 39, 45, 48, 54 and 16's record), existing with no build 15, John decides 7, declined or watch 10. Working: 26 + 15 + 7 + 10 = 58 because 16 and 18 appear in two rows; distinct insights 56.
 

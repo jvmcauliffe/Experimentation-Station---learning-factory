@@ -5,6 +5,18 @@ import os
 from pathlib import Path
 import subprocess
 
+SAFE_COMMANDS = {'init', 'add', 'start', 'stop', 'tick', 'where', 'card', 'log',
+                 'take', 'finish', 'read', 'merge', 'queue'}
+
+
+def twin_environment():
+    """Give the simulation no inherited Nova configuration or model credentials."""
+    allowed = {'PATH', 'HOME', 'USER', 'LANG', 'LC_ALL', 'TZ', 'TMPDIR', 'TEMP', 'TMP',
+               'SYSTEMROOT', 'WINDIR'}
+    env = {key: value for key, value in os.environ.items() if key in allowed}
+    env['NOVA_SPRINT_ACTOR'] = 'boss'
+    return env
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -15,16 +27,15 @@ def main():
     command = args.command[1:] if args.command[:1] == ['--'] else args.command
     if not command:
         parser.error('Supply a native command, for example -- where --json')
-    if any(x.split('=')[0] in {'--redis', '--server', '--actor'} for x in command):
-        parser.error('Connection and actor overrides are not allowed through the local twin wrapper')
+    if command[0] not in SAFE_COMMANDS:
+        parser.error('Only finite local-twin workflow commands are supported; no run, land, fleet or session setup')
+    if any(x.startswith('-') and x.lstrip('-').split('=')[0] in
+           {'redis', 'server', 'actor', 'keys', 'decide', 'listen', 'repo-dir', 'check'} for x in command):
+        parser.error('Connection, credential and execution overrides are not allowed through the local twin wrapper')
     state = args.state.resolve()
     state.parent.mkdir(parents=True, exist_ok=True)
-    env = dict(os.environ)
-    for key in ('NOVA_SPRINT_SERVER', 'NOVA_SPRINT_REDIS', 'NOVA_REDIS_ADDR', 'NOVA_BUS_REDIS'):
-        env.pop(key, None)
-    env['NOVA_SPRINT_ACTOR'] = 'boss'
     return subprocess.run([str(args.binary.resolve()), command[0], '--redis', 'mem:' + str(state),
-                           *command[1:]], env=env).returncode
+                           *command[1:]], env=twin_environment()).returncode
 
 
 if __name__ == '__main__':

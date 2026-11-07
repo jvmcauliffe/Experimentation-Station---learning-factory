@@ -45,7 +45,10 @@ def main():
     binary = runtime / 'bin' / 'nova-sprint'
     binary.parent.mkdir(exist_ok=True)
     subprocess.run([go, 'build', '-o', str(binary), './cmd/nova-sprint'], cwd=source, env=env, check=True)
-    subprocess.run([str(binary), 'version'], check=True)
+    built_version = subprocess.check_output([str(binary), 'version'], text=True).strip()
+    if 'commit=' + head not in built_version:
+        parser.error('Built binary does not identify the pinned source commit')
+    print(built_version)
     companions = []
     for name in ('nova-bus', 'nova-hook', 'nova-friend', 'nova-config'):
         target = runtime / 'bin' / name

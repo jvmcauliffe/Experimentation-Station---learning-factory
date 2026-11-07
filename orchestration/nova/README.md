@@ -54,13 +54,18 @@ python3 orchestration/nova/twin.py --binary /path/to/nova-sprint \
   --state /path/to/untracked/sprint.twin -- where --json
 ```
 
-The wrapper forces an explicit `mem:` state path, clears inherited live connection
-variables and rejects connection overrides. It must not be used as a live fleet
+The wrapper forces an explicit `mem:` state path, inherits only a minimal OS
+environment, and refuses connection/credential overrides (including single-dash
+Go flag forms) and commands such as `run`, `land` and fleet/session setup.
+It must not be used as a live fleet
 adapter. Read upstream `docs/FIRST-LAP.md` and installed command help for native
 cards, dependencies, worker reports, review, holds and recovery. The production
 `run` loop, not this wrapper, owns unattended transitions in a live deployment.
 
 ## Retire rules by purpose
+
+The following is a migration assessment, not a change to any active harness
+rule. Adopting these local tools does not activate that migration.
 
 | Existing mechanism | Adoption decision |
 |---|---|
@@ -85,3 +90,20 @@ the active PR13 queue. Preserve in-flight attempts and source IDs in migration;
 do not replay approvals. Account for late Nova reports without manufacturing
 a successful terminal receipt for an expired controlled packet. No additional
 model call, account purchase or public release is started by these local commands.
+
+## Evidence boundaries
+
+The proof includes SHA-256 hashes of its producing script, local wrapper,
+bootstrap, upstream lock and built binary. Recompute them after any change.
+The smoke run actually tests refusal to merge before review and refusal to
+overwrite an explicitly failed finish. Upstream's special deadline-failed
+late-result recovery is a different source-reviewed path and is not exercised
+by that negative test. This local profile has no controlled-packet adapter and
+cannot regenerate any such packet's receipt.
+
+The Go minimum intentionally rejects pre-releases below Go 1.26.6. An explicitly
+inherited `GOPROXY` is honoured; direct VCS is the default only when unset.
+The bootstrap checks the built engine's reported source commit before use.
+
+Run the wrapper isolation tests with:
+`python3 -B -m unittest discover -s orchestration/nova -p 'test_*.py'`.

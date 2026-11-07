@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude-code-remote__add_repo",
+      "Bash(git clone --depth 1 https://github.com/jvmcauliffe/content-creation-pipeline /home/user/content-creation-pipeline)"
+    ]
+  }
+}

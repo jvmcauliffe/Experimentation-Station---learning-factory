@@ -24,7 +24,7 @@ The measure is John's definition: a task typed at night is merged by morning and
 | W0-7 Merge gate | Done | Checks green at the head (or the runner runs the unit suite itself when no check exists), Codex review at the head with no P1, no `docs/private/` path, no needs-john label, PR targets main, no conflict. Merges with a merge commit and closes the issue. | No budget line in the gate (money is `unknown` on receipts). Stacked PRs are not ordered bottom-up; the runner takes one packet at a time so stacks do not arise yet. |
 | W0-8 Deploy | Not done | Chauffeur `cloudflare-deploy.yml` is still manual dispatch. | A `push` to main trigger with the probe, and a Chauffeur `night-runner.yml`. |
 | W0-9 Morning post | Not done | `build_task_report.py` turns one receipt into a task report. | Nothing writes `reports/night-YYYY-MM-DD.md` from the night's receipts, merges and tests, and nothing opens the blog packet. |
-| W1-1 Intake | Not done | A Claude chat session writes packets by hand. | A `task` label that the runner turns into a planning packet, whose output is a set of `night:ready` packets with dependencies. |
+| W1-1 Intake | Half | A plain `night:task` issue is planned by `scripts/night_runner.py` into one `night:ready` packet (checked 7 Nov, CCP 144acf1). Not built: question path, side-finding tickets, multi-packet plans. | A `task` label that the runner turns into a planning packet, whose output is a set of `night:ready` packets with dependencies. |
 | W1-2 GreenPT first pass | Not done | GreenPT runs one call per issue when a session posts the trigger; private-path refusal (B2) is not merged. | Runner-started GreenPT extraction or draft, then the Claude authoring packet with the candidate attached. |
 | W1-3 Codex implementer | Not done | Codex implements only from a PR 13 command posted by a person or a session. | Runner-started Codex packets, Claude reviewing them, same fix loop and gate. |
 | W1-4 Escalation ladder | Not done | Rule on paper only (packet #317, untriggered). | Runner writes the next-tier packet bound to the failed receipt: GreenPT → Codex → Claude standard → Claude premium → needs-john. |
@@ -84,15 +84,15 @@ Short names as in `GOLDMINE.md`. "Existing" means the harness already did it bef
 | 22 | 5.5-era models need fewer guardrails | Left out | J2; no yes yet. |
 | 23 | Memory folder and state file | Done | Gap check 7 Nov: `scripts/harness_memory.py` (`closeout`, `rebuild`, `search`) writes committed `memory/records/<id>.md`. Task state stays in GitHub issues by design. |
 | 24 | Spec-first | Done | CCP #396, `scripts/check_deliverables.py`. |
-| 25 | Agents commit, host pushes | Changed | The runner now merges on the gate (owner decision 7 Nov). |
-| 26 | Separate done and needs-you alerts | Half | Runner writes one needs-john comment per stop; no digest (B9), no morning post (W0-9). |
+| 25 | Agents commit, host pushes | Not done | Runner merges on the gate (owner decision 7 Nov), but agents still push: `validate_claude_task.py` tool_policy grants git push; `night_runner.py` tells the fix agent to push (checked 7 Nov, CCP 144acf1). |
+| 26 | Separate done and needs-you alerts | Half | Runner writes one needs-john comment per stop. `scripts/needs_john.py` digest exists but nothing calls it; `night_report.py` mixes done and stopped (checked 7 Nov, CCP 144acf1). |
 | 27 | Broad skills poison context | Left out | J2. |
 | 28 | Cheap inter-agent channels | Done | Labels and receipts; no model-to-model chat. |
 | 29 | Remote control everywhere | Done differently | Scheduler runs in Actions, no laptop needed. |
 | 30 | Audit against 100 tips | Left out | This mining was the audit. |
 | 31 | Vulcan tone line | Left out | J5, John's one-line edit. |
 | 32 | Binary CLEAR or DISCREPANCY gates | Done | `scripts/check_review_verdicts.py` on CCP main (checked 7 Nov). |
-| 33 | Tickets as the interface | Half | Packet issues are the interface; free-text intake (W1-1) is not. |
+| 33 | Tickets as the interface | Half | Intake via `night:task` works (one packet). No question path, no side-finding tickets, no multi-packet plans (checked 7 Nov, CCP 144acf1). |
 | 34 | pm-intake daily digest with auto-approved classes | Done differently or half | `scripts/needs_john.py` prints the digest with an Approve / Deny line; no auto-approved classes (checked 7 Nov). |
 | 35 | Build the builder | Left out | Principle; J1 would measure it. |
 | 36 | Mechanical gates | Done | Push hook, trigger lint, merge gate. |

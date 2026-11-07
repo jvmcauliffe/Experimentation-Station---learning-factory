@@ -62,11 +62,11 @@ def main():
             second = config('migrate')
             require(second['facts']['applied'] == 0, 'Migration is not idempotent')
             proof['migration_reapply_count'] = 0
-            config('machine', 'add', '127.0.0.1', '--user', 'runner', '--seat', 'canary',
+            config('machine', 'add', 'localhost', '--user', 'runner', '--seat', 'canary',
                    '--slots', '1', '--width', '1', '--actor', 'canary')
             config('friend', 'add', 'canary', '--tiers', 'pro', '--width', '1',
                    '--roles', 'builder,reader', '--actor', 'canary')
-            config('fleet', 'set', '--store', '127.0.0.1', '--coordinator', '127.0.0.1',
+            config('fleet', 'set', '--store', 'localhost', '--coordinator', 'localhost',
                    '--redis_port', '16379', '--pg_dsn', PG, '--bus', BUS, '--actor', 'canary')
             config('sprint', 'set', '--coordinator', 'canary', '--git_identity',
                    'Nova Canary <nova-canary@example.invalid>', '--max_attempts', '1', '--actor', 'canary')

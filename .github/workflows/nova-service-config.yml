@@ -1,0 +1,57 @@
+name: Nova service configuration smoke
+on:
+  pull_request:
+    paths:
+      - orchestration/nova/service_config_smoke.py
+      - .github/workflows/nova-service-config.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-services:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      sprint-redis:
+        image: redis:7-alpine
+        ports: ['127.0.0.1:16379:6379']
+        options: >-
+          --health-cmd "redis-cli ping" --health-interval 5s
+          --health-timeout 3s --health-retries 10
+      bus-redis:
+        image: redis:7-alpine
+        ports: ['127.0.0.1:16380:6379']
+        options: >-
+          --health-cmd "redis-cli ping" --health-interval 5s
+          --health-timeout 3s --health-retries 10
+      config-postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: nova_config
+          POSTGRES_DB: nova
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports: ['127.0.0.1:15432:5432']
+        options: >-
+          --health-cmd "pg_isready -U nova_config -d nova" --health-interval 5s
+          --health-timeout 3s --health-retries 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.26.6'
+          cache: false
+      - name: Build pinned native tools
+        run: python3 orchestration/nova/bootstrap.py --go "$(command -v go)" --runtime "$RUNNER_TEMP/nova"
+      - name: Exercise real local services with disabled model route
+        run: >-
+          python3 orchestration/nova/service_config_smoke.py
+          --bin-dir "$RUNNER_TEMP/nova/bin"
+          --output "$RUNNER_TEMP/nova-service-config.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nova-service-config-proof
+          path: ${{ runner.temp }}/nova-service-config.json
+          if-no-files-found: error

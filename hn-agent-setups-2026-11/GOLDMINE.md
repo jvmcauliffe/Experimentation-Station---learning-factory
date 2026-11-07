@@ -283,7 +283,7 @@ These change policy, providers or spend, or fit poorly, so they are listed for y
 55. **A strong model does exploratory and regression testing in a real browser, looped until clean**  ([#50376216](https://news.ycombinator.com/item?id=50376216))
 56. **Some users report that their always-on personal agents became mostly digest bots**  ([#50376601](https://news.ycombinator.com/item?id=50376601), [#50377290](https://news.ycombinator.com/item?id=50377290), [#50370886](https://news.ycombinator.com/item?id=50370886))
 
-## Additional insights from the coverage review (57–62, unranked)
+## Additional insights from the coverage review (57–62, scored 7 November 2026)
 
 Added by Codex on 7 November 2026 after reading the full 60-comment sample described in [VERIFICATION.md](VERIFICATION.md). These extend the original 56; their sources are reports, not independent effectiveness tests. John requested their addition, not automatic implementation or a policy/cap change.
 
@@ -295,6 +295,8 @@ Sources: [#50367037](https://news.ycombinator.com/item?id=50367037), [#50399014]
 
 Evidence limit: Two workflow reports; 50399014 promotes its author's product. No measured success-rate improvement.
 
+Rubric v2: Score 5.0 (rank 1 of these): 4 × 5 × 0.5 ÷ (6−4). Confidence is a proxy: 1.5 commenters, one self-promoting, rounded down to 0.5. Impact, Fit and Ease are judgements; author names not checked.
+
 ### 58. Keep unfinished work in durable state and let mechanical dispatch drive it to a result
 
 Extend 17, 23 and 38: persist assignments outside compacting context, dispatch from that state, and give one owner responsibility for the next action and the final handover. An enabled subscription is not proof of delivery or completed work.
@@ -302,6 +304,8 @@ Extend 17, 23 and 38: persist assignments outside compacting context, dispatch f
 Sources: [#50393739](https://news.ycombinator.com/item?id=50393739), [#50375407](https://news.ycombinator.com/item?id=50375407)
 
 Evidence limit: Self-reported orchestration behaviour; product authorship/affiliation is visible. No unattended completion proof for this harness.
+
+Rubric v2: Score 2.7 (rank 3): 4 × 4 × 0.5 ÷ (6−3). Confidence is a proxy: 1.5 commenters, one self-promoting, rounded down to 0.5. Impact, Fit and Ease are judgements; author names not checked.
 
 ### 59. Pair isolation with independent backups and restorable snapshots
 
@@ -311,6 +315,8 @@ Sources: [#50378897](https://news.ycombinator.com/item?id=50378897)
 
 Evidence limit: One operator reports restoring damaged VMs. Backup integrity and recovery time were not independently tested.
 
+Rubric v2: Score 2.3 (rank 5): 3 × 3 × 0.5 ÷ (6−4). One commenter. Impact, Fit and Ease are judgements; author names not checked.
+
 ### 60. Budget stakeholder decision load and preserve explainable design rationale
 
 Extend 16: diagrams, data-model and RBAC summaries help the owner retain a mental model. Increasing agent width does not remove decisions that must be explained to stakeholders.
@@ -318,6 +324,8 @@ Extend 16: diagrams, data-model and RBAC summaries help the owner retain a menta
 Sources: [#50376110](https://news.ycombinator.com/item?id=50376110), [#50377328](https://news.ycombinator.com/item?id=50377328)
 
 Evidence limit: Two comments by the same person; one independent perspective, not two. No universal attention cap follows.
+
+Rubric v2: Score 3.0 (rank 2): 3 × 4 × 0.5 ÷ (6−4). One commenter. Impact, Fit and Ease are judgements; author names not checked.
 
 ### 61. Explore a small domain language that enforces business invariants in the substrate
 
@@ -327,6 +335,8 @@ Sources: [#50367941](https://news.ycombinator.com/item?id=50367941)
 
 Evidence limit: One anecdote; no comparative correctness, complexity or maintenance benchmark.
 
+Rubric v2: Not ranked: Fit 1. Goes on the John decides list. One commenter. Impact, Fit and Ease are judgements; author names not checked.
+
 ### 62. Include provider continuity and account recovery in workflow risk assessment
 
 Keep a recovery plan for unavailable accounts or sign-up channels. Preserve the disagreement: one commenter fears opaque cancellation, while another challenges the premise. Verify current official terms and actual incidents before drawing conclusions.
@@ -334,6 +344,8 @@ Keep a recovery plan for unavailable accounts or sign-up channels. Preserve the 
 Sources: [#50376720](https://news.ycombinator.com/item?id=50376720), [#50395473](https://news.ycombinator.com/item?id=50395473)
 
 Evidence limit: Contested anecdotal evidence; neither source establishes cancellation rates, actual provider policy or a general right to use alternative clients.
+
+Rubric v2: Score 2.4 (rank 4): 3 × 2 × 0.8 ÷ (6−4). Two opposing commenters. Impact, Fit and Ease are judgements; author names not checked.
 
 ## Where the thread disagrees
 

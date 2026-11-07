@@ -1,0 +1,28 @@
+name: Nova local integration
+on:
+  pull_request:
+    paths: ['orchestration/nova/**', '.github/workflows/nova-local.yml']
+  push:
+    paths: ['orchestration/nova/**', '.github/workflows/nova-local.yml']
+permissions:
+  contents: read
+jobs:
+  local-twin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.26.6'
+          cache: false
+      - name: Check local wrapper isolation
+        run: python3 -B -m unittest discover -s orchestration/nova -p 'test_*.py'
+      - name: Build pinned upstream and companions
+        run: python3 orchestration/nova/bootstrap.py --go "$(command -v go)" --runtime "$RUNNER_TEMP/nova"
+      - name: Exercise native local workflow
+        run: python3 orchestration/nova/smoke.py --binary "$RUNNER_TEMP/nova/bin/nova-sprint" --output "$RUNNER_TEMP/nova-proof.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nova-local-proof
+          path: ${{ runner.temp }}/nova-proof.json

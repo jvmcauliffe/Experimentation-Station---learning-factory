@@ -248,5 +248,5 @@ Counts: built or in flight 26 (B1–B14 cover insights 1, 4, 5, 6, 8, 9, 10, 11,
 4. Lint the packet: `python3 scripts/validate_claude_task.py --lint --event EVENT.json --head MAIN_SHA`. Post `@claude run approved packet` only through the GitHub comment tool, never from the shell.
 5. Inside the run: at most five tool calls a turn, eight minutes a turn, the packet's turn and retry figures, one route. Run the unittest command as a single standalone invocation.
 6. Close: draft PR left unmerged for Codex review; handover file under `docs/handover/` once B1 is merged; closing comment with branch, commit, files changed, commands and results, unresolved findings, route, retry count, usage (`unknown` where missing). Count delegated model calls honestly; zero only when none were made.
-7. Never edit `CLAUDE.md` or `AGENTS.md`. Leave the PR for the night runner's merge gate (or merge it yourself after a Codex review with no P1, owner decision 7 Nov). Never publish, raise a cap or mark a fact verified.
+7. Never edit `CLAUDE.md` or `AGENTS.md`. Leave the PR for the automate loop's merge gate (or merge it yourself after a Codex review with no P1, owner decision 7 Nov). Never publish, raise a cap or mark a fact verified.
 8. A cheaper model is enough to execute any sheet in section 1; they are mechanical once the sheet is read.

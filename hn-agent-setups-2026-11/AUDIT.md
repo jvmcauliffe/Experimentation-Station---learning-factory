@@ -1,6 +1,6 @@
 # Audit: what was copied, what was not, and why
 
-Written 7 November 2026 against the 56 insights in `GOLDMINE.md`, the 10 ranked changes, the 6 John-decides items, the routing table, the B0 to B14 build sheets in `IMPLEMENTATION-PLAN.md` and the W0 and W1 loop pieces in `WHAT-IS-MISSING.md`. Checked against the code actually on `main` of jvmcauliffe/Content-Creation-Pipeline at commit `84075ef` (night runner merged) and on `main` of jvmcauliffe/chauffeur-academy at `d846559`.
+Written 7 November 2026 against the 56 insights in `GOLDMINE.md`, the 10 ranked changes, the 6 John-decides items, the routing table, the B0 to B14 build sheets in `IMPLEMENTATION-PLAN.md` and the W0 and W1 loop pieces in `WHAT-IS-MISSING.md`. Checked against the code actually on `main` of jvmcauliffe/Content-Creation-Pipeline at commit `84075ef` (automate loop merged) and on `main` of jvmcauliffe/chauffeur-academy at `d846559`.
 
 Plain words. Four verdicts only:
 
@@ -30,13 +30,13 @@ The measure is John's definition: a task typed at night is merged by morning and
 | W1-4 Escalation ladder | Not done | Rule on paper only (packet #317, untriggered). | Runner writes the next-tier packet bound to the failed receipt: GreenPT → Codex → Claude standard → Claude premium → needs-john. |
 | W1-5 Quota switch | Not done | Caps are counted per receipt; nobody reads them to choose a provider. | Runner reads the month's counts and picks the route with room; stops the night and says so when every route is capped. |
 
-Honest total for the loop: 5 of 14 pieces are on main, 2 of those unproven. The night runner is the scheduler, the state machine, the fix loop and the merge gate. It is not the intake, not the other providers, not escalation, not deploy and not the morning post. That is why it is a gap-plug and not the imported capability.
+Honest total for the loop: 5 of 14 pieces are on main, 2 of those unproven. The automate loop is the scheduler, the state machine, the fix loop and the merge gate. It is not the intake, not the other providers, not escalation, not deploy and not the morning post. That is why it is a gap-plug and not the imported capability.
 
 ## 2. The old plan, B0 to B14
 
 | Build | Packet | Verdict | Why |
 |---|---|---|---|
-| B0 queue runner | none | Done | Subsumed by the night runner. |
+| B0 queue runner | none | Done | Subsumed by the automate loop. |
 | B1 handover file at packet close | #305 | Not done | Wave 1 run failed before the executor fix. Packet is stale against the new main head and must be re-posted. |
 | B2 private-path guard and GreenPT queue | #306 | Not done | Same. The private-path refusal is the one guard the loop must have before the runner ever starts GreenPT. |
 | B3 spec-first packets with deliverable paths | #307 | Not done | Same. |

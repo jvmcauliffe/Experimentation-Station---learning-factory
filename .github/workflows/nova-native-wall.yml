@@ -1,0 +1,45 @@
+name: Nova native wall readiness
+on:
+  pull_request:
+    paths:
+      - orchestration/nova/native_wall_probe.py
+      - .github/workflows/nova-native-wall.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-wall:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.26.6'
+          cache: false
+      - name: Build pinned upstream and companions
+        run: python3 orchestration/nova/bootstrap.py --go "$(command -v go)" --runtime "$RUNNER_TEMP/nova"
+      - name: Build native sandbox from the same pinned companion module
+        env:
+          GOTOOLCHAIN: local
+        run: |
+          export GOCACHE="$RUNNER_TEMP/nova/cache/go-cache"
+          export GOPATH="$RUNNER_TEMP/nova/cache/go-path"
+          export GOMODCACHE="$RUNNER_TEMP/nova/cache/go-modules"
+          cd "$RUNNER_TEMP/nova/source"
+          go build -o "$RUNNER_TEMP/nova/bin/nova-sandbox" github.com/mas-bandwidth/nova-tools/cmd/nova-sandbox
+      - name: Require actual native wall execution
+        run: >-
+          python3 orchestration/nova/native_wall_probe.py
+          --go "$(command -v go)"
+          --friend "$RUNNER_TEMP/nova/bin/nova-friend"
+          --sandbox "$RUNNER_TEMP/nova/bin/nova-sandbox"
+          --output "$RUNNER_TEMP/nova-native-wall.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nova-native-wall-proof
+          path: ${{ runner.temp }}/nova-native-wall.json
+          if-no-files-found: error

@@ -1,0 +1,16 @@
+name: Insight source integrity
+on:
+  pull_request:
+    paths: ['hn-agent-setups-2026-11/**', '.github/workflows/insight-integrity.yml']
+  push:
+    paths: ['hn-agent-setups-2026-11/**', '.github/workflows/insight-integrity.yml']
+permissions:
+  contents: read
+jobs:
+  source-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+      - name: Verify retained evidence and coverage
+        run: python3 -I hn-agent-setups-2026-11/verify/integrity.py

@@ -610,5 +610,23 @@
   2,
   5,
   3
+ ],
+ "https://github.com/infisical/agent-vault": [
+  3,
+  3,
+  2,
+  "cloud proxy already injects keys"
+ ],
+ "https://tuicr.dev": [
+  3,
+  4,
+  2,
+  "reviews happen on GitHub from the phone"
+ ],
+ "https://www.brianhirsh.com/workspace": [
+  2,
+  3,
+  2,
+  "Drive and repos already hold this"
  ]
 }

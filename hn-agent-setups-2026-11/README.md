@@ -10,8 +10,8 @@
 | `routing-table.md` | Draft table of which job goes to which model, for John's decision |
 | `reddit-check.md` | The Reddit summary's 10 claims checked against the thread |
 | `shots/` | Screenshots of 111 linked projects |
-| `data/` | Project list, judgements, v2 scores and synthesis output |
-| `tools/` | Deterministic v2 scorers: `score_v2.py` for findings, `score_projects.py` for projects |
+| `data/` | Project list, judgements and v2 scores; `synthesis_raw.json` (synthesis agent output), `synthesis_v2.json` (scored), `critic.json` (critic agent output) |
+| `tools/` | Deterministic scripts: `score_v2.py` scores findings, `score_projects.py` scores projects, `build_goldmine.py` writes GOLDMINE.md and the page sections, `assemble_page.py` splices them into the page |
 
 ## Rubric v2
 

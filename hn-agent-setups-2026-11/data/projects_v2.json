@@ -114,7 +114,7 @@
   "fit": 3,
   "v2": 4.5,
   "v2_conf": 1.0,
-  "v2_authors": 6.0,
+  "v2_authors": 7.0,
   "v2_note": "spec-driven docs",
   "v2_working": "3×3×1.0÷2 = 4.5"
  },
@@ -369,7 +369,7 @@
   "fit": 2,
   "v2": 2.0,
   "v2_conf": 1.0,
-  "v2_authors": 31.5,
+  "v2_authors": 32.5,
   "v2_note": "terminal app; you work from a phone",
   "v2_working": "2×2×1.0÷2 = 2.0"
  },
@@ -420,7 +420,7 @@
   "fit": 2,
   "v2": 2.0,
   "v2_conf": 1.0,
-  "v2_authors": 3.0,
+  "v2_authors": 4.0,
   "v2_note": "macOS app",
   "v2_working": "2×2×1.0÷2 = 2.0"
  },
@@ -644,6 +644,23 @@
   "v2_authors": 1.0,
   "v2_note": "",
   "v2_working": "2×3×0.5÷2 = 1.5"
+ },
+ {
+  "key": "tuicr",
+  "name": "tuicr",
+  "url": "https://tuicr.dev",
+  "category": "",
+  "stars": null,
+  "what": "Terminal UI for reviewing code diffs, including agent output.",
+  "curated": false,
+  "impact": 3,
+  "ease": 4,
+  "fit": 2,
+  "v2": 1.5,
+  "v2_conf": 0.5,
+  "v2_authors": 1.0,
+  "v2_note": "reviews happen on GitHub from the phone",
+  "v2_working": "3×2×0.5÷2 = 1.5"
  },
  {
   "key": "t3code",
@@ -916,6 +933,23 @@
   "v2_authors": 1.0,
   "v2_note": "",
   "v2_working": "2×2×0.5÷2 = 1.0"
+ },
+ {
+  "key": "agent-vault",
+  "name": "agent-vault",
+  "url": "https://github.com/infisical/agent-vault",
+  "category": "",
+  "stars": null,
+  "what": "Keeps API keys out of the agent: it brokers secrets so Claude never sees them.",
+  "curated": false,
+  "impact": 3,
+  "ease": 3,
+  "fit": 2,
+  "v2": 1.0,
+  "v2_conf": 0.5,
+  "v2_authors": 1.0,
+  "v2_note": "cloud proxy already injects keys",
+  "v2_working": "3×2×0.5÷3 = 1.0"
  },
  {
   "key": "openhands",
@@ -1340,6 +1374,23 @@
   "v2_conf": 0.5,
   "v2_authors": 1.0,
   "v2_note": "",
+  "v2_working": "2×2×0.5÷3 = 0.7"
+ },
+ {
+  "key": "workspace",
+  "name": "Workspace (brianhirsh.com)",
+  "url": "https://www.brianhirsh.com/workspace",
+  "category": "",
+  "stars": null,
+  "what": "Manages larger projects, databases and markdown files in one place (posted by its maker).",
+  "curated": false,
+  "impact": 2,
+  "ease": 3,
+  "fit": 2,
+  "v2": 0.7,
+  "v2_conf": 0.5,
+  "v2_authors": 0.5,
+  "v2_note": "Drive and repos already hold this",
   "v2_working": "2×2×0.5÷3 = 0.7"
  },
  {

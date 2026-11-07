@@ -293,7 +293,7 @@
   "url": "https://maki.sh",
   "category": "Harnesses",
   "stars": 3,
-  "what": "A lean coding agent that claims 2\u20133\u00d7 lower token use than mainstream harnesses.",
+  "what": "A lean coding agent that claims 2–3× lower token use than mainstream harnesses.",
   "curated": true
  },
  {
@@ -996,6 +996,33 @@
   "category": "",
   "stars": null,
   "what": "",
+  "curated": false
+ },
+ {
+  "key": "agent-vault",
+  "name": "agent-vault",
+  "url": "https://github.com/infisical/agent-vault",
+  "category": "",
+  "stars": null,
+  "what": "Keeps API keys out of the agent: it brokers secrets so Claude never sees them.",
+  "curated": false
+ },
+ {
+  "key": "tuicr",
+  "name": "tuicr",
+  "url": "https://tuicr.dev",
+  "category": "",
+  "stars": null,
+  "what": "Terminal UI for reviewing code diffs, including agent output.",
+  "curated": false
+ },
+ {
+  "key": "workspace",
+  "name": "Workspace (brianhirsh.com)",
+  "url": "https://www.brianhirsh.com/workspace",
+  "category": "",
+  "stars": null,
+  "what": "Manages larger projects, databases and markdown files in one place (posted by its maker).",
   "curated": false
  }
 ]

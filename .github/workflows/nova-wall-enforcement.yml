@@ -1,0 +1,45 @@
+name: Nova native wall enforcement
+on:
+  pull_request:
+    paths:
+      - orchestration/nova/enforcement_probe.py
+      - .github/workflows/nova-wall-enforcement.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-enforcement:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.26.6'
+          cache: false
+      - name: Build pinned native tools
+        run: python3 orchestration/nova/bootstrap.py --go "$(command -v go)" --runtime "$RUNNER_TEMP/nova"
+      - name: Build matching native sandbox
+        env:
+          GOTOOLCHAIN: local
+        run: |
+          export GOCACHE="$RUNNER_TEMP/nova/cache/go-cache"
+          export GOPATH="$RUNNER_TEMP/nova/cache/go-path"
+          export GOMODCACHE="$RUNNER_TEMP/nova/cache/go-modules"
+          cd "$RUNNER_TEMP/nova/source"
+          go build -o "$RUNNER_TEMP/nova/bin/nova-sandbox" github.com/mas-bandwidth/nova-tools/cmd/nova-sandbox
+      - name: Require healthy controls and actual native refusal
+        run: >-
+          python3 orchestration/nova/enforcement_probe.py
+          --go "$(command -v go)"
+          --friend "$RUNNER_TEMP/nova/bin/nova-friend"
+          --sandbox "$RUNNER_TEMP/nova/bin/nova-sandbox"
+          --output "$RUNNER_TEMP/nova-enforcement-proof.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nova-enforcement-proof
+          path: ${{ runner.temp }}/nova-enforcement-proof.json
+          if-no-files-found: error

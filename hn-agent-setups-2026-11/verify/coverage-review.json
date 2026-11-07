@@ -1,0 +1,602 @@
+[
+  {
+    "id": 50376720,
+    "author": "Animats",
+    "replies": 7,
+    "signals": 2,
+    "characters": 1537,
+    "full_text_sha256": "1bc35698fd27621a2bf6908fb0499a46ad31534dbc36382484ded8ca93dcb832",
+    "disposition": "gap",
+    "note": "Provider continuity/account recovery risk; contested by 50395473, not a verified ban-rate claim."
+  },
+  {
+    "id": 50367037,
+    "author": "thefourthchime",
+    "replies": 7,
+    "signals": 0,
+    "characters": 819,
+    "full_text_sha256": "dd66b5c2cbe892e0e3d2af39ad3330679df712cfc56805fabb4eea98be0174ad",
+    "disposition": "extend 14,24",
+    "note": "Explicit observable completion criteria before work, not merely an implementation spec."
+  },
+  {
+    "id": 50377492,
+    "author": "OSaMaBiNLoGiN",
+    "replies": 5,
+    "signals": 1,
+    "characters": 1560,
+    "full_text_sha256": "8b5c68ab0ebd1bdfacc2f267b83186044dade86b136255320323d6880981054a",
+    "disposition": "covered 19,22,40",
+    "note": "Minimalism and professional identity; no new operational method."
+  },
+  {
+    "id": 50380973,
+    "author": "vvilliamperez",
+    "replies": 4,
+    "signals": 0,
+    "characters": 843,
+    "full_text_sha256": "d95626267169cb7b10839f68e172482fb9fd19321a4c026404bc7a5826005a7e",
+    "disposition": "covered 29,55",
+    "note": "Remote phone workflow plus device testing."
+  },
+  {
+    "id": 50373324,
+    "author": "jeswin",
+    "replies": 3,
+    "signals": 1,
+    "characters": 811,
+    "full_text_sha256": "f03207700a50156e4a788541b3b492f0a6d717a083d59dddf52cab61e40da063",
+    "disposition": "covered 2,4,28",
+    "note": "Coordinator and cross-provider workers."
+  },
+  {
+    "id": 50378366,
+    "author": "creativeSlumber",
+    "replies": 3,
+    "signals": 1,
+    "characters": 630,
+    "full_text_sha256": "d6f604df22dd3330e2d8a779d69770ce41a8a443a4297ed077b172a73410ff65",
+    "disposition": "covered 20; disagreement 4",
+    "note": "Cheap-provider claim with a quoted parent; not measured cost evidence."
+  },
+  {
+    "id": 50378067,
+    "author": "eamonnsullivan",
+    "replies": 3,
+    "signals": 0,
+    "characters": 1419,
+    "full_text_sha256": "1e37ca2e683f79138ea6b570b17310b16f5d3aae51b37d732a53bb35ac110a9c",
+    "disposition": "covered 10,20",
+    "note": "Budget and provider flexibility; personal tool choice."
+  },
+  {
+    "id": 50376110,
+    "author": "teekert",
+    "replies": 2,
+    "signals": 5,
+    "characters": 3006,
+    "full_text_sha256": "2778b8433c37fdb982d9accd57e3ef70cc5e9586136db0b63616d6f8f896fbd3",
+    "disposition": "extend 16; gap",
+    "note": "Stakeholder decision load, visual schema/RBAC aids; also public-data automation and VLAN isolation."
+  },
+  {
+    "id": 50377554,
+    "author": "jvidalv",
+    "replies": 2,
+    "signals": 3,
+    "characters": 817,
+    "full_text_sha256": "43b9f945556b8b9ed5cc4373d0046808f4aef529aa16ee5724919a88d5bf7bf5",
+    "disposition": "covered 29,53",
+    "note": "App/PR interface preference, no new repeatable harness invariant."
+  },
+  {
+    "id": 50374090,
+    "author": "thefunnyman",
+    "replies": 2,
+    "signals": 2,
+    "characters": 1558,
+    "full_text_sha256": "04ad9826effee1ea11024b23a118449301257b0335f6b02ec2247ad73a0ad021",
+    "disposition": "covered 25,42,49",
+    "note": "Least privilege and external microVM implementation."
+  },
+  {
+    "id": 50367546,
+    "author": "dewey",
+    "replies": 2,
+    "signals": 2,
+    "characters": 793,
+    "full_text_sha256": "d925cc59a98979e88cc8da516fb8afd582753b73842044d181a981ed8d834fc1",
+    "disposition": "extend 28,37",
+    "note": "Explicit cross-repository dependency coordination."
+  },
+  {
+    "id": 50375966,
+    "author": "mickeyp",
+    "replies": 2,
+    "signals": 2,
+    "characters": 606,
+    "full_text_sha256": "2d2ac3bf8dd887b870d5d6b03a96b08e8e7ff5ae3f27421724aac31f33b27762",
+    "disposition": "covered 22; local-model camp",
+    "note": "Harness preference and local model."
+  },
+  {
+    "id": 50378790,
+    "author": "Kuyawa",
+    "replies": 2,
+    "signals": 0,
+    "characters": 889,
+    "full_text_sha256": "e4439eed6a38e49753d51357e012e4ba6607890c99a0282db70353bbc74c883e",
+    "disposition": "out of scope",
+    "note": "Language experiment; model claims about itself are not validation."
+  },
+  {
+    "id": 50377286,
+    "author": "stinos",
+    "replies": 2,
+    "signals": 0,
+    "characters": 630,
+    "full_text_sha256": "df25d1acccb5849a09ca43692c7fb4038eae111d53d998bc3ae4276c20e368a5",
+    "disposition": "covered 17,22",
+    "note": "Automate repetitive work with a minimal local setup."
+  },
+  {
+    "id": 50376993,
+    "author": "walrus01",
+    "replies": 2,
+    "signals": 0,
+    "characters": 607,
+    "full_text_sha256": "55c09b0d4acb1067ea79735c4b8e55796433058a758f0e1295596367fe96d0e7",
+    "disposition": "covered 11; local-model camp",
+    "note": "Local-only trust preference."
+  },
+  {
+    "id": 50373698,
+    "author": "mgiampapa",
+    "replies": 1,
+    "signals": 3,
+    "characters": 939,
+    "full_text_sha256": "09b54c37c2677bc611f352990cc59414c1251ae9d26f107116a3a740f33c4de1",
+    "disposition": "covered 39; personal-agent camp",
+    "note": "Research and recordkeeping; financial outcome not independently verified."
+  },
+  {
+    "id": 50373649,
+    "author": "keithnz",
+    "replies": 1,
+    "signals": 2,
+    "characters": 710,
+    "full_text_sha256": "ed9cfc5cd900393ea942eeb36f191f52cd47f600f5c53c4752927213bc7e9f07",
+    "disposition": "covered 2,29",
+    "note": "Project manager/front door; no specific new control."
+  },
+  {
+    "id": 50388891,
+    "author": "hosteur",
+    "replies": 1,
+    "signals": 2,
+    "characters": 671,
+    "full_text_sha256": "a7d09175ffed3637191664a4bf55971e2cd398344667aa03b70ef4ccafa7eca0",
+    "disposition": "covered 5,19,20",
+    "note": "Good-enough model and task-fit question."
+  },
+  {
+    "id": 50368640,
+    "author": "robgough",
+    "replies": 1,
+    "signals": 1,
+    "characters": 1555,
+    "full_text_sha256": "cb085feef2b16512b10a9ec7a92df37793cca2463945acd7ce7be46f51f9a284",
+    "disposition": "covered 29,49; personal-agent camp",
+    "note": "Remote availability and chores; reports of value counter universal dismissal."
+  },
+  {
+    "id": 50380647,
+    "author": "bloppe",
+    "replies": 1,
+    "signals": 1,
+    "characters": 1239,
+    "full_text_sha256": "018646759eefd5184b541230b1500613fa4b41bb6e0a198d0b921c0598038de8",
+    "disposition": "extend 53,55",
+    "note": "Choose an inspectable, instrumentable UI substrate for browser automation."
+  },
+  {
+    "id": 50377328,
+    "author": "teekert",
+    "replies": 1,
+    "signals": 1,
+    "characters": 1098,
+    "full_text_sha256": "4ae7f97461a57b64b7ff3e1045ed6be078f3aa8c61904567a787b3383e7c6e74",
+    "disposition": "gap",
+    "note": "Retain stakeholder-facing data/RBAC rationale; throughput does not remove accountable decisions."
+  },
+  {
+    "id": 50393807,
+    "author": "glennfiedler",
+    "replies": 1,
+    "signals": 1,
+    "characters": 964,
+    "full_text_sha256": "e06f76b46354f54e99fcda2398ffcfc6a575ed2389e082b452657844a53cf0d8",
+    "disposition": "covered 23,38",
+    "note": "Durable structured work graph, avoiding repeated API queries."
+  },
+  {
+    "id": 50377449,
+    "author": "crisopolis",
+    "replies": 1,
+    "signals": 1,
+    "characters": 808,
+    "full_text_sha256": "60976b69da6035d0c147ab1488bc14bff2ac8bffc186df5b11a23bb60a835251",
+    "disposition": "covered 2,4,33",
+    "note": "Lead-mediated product/engineering teams."
+  },
+  {
+    "id": 50376652,
+    "author": "gogoro",
+    "replies": 1,
+    "signals": 1,
+    "characters": 685,
+    "full_text_sha256": "dfad57209b4c9d2344ca7cc0652b63b5261d1d1ad3936b1a79bf7fef3cca6039",
+    "disposition": "covered 29,49",
+    "note": "Remote isolated compute."
+  },
+  {
+    "id": 50370525,
+    "author": "warpspin",
+    "replies": 1,
+    "signals": 1,
+    "characters": 671,
+    "full_text_sha256": "816aae1dbfd85a81dde3ff7b9f5697e0c94ea7f6122fbe525c6a5026e8ad3629",
+    "disposition": "covered 19,49",
+    "note": "Sandbox usability/reliability counter-evidence; not a new gate."
+  },
+  {
+    "id": 50375873,
+    "author": "peepee1982",
+    "replies": 1,
+    "signals": 0,
+    "characters": 2599,
+    "full_text_sha256": "a6458cc4c7863221485aa8a7252562d495fcb94230dff1cc76d527525f2f47c6",
+    "disposition": "covered 10,26,29,53",
+    "note": "Session UI, telemetry and diff navigation."
+  },
+  {
+    "id": 50393739,
+    "author": "glennfiedler",
+    "replies": 1,
+    "signals": 0,
+    "characters": 1686,
+    "full_text_sha256": "f2694e6d442962afae46fea341e67b15a028a9b51ad45300abd55dfb03f24f15",
+    "disposition": "extend 17,23,38",
+    "note": "Mechanical durable dispatch prevents forgotten/half-started tasks; push notifications sustain work."
+  },
+  {
+    "id": 50374261,
+    "author": "seanmcdirmid",
+    "replies": 1,
+    "signals": 0,
+    "characters": 1290,
+    "full_text_sha256": "f123c880900fcbdf4b95b46fc7419b171b4cd6bb29a1f21e5f18621c1732e569",
+    "disposition": "covered 5,19,24",
+    "note": "Spec-driven RPC orchestration and benchmarking."
+  },
+  {
+    "id": 50379779,
+    "author": "lubonay",
+    "replies": 1,
+    "signals": 0,
+    "characters": 959,
+    "full_text_sha256": "19b78781238f7a74ddc9a4ddb836b050bc647f3919a746c5d965e5b787db0f37",
+    "disposition": "extend 19,22",
+    "note": "Re-evaluate default tools periodically rather than preserving an obsolete verdict."
+  },
+  {
+    "id": 50367571,
+    "author": "nkotov",
+    "replies": 1,
+    "signals": 0,
+    "characters": 775,
+    "full_text_sha256": "4c3168492b4f1ad26a803b939354cf9349ff290477148a19b92f72d98e84850c",
+    "disposition": "covered 5,22,56; disagreement 12",
+    "note": "Task-specific provider strengths; personal-agent failure report."
+  },
+  {
+    "id": 50385840,
+    "author": "degrees57",
+    "replies": 1,
+    "signals": 0,
+    "characters": 731,
+    "full_text_sha256": "ab54c10e6eaad9ae87f194f88d926cff8e34784e66c1ffb9a645d920b2bd1d74",
+    "disposition": "out of scope",
+    "note": "One hardware-specific guided repair; no general harness practice."
+  },
+  {
+    "id": 50367941,
+    "author": "sim04ful",
+    "replies": 1,
+    "signals": 0,
+    "characters": 631,
+    "full_text_sha256": "11a51d7b6ba15d55fc4a5e37f44d3c1e518ab01c2a31b901059779962db21678",
+    "disposition": "gap; optional",
+    "note": "Domain-specific language/substrate enforces business invariants; different from adding prose rules."
+  },
+  {
+    "id": 50367434,
+    "author": "CBLT",
+    "replies": 1,
+    "signals": 0,
+    "characters": 600,
+    "full_text_sha256": "27231e40f5a3ee15301449be64a699e2c72b2ab237bd3395bdd1c62ba54aa03c",
+    "disposition": "covered 2,4",
+    "note": "One orchestrator owns cross-harness toil."
+  },
+  {
+    "id": 50373956,
+    "author": "paustint",
+    "replies": 0,
+    "signals": 6,
+    "characters": 2235,
+    "full_text_sha256": "dfd4d52664ce4833a8c6ba3aafd0501ac36db48ce46fd9cf377332f06c09fe22",
+    "disposition": "covered 26,29,33,41,53",
+    "note": "Alerts, remote worktrees and addressed review findings."
+  },
+  {
+    "id": 50377715,
+    "author": "thibsrn",
+    "replies": 0,
+    "signals": 4,
+    "characters": 3821,
+    "full_text_sha256": "54bf34f7d419e185f96ae1e262a1b569bdd3e8b87a6541f9832365200e6747e4",
+    "disposition": "covered 16,20,40; disagreement 4",
+    "note": "Single-threaded mental model; preference for API/subscription is not a price benchmark."
+  },
+  {
+    "id": 50378897,
+    "author": "Uptrenda",
+    "replies": 0,
+    "signals": 4,
+    "characters": 2148,
+    "full_text_sha256": "1a014f37d11f623a1e7999e2a7c71554020276e64b9f2f64b85f76154e660d69",
+    "disposition": "gap",
+    "note": "Recovery through independent backups and VM snapshots; isolation alone is insufficient."
+  },
+  {
+    "id": 50373248,
+    "author": "Quibblingeek",
+    "replies": 0,
+    "signals": 4,
+    "characters": 2030,
+    "full_text_sha256": "b0178589aab1b205047aacc32402de85429578f22a1729aec99f56dc62d657fe",
+    "disposition": "counter 56; disagreement 12",
+    "note": "Persistent personal agent described as useful; prevents universal digest-only claim."
+  },
+  {
+    "id": 50375619,
+    "author": "ehostunreach",
+    "replies": 0,
+    "signals": 4,
+    "characters": 830,
+    "full_text_sha256": "f3998d805c824997239868dccaf87b62b38d93fec974188c8236895275a157dc",
+    "disposition": "covered 23,45",
+    "note": "Status history and proposed checkpointed trace retrieval; vendor affiliation disclosed."
+  },
+  {
+    "id": 50376410,
+    "author": "FlyingSnake",
+    "replies": 0,
+    "signals": 4,
+    "characters": 769,
+    "full_text_sha256": "66d0a6e930d140fdcdcfa6c32d4723cca07c194e739a89f429f699aa6248a201",
+    "disposition": "covered 5,11",
+    "note": "Hybrid local/cloud routing; numeric model split itself is inconsistent (75+35)."
+  },
+  {
+    "id": 50378086,
+    "author": "moezd",
+    "replies": 0,
+    "signals": 4,
+    "characters": 630,
+    "full_text_sha256": "4afe0189a9b95682e2aa68280a02a910dd895760ca078562b2ac0f9262cc9c87",
+    "disposition": "covered 19,22",
+    "note": "Minimalism and remote availability."
+  },
+  {
+    "id": 50368119,
+    "author": "patwolf",
+    "replies": 0,
+    "signals": 3,
+    "characters": 1150,
+    "full_text_sha256": "b86b37e772be6972b813baf027ba91dedddd8871c362cb9c9b06b5525acf989c",
+    "disposition": "covered 26,39; personal-agent camp",
+    "note": "Morning information package."
+  },
+  {
+    "id": 50374646,
+    "author": "dofm",
+    "replies": 0,
+    "signals": 3,
+    "characters": 1136,
+    "full_text_sha256": "f81b62e3b2a076aab7bf499cf11e2c83f0db8ef8bcf7bf24f7edc4fd902ae325",
+    "disposition": "counter 40",
+    "note": "Automation may help with burnout/blank-page work; no health-effect proof."
+  },
+  {
+    "id": 50378530,
+    "author": "nfriedly",
+    "replies": 0,
+    "signals": 3,
+    "characters": 1089,
+    "full_text_sha256": "6fcfd08426bc06d5e8d76be980225ec3ac77b50b0d42a468584d480f87e820db",
+    "disposition": "covered 29,55",
+    "note": "Remote/browser tool access."
+  },
+  {
+    "id": 50384963,
+    "author": "egrm",
+    "replies": 0,
+    "signals": 3,
+    "characters": 630,
+    "full_text_sha256": "79feb126b240a2242badabe7dfa1d49f1df4ffba458985063a53e0a4b96b998e",
+    "disposition": "covered 51; disagreement 5",
+    "note": "Account switching and return to default apps; no authorisation to buy accounts."
+  },
+  {
+    "id": 50378681,
+    "author": "Teyott",
+    "replies": 0,
+    "signals": 3,
+    "characters": 627,
+    "full_text_sha256": "572a6ad8bdb257a99cb338d2b79ddc3b05c0b03925dfc76fa762da1547500b70",
+    "disposition": "out of scope",
+    "note": "Non-use preference; no actionable harness method."
+  },
+  {
+    "id": 50377455,
+    "author": "vekker",
+    "replies": 0,
+    "signals": 2,
+    "characters": 2013,
+    "full_text_sha256": "8c2c63f15cfe8d2f077a0edfcac86aa27def5759a8e90be78f78cd3021cf29c3",
+    "disposition": "covered 11,15,29; counter 56",
+    "note": "Private routing, reusable skills and useful personal assistant."
+  },
+  {
+    "id": 50375407,
+    "author": "dgunay",
+    "replies": 0,
+    "signals": 2,
+    "characters": 1924,
+    "full_text_sha256": "b10c0d9f8607e9e7ae08773b177472aa0d46d5d4025b78b9accb14a8753a34d9",
+    "disposition": "extend 2,33,41",
+    "note": "Chief-of-staff owns intake through reviewed PR; merge authority remains repository-specific."
+  },
+  {
+    "id": 50377557,
+    "author": "tomburgs",
+    "replies": 0,
+    "signals": 2,
+    "characters": 1922,
+    "full_text_sha256": "bcf87add5093adcc2d88df4b14079fd573731fc51ce042e8630e6d2a1ec1d848",
+    "disposition": "covered 15,20,56; disagreement 4",
+    "note": "PAYG/workflow UI preferences and cost caveat."
+  },
+  {
+    "id": 50374449,
+    "author": "Zambyte",
+    "replies": 0,
+    "signals": 2,
+    "characters": 1597,
+    "full_text_sha256": "837b29d8404a978fabe078ea34c767fefff76cc2b947258f92a95b54daecbb63",
+    "disposition": "covered 1,27,28",
+    "note": "Small prompts fit local context; ad hoc agent checks."
+  },
+  {
+    "id": 50373432,
+    "author": "2001zhaozhao",
+    "replies": 0,
+    "signals": 2,
+    "characters": 1458,
+    "full_text_sha256": "f9150cb796cf89b04de9d284cf6331937140beb21ae67922d541ddb2d88cbc64",
+    "disposition": "covered 4,24,33",
+    "note": "Main agent answers child questions and escalates only uncertainty."
+  },
+  {
+    "id": 50395473,
+    "author": "mirmor23",
+    "replies": 0,
+    "signals": 2,
+    "characters": 1376,
+    "full_text_sha256": "5931c8a78eee5b558ec0e074fc3402022f918bb02f7ef383138f3d3bef82b4d0",
+    "disposition": "counter to sample 1",
+    "note": "Alternative account-risk account; neither side establishes provider policy or rates."
+  },
+  {
+    "id": 50399014,
+    "author": "cpcdoy",
+    "replies": 0,
+    "signals": 2,
+    "characters": 1150,
+    "full_text_sha256": "e1cc0aeb803db9b0ea11623813cfbaf85037e2a238e516ada89cb7909a4b520c",
+    "disposition": "extend 14,24",
+    "note": "Expected output compared with plan/checks; vendor self-report, not adoption evidence."
+  },
+  {
+    "id": 50377417,
+    "author": "hosteur",
+    "replies": 0,
+    "signals": 2,
+    "characters": 1011,
+    "full_text_sha256": "e019abc10a485144c8cd394e924d1db060dfd5f29f27f420482e4c79c2cc8b4b",
+    "disposition": "covered 29,37,49",
+    "note": "Isolated worktree per task on remote VM."
+  },
+  {
+    "id": 50367866,
+    "author": "x3haloed",
+    "replies": 0,
+    "signals": 2,
+    "characters": 965,
+    "full_text_sha256": "cc474d26d51dfcf59363f12be1fd4f2bb4bd4a8172f715591326f505fe25724b",
+    "disposition": "covered 21,22,33",
+    "note": "Add orchestration only after need; request-to-PR intake."
+  },
+  {
+    "id": 50374746,
+    "author": "jauzeyimam",
+    "replies": 0,
+    "signals": 2,
+    "characters": 845,
+    "full_text_sha256": "db9f735e541c7868702e720f3a35a9167f021698135bfb7605071774e688e91e",
+    "disposition": "covered 5,17,23",
+    "note": "Checked-in brain plus separate cron/watch structure."
+  },
+  {
+    "id": 50367399,
+    "author": "marshalla",
+    "replies": 0,
+    "signals": 2,
+    "characters": 813,
+    "full_text_sha256": "0807614ee24404730b13497b1207ccdfb0a7259cf9228978bd9595d34e0c6a4e",
+    "disposition": "covered 4,16; caution",
+    "note": "Human review relay and timeouts; filler/cache belief is not billing evidence."
+  },
+  {
+    "id": 50374806,
+    "author": "einhard",
+    "replies": 0,
+    "signals": 2,
+    "characters": 708,
+    "full_text_sha256": "62443ca3d7cbbc26ea53afc0443ec3399d5061ed70dba5aaa74e2d37b0d394ad",
+    "disposition": "covered 20,49",
+    "note": "Cheap model inside a container."
+  },
+  {
+    "id": 50375205,
+    "author": "YuechenLi",
+    "replies": 0,
+    "signals": 2,
+    "characters": 689,
+    "full_text_sha256": "03456e560c91bbfcb6b8324e75cf110e15c7d2c1e6014b0c4d49475e2f565835",
+    "disposition": "covered 5,19,22",
+    "note": "Per-task model preferences and anti-swarm counter-evidence."
+  },
+  {
+    "id": 50380849,
+    "author": "alentred",
+    "replies": 0,
+    "signals": 2,
+    "characters": 653,
+    "full_text_sha256": "355c2f98126eed41baa881f95a582f9d65e1dc6bb9520048d40dd704b6711821",
+    "disposition": "covered 29,49",
+    "note": "Disposable background VM, not laptop-dependent work."
+  },
+  {
+    "id": 50376062,
+    "author": "TheArcane",
+    "replies": 0,
+    "signals": 2,
+    "characters": 626,
+    "full_text_sha256": "e06f8e40a26823d6420c30edeb4e75fb6d5d0777eb497efd211bc8417e37ff36",
+    "disposition": "covered 20; disagreement 9",
+    "note": "Latency helps flow; self-reported correctness is not an eval."
+  }
+]

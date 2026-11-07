@@ -1,0 +1,78 @@
+[
+  {
+    "id": 57,
+    "claim": "Define observable completion criteria and compare the delivered result with them",
+    "category": "tickets_planning",
+    "comment_ids": [
+      "50367037",
+      "50399014"
+    ],
+    "application": "Extend insights 14 and 24: specify what the agent must return, then check the actual output against the plan. A receipt, acknowledgement or green check is not automatically acceptance.",
+    "evidence_limit": "Two workflow reports; 50399014 promotes its author's product. No measured success-rate improvement.",
+    "rank": null,
+    "status": "source-supported candidate; not adopted policy"
+  },
+  {
+    "id": 58,
+    "claim": "Keep unfinished work in durable state and let mechanical dispatch drive it to a result",
+    "category": "orchestration",
+    "comment_ids": [
+      "50393739",
+      "50375407"
+    ],
+    "application": "Extend 17, 23 and 38: persist assignments outside compacting context, dispatch from that state, and give one owner responsibility for the next action and the final handover. An enabled subscription is not proof of delivery or completed work.",
+    "evidence_limit": "Self-reported orchestration behaviour; product authorship/affiliation is visible. No unattended completion proof for this harness.",
+    "rank": null,
+    "status": "source-supported candidate; not adopted policy"
+  },
+  {
+    "id": 59,
+    "claim": "Pair isolation with independent backups and restorable snapshots",
+    "category": "sandbox_security",
+    "comment_ids": [
+      "50378897"
+    ],
+    "application": "Isolation contains access; backups and VM snapshots provide recovery after destructive agent changes. Treat recovery as a separate check rather than assuming a sandbox prevents all loss.",
+    "evidence_limit": "One operator reports restoring damaged VMs. Backup integrity and recovery time were not independently tested.",
+    "rank": null,
+    "status": "source-supported candidate; not adopted policy"
+  },
+  {
+    "id": 60,
+    "claim": "Budget stakeholder decision load and preserve explainable design rationale",
+    "category": "skeptic_wellbeing",
+    "comment_ids": [
+      "50376110",
+      "50377328"
+    ],
+    "application": "Extend 16: diagrams, data-model and RBAC summaries help the owner retain a mental model. Increasing agent width does not remove decisions that must be explained to stakeholders.",
+    "evidence_limit": "Two comments by the same person; one independent perspective, not two. No universal attention cap follows.",
+    "rank": null,
+    "status": "source-supported candidate; not adopted policy"
+  },
+  {
+    "id": 61,
+    "claim": "Explore a small domain language that enforces business invariants in the substrate",
+    "category": "tickets_planning",
+    "comment_ids": [
+      "50367941"
+    ],
+    "application": "Consider domain-specific nouns and verbs whose semantics handle recurring business rules and edge cases. This is an optional architecture experiment, not a reason to invent a language for every project.",
+    "evidence_limit": "One anecdote; no comparative correctness, complexity or maintenance benchmark.",
+    "rank": null,
+    "status": "source-supported candidate; not adopted policy"
+  },
+  {
+    "id": 62,
+    "claim": "Include provider continuity and account recovery in workflow risk assessment",
+    "category": "sandbox_security",
+    "comment_ids": [
+      "50376720",
+      "50395473"
+    ],
+    "application": "Keep a recovery plan for unavailable accounts or sign-up channels. Preserve the disagreement: one commenter fears opaque cancellation, while another challenges the premise. Verify current official terms and actual incidents before drawing conclusions.",
+    "evidence_limit": "Contested anecdotal evidence; neither source establishes cancellation rates, actual provider policy or a general right to use alternative clients.",
+    "rank": null,
+    "status": "source-supported candidate; not adopted policy"
+  }
+]

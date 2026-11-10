@@ -5,13 +5,16 @@
 
 | File | What it is |
 |---|---|
+| `VERIFICATION.md` | Verification of the remaining insights and the 60-comment coverage sample |
+| `IMPLEMENTATION-PLAN.md` | Build sheets and the disposition of each insight |
+| `verify/` | Thread snapshot and `integrity.py`, the check run on every pull request here |
 | `GOLDMINE.md` | The full report: camps, top insights, recommendations, disagreements and quotes, all scored with rubric v2 |
 | `agent-setups.html` | The same report as a page, with the 111-project screenshot gallery |
 | `routing-table.md` | Draft table of which job goes to which model, for John's decision |
 | `reddit-check.md` | The Reddit summary's 10 claims checked against the thread |
 | `shots/` | Screenshots of 111 linked projects |
 | `data/` | Project list, judgements and v2 scores; `synthesis_raw.json` (synthesis agent output), `synthesis_v2.json` (scored), `critic.json` (critic agent output) |
-| `tools/` | Deterministic scripts: `score_v2.py` scores findings, `score_projects.py` scores projects, `build_goldmine.py` writes GOLDMINE.md and the page sections, `assemble_page.py` splices them into the page |
+| `tools/` | Deterministic scripts: `hn_diff.py` lists thread comments not yet read, `score_v2.py` scores findings, `score_projects.py` scores projects, `build_goldmine.py` writes GOLDMINE.md and the page sections, `assemble_page.py` splices them into the page |
 
 ## Rubric v2
 

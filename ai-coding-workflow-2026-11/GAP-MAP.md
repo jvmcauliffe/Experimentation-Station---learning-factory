@@ -4,9 +4,11 @@ Source: [github.com/vaibhav-space/my-ai-coding-workflow](https://github.com/vaib
 
 Scoring follows the HN gold mine v2: Priority = Impact × Fit × Confidence ÷ (6 − Ease).
 
-## Built (content-creation-pipeline, branch `claude/ai-coding-workflow-mkl2s4`)
+## Proposed, in review (content-creation-pipeline [PR 485](https://github.com/jvmcauliffe/Content-Creation-Pipeline/pull/485), head `56bc708231f0767b300cc0209e0b1c28c6f1852c`)
 
-| # | Practice | Where it went | v2 | Working |
+Not merged. The first head, `08f4cba`, failed Codex's exact-head review (the checker passed an empty checklist); `56bc708` makes it fail closed and awaits re-review. Nothing below counts as built until PR 485 merges.
+
+| # | Practice | Proposed location | v2 | Working |
 | --- | --- | --- | --- | --- |
 | 1 | Diff review answers a fixed question list, not the author's summary | `docs/review/code-questions.md` (11 questions, CLEAR or DISCREPANCY), checked by `scripts/check_review_verdicts.py --checklist` | 10.0 | 4×5×0.5÷1 = 10.0 |
 | 2 | Size the task first: spike, bounded, architectural | `skills/plan-and-diff-review` | 6.0 | 3×4×0.5÷1 = 6.0 |

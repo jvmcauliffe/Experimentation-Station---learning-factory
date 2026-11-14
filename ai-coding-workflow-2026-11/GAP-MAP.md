@@ -4,9 +4,9 @@ Source: [github.com/vaibhav-space/my-ai-coding-workflow](https://github.com/vaib
 
 Scoring follows the HN gold mine v2: Priority = Impact × Fit × Confidence ÷ (6 − Ease).
 
-## Proposed, in review (content-creation-pipeline [PR 485](https://github.com/jvmcauliffe/Content-Creation-Pipeline/pull/485), head `a01dbcf`)
+## Proposed, in review (content-creation-pipeline [PR 485](https://github.com/jvmcauliffe/Content-Creation-Pipeline/pull/485), head `c1f6bef`)
 
-Not merged. The first head, `08f4cba`, failed Codex's exact-head review (the checker passed an empty checklist); `56bc708` makes it fail closed; `e7cd5bf` adds the three skill packs; `76429d8` amends CLAUDE.md rule 17 on John's instruction (one fresh-context review per plan task, inside rule 15's ten calls); `08c67aa` adds an identity and use gate after the Nova Sprint lesson; `a01dbcf` makes it a script check (`scripts/check_plan_identity.py`, run by CI on `docs/plans/`). All await re-review. Nothing below counts as built until PR 485 merges.
+Not merged. The first head, `08f4cba`, failed Codex's exact-head review (the checker passed an empty checklist); `56bc708` makes it fail closed; `e7cd5bf` adds the three skill packs; `76429d8` amends CLAUDE.md rule 17 on John's instruction (one fresh-context review per plan task, inside rule 15's ten calls); `08c67aa` adds an identity and use gate after the Nova Sprint lesson; `a01dbcf` makes it a script check (`scripts/check_plan_identity.py`, run by CI on `docs/plans/`). Later heads up to `c1f6bef` harden the acceptance check against shell tricks that run local code; `c1f6bef` is CLEAR in an independent exact-head review (PR 485 comment 6883379326) with CI green. Awaiting merge by a provider other than the author. Nothing below counts as built until PR 485 merges.
 
 | # | Practice | Proposed location | v2 | Working |
 | --- | --- | --- | --- | --- |

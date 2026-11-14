@@ -4,18 +4,19 @@ Source: [github.com/vaibhav-space/my-ai-coding-workflow](https://github.com/vaib
 
 Scoring follows the HN gold mine v2: Priority = Impact × Fit × Confidence ÷ (6 − Ease).
 
-## Proposed, in review (content-creation-pipeline [PR 485](https://github.com/jvmcauliffe/Content-Creation-Pipeline/pull/485), head `e7cd5bfc832edd17b801439da225ec779f1e8751`)
+## Proposed, in review (content-creation-pipeline [PR 485](https://github.com/jvmcauliffe/Content-Creation-Pipeline/pull/485), head `08c67aa`)
 
-Not merged. The first head, `08f4cba`, failed Codex's exact-head review (the checker passed an empty checklist); `56bc708` makes it fail closed; `e7cd5bf` adds the three skill packs. Both await re-review. Nothing below counts as built until PR 485 merges.
+Not merged. The first head, `08f4cba`, failed Codex's exact-head review (the checker passed an empty checklist); `56bc708` makes it fail closed; `e7cd5bf` adds the three skill packs; `76429d8` amends CLAUDE.md rule 17 on John's instruction (one fresh-context review per plan task, inside rule 15's ten calls); `08c67aa` adds an identity and use gate after the Nova Sprint lesson. All await re-review. Nothing below counts as built until PR 485 merges.
 
 | # | Practice | Proposed location | v2 | Working |
 | --- | --- | --- | --- | --- |
-| 1 | Diff review answers a fixed question list, not the author's summary | `docs/review/code-questions.md` (11 questions, CLEAR or DISCREPANCY), checked by `scripts/check_review_verdicts.py --checklist` | 10.0 | 4×5×0.5÷1 = 10.0 |
+| 1 | Diff review answers a fixed question list, not the author's summary | `docs/review/code-questions.md` (13 questions, CLEAR or DISCREPANCY), checked by `scripts/check_review_verdicts.py --checklist` | 10.0 | 4×5×0.5÷1 = 10.0 |
 | 2 | Size the task first: spike, bounded, architectural | `skills/plan-and-diff-review` | 6.0 | 3×4×0.5÷1 = 6.0 |
 | 3 | Simplest-first ladder and surgical edits | Same skill, stage 1; checklist Q1 and Q2 | 6.0 | 3×4×0.5÷1 = 6.0 |
 | 4 | One-hypothesis failure loop | Same skill, "When a check fails"; second failure escalates under rule 11 | 6.0 | 3×4×0.5÷1 = 6.0 |
 | 5 | Adversarial plan review in a fresh context | Same skill, stage 2; one delegated call under rule 15 | 4.0 | 4×4×0.5÷2 = 4.0 |
 | 6 | Plan grounded in the code, one runnable check per requirement | Same skill, stage 1 | 3.0 | 3×4×0.5÷2 = 3.0 |
+| 7 | Identity and use gate: pin the upstream tool and run it in the acceptance check, name the user and what it replaces, spike first | Same skill; checklist Q12 and Q13 (added after two days went on Nova Sprint and a lookalike) | not scored | n/a |
 
 ## Already covered by the harness
 

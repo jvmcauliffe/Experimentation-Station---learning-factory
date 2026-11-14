@@ -4,9 +4,9 @@ Source: [github.com/vaibhav-space/my-ai-coding-workflow](https://github.com/vaib
 
 Scoring follows the HN gold mine v2: Priority = Impact × Fit × Confidence ÷ (6 − Ease).
 
-## Proposed, in review (content-creation-pipeline [PR 485](https://github.com/jvmcauliffe/Content-Creation-Pipeline/pull/485), head `08c67aa`)
+## Proposed, in review (content-creation-pipeline [PR 485](https://github.com/jvmcauliffe/Content-Creation-Pipeline/pull/485), head `a01dbcf`)
 
-Not merged. The first head, `08f4cba`, failed Codex's exact-head review (the checker passed an empty checklist); `56bc708` makes it fail closed; `e7cd5bf` adds the three skill packs; `76429d8` amends CLAUDE.md rule 17 on John's instruction (one fresh-context review per plan task, inside rule 15's ten calls); `08c67aa` adds an identity and use gate after the Nova Sprint lesson. All await re-review. Nothing below counts as built until PR 485 merges.
+Not merged. The first head, `08f4cba`, failed Codex's exact-head review (the checker passed an empty checklist); `56bc708` makes it fail closed; `e7cd5bf` adds the three skill packs; `76429d8` amends CLAUDE.md rule 17 on John's instruction (one fresh-context review per plan task, inside rule 15's ten calls); `08c67aa` adds an identity and use gate after the Nova Sprint lesson; `a01dbcf` makes it a script check (`scripts/check_plan_identity.py`, run by CI on `docs/plans/`). All await re-review. Nothing below counts as built until PR 485 merges.
 
 | # | Practice | Proposed location | v2 | Working |
 | --- | --- | --- | --- | --- |
@@ -16,7 +16,7 @@ Not merged. The first head, `08f4cba`, failed Codex's exact-head review (the che
 | 4 | One-hypothesis failure loop | Same skill, "When a check fails"; second failure escalates under rule 11 | 6.0 | 3×4×0.5÷1 = 6.0 |
 | 5 | Adversarial plan review in a fresh context | Same skill, stage 2; one delegated call under rule 15 | 4.0 | 4×4×0.5÷2 = 4.0 |
 | 6 | Plan grounded in the code, one runnable check per requirement | Same skill, stage 1 | 3.0 | 3×4×0.5÷2 = 3.0 |
-| 7 | Identity and use gate: pin the upstream tool and run it in the acceptance check, name the user and what it replaces, spike first | Same skill; checklist Q12 and Q13 (added after two days went on Nova Sprint and a lookalike) | not scored | n/a |
+| 7 | Identity and use gate: pin the upstream tool and run it in the acceptance check, name the user and what it replaces, spike first | `scripts/check_plan_identity.py` on `docs/plans/`, run in CI; checklist Q12 and Q13 (added after two days went on Nova Sprint and a lookalike) | not scored | n/a |
 
 ## Already covered by the harness
 

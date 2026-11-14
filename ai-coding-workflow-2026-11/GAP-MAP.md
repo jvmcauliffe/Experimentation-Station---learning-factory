@@ -4,9 +4,9 @@ Source: [github.com/vaibhav-space/my-ai-coding-workflow](https://github.com/vaib
 
 Scoring follows the HN gold mine v2: Priority = Impact × Fit × Confidence ÷ (6 − Ease).
 
-## Proposed, in review (content-creation-pipeline [PR 485](https://github.com/jvmcauliffe/Content-Creation-Pipeline/pull/485), head `56bc708231f0767b300cc0209e0b1c28c6f1852c`)
+## Proposed, in review (content-creation-pipeline [PR 485](https://github.com/jvmcauliffe/Content-Creation-Pipeline/pull/485), head `e7cd5bfc832edd17b801439da225ec779f1e8751`)
 
-Not merged. The first head, `08f4cba`, failed Codex's exact-head review (the checker passed an empty checklist); `56bc708` makes it fail closed and awaits re-review. Nothing below counts as built until PR 485 merges.
+Not merged. The first head, `08f4cba`, failed Codex's exact-head review (the checker passed an empty checklist); `56bc708` makes it fail closed; `e7cd5bf` adds the three skill packs. Both await re-review. Nothing below counts as built until PR 485 merges.
 
 | # | Practice | Proposed location | v2 | Working |
 | --- | --- | --- | --- | --- |
@@ -32,10 +32,13 @@ Not merged. The first head, `08f4cba`, failed Codex's exact-head review (the che
 
 | Practice | Reason |
 | --- | --- |
-| Install superpowers, ponytail and i-have-adhd skill packs | Overlap the rules above; extra context every session; superpowers' branch-finishing step offers merge options that conflict with the rule 6 merge gate |
 | "Active mode" badge on line 1 of every reply | Adds tokens; rule 13 already reports the actual route |
 | Global `~/.claude/CLAUDE.md` | Cloud containers are rebuilt each session; the repo CLAUDE.md is the durable carrier |
 | Tenant-scoped tool identity | No multi-tenant tools in this harness |
+
+## Accepted by John (14 November 2026)
+
+The superpowers, ponytail and i-have-adhd packs were declined at first, then accepted by John. They are copied unmodified (MIT) into `skills/` in PR 485. Hooks are not copied, and the packs are not installed. `skills/ATTRIBUTION-third-party-skills.md` lists each conflict with the rules (merge, approvals, subagent counts, always-on loading, worktrees, hooks). Where they conflict, the rules win.
 
 ## Not done
 

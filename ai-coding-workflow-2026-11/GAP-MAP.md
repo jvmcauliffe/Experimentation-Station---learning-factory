@@ -4,11 +4,13 @@ Source: [github.com/vaibhav-space/my-ai-coding-workflow](https://github.com/vaib
 
 Scoring follows the HN gold mine v2: Priority = Impact × Fit × Confidence ÷ (6 − Ease).
 
-## Proposed, in review (content-creation-pipeline [PR 485](https://github.com/jvmcauliffe/Content-Creation-Pipeline/pull/485), head `c1f6bef`)
+## Merged (content-creation-pipeline [PR 485](https://github.com/jvmcauliffe/Content-Creation-Pipeline/pull/485), squash commit `c66493a` on `main`)
 
-Not merged. The first head, `08f4cba`, failed Codex's exact-head review (the checker passed an empty checklist); `56bc708` makes it fail closed; `e7cd5bf` adds the three skill packs; `76429d8` amends CLAUDE.md rule 17 on John's instruction (one fresh-context review per plan task, inside rule 15's ten calls); `08c67aa` adds an identity and use gate after the Nova Sprint lesson; `a01dbcf` makes it a script check (`scripts/check_plan_identity.py`, run by CI on `docs/plans/`). Later heads up to `c1f6bef` harden the acceptance check against shell tricks that run local code; `c1f6bef` is CLEAR in an independent exact-head review (PR 485 comment 6883379326) with CI green. Awaiting merge by a provider other than the author. Nothing below counts as built until PR 485 merges.
+Merged on 15 November 2026 at 16:45 UTC as squash commit `c66493a9db1f7a21fc04ab4cee461f72f54d6992`. The reviewed head was `c1f6bef`: CLEAR in an independent exact-head review (PR 485 comment 6883379326), CI green, and John's own J2 confirmation (per Codex, ES PR 15 comment 6897860469). History: the first head, `08f4cba`, failed Codex's exact-head review (the checker passed an empty checklist); `56bc708` makes it fail closed; `e7cd5bf` adds the three skill packs; `76429d8` amends CLAUDE.md rule 17 on John's instruction (one fresh-context review per plan task, inside rule 15's ten calls); `08c67aa` adds an identity and use gate after the Nova Sprint lesson; `a01dbcf` makes it a script check (`scripts/check_plan_identity.py`); later heads up to `c1f6bef` harden the acceptance check against shell tricks that run local code.
 
-| # | Practice | Proposed location | v2 | Working |
+Merged means the files below are on `main` and the plan gate runs in CI (`capability-tests.yml` runs `tests/test_check_plan_identity.py`, including `test_committed_plans_pass_the_gate`). It does not mean installed or measured: see Not done.
+
+| # | Practice | Location on `main` | v2 | Working |
 | --- | --- | --- | --- | --- |
 | 1 | Diff review answers a fixed question list, not the author's summary | `docs/review/code-questions.md` (13 questions, CLEAR or DISCREPANCY), checked by `scripts/check_review_verdicts.py --checklist` | 10.0 | 4×5×0.5÷1 = 10.0 |
 | 2 | Size the task first: spike, bounded, architectural | `skills/plan-and-diff-review` | 6.0 | 3×4×0.5÷1 = 6.0 |
@@ -39,9 +41,9 @@ Not merged. The first head, `08f4cba`, failed Codex's exact-head review (the che
 
 ## Accepted by John (14 November 2026)
 
-The superpowers, ponytail and i-have-adhd packs were declined at first, then accepted by John. They are copied unmodified (MIT) into `skills/` in PR 485. Hooks are not copied, and the packs are not installed. `skills/ATTRIBUTION-third-party-skills.md` lists each conflict with the rules (merge, approvals, subagent counts, always-on loading, worktrees, hooks). Where they conflict, the rules win.
+The superpowers, ponytail and i-have-adhd packs were declined at first, then accepted by John. They are copied unmodified (MIT) into `skills/` and merged with PR 485. Hooks are not copied, and the packs are not installed (`scripts/install_skills.py` does not list them). `skills/ATTRIBUTION-third-party-skills.md` lists each conflict with the rules (merge, approvals, subagent counts, always-on loading, worktrees, hooks). Where they conflict, the rules win.
 
 ## Not done
 
 - A pointer to the skill from CLAUDE.md rule 18 is governance text, which John edits himself (standing directives, HN decision J2).
-- The skill is not listed in `scripts/install_skills.py` and has not been measured against working without it.
+- The `plan-and-diff-review` skill is merged but not listed in `scripts/install_skills.py`, so it is not installed, and it has not been measured against working without it.
